@@ -1,0 +1,89 @@
+[package]
+name = "hus-sdk"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+libm = { version = "0.2", default-features = false }
+
+# Groth16 proving system on BN254
+ark-groth16 = { version = "0.4", default-features = false }
+ark-bn254 = { version = "0.4", default-features = false, features = ["curve"] }
+ark-crypto-primitives = { version = "0.4", default-features = false, features = ["sponge"] }
+ark-serialize = { version = "0.4", default-features = false, features = ["derive"] }
+ark-relations = { version = "0.4", default-features = false }
+ark-ff = { version = "0.4", default-features = false }
+ark-std = { version = "0.4", default-features = false }
+rand = "0.8"
+
+# SHA-256 for key derivation (WASM-compatible, no_std)
+sha2 = { version = "0.10", default-features = false }
+
+# Structured logging (no_std safe, becomes no-op without a logger)
+log = { version = "0.4", default-features = false }
+
+# HTTP client for JSON-RPC (std-only)
+ureq = { version = "2.9", optional = true, default-features = false, features = ["json"] }
+
+# JSON-RPC types (std-only, for HTTP transport)
+serde = { version = "1.0", default-features = false, features = ["derive", "alloc"], optional = true }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"], optional = true }
+hex = { version = "0.4", optional = true }
+base64 = { version = "0.22", optional = true, default-features = false, features = ["std"] }
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+# OS-native entropy
+getrandom = "0.2"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+    "MediaDevices", "MediaStream", "MediaStreamConstraints",
+    "MediaStreamTrack", "HtmlVideoElement",
+    "Document", "HtmlElement", "HtmlCanvasElement", "CanvasRenderingContext2d",
+    "ImageData", "Window", "Navigator",
+    "DeviceAcceleration", "DeviceMotionEvent", "DeviceOrientationEvent",
+    "KeyboardEvent", "TouchEvent", "Touch", "TouchList",
+    "AudioContext", "AudioBuffer", "AudioBufferSourceNode",
+    "AudioWorklet", "MediaRecorder", "MediaRecorderOptions", "BlobEvent",
+    "Blob",
+    "Performance",
+] }
+getrandom = { version = "0.2", default-features = false, features = ["js"] }
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies]
+proptest = "1.5"
+
+[target.'cfg(not(target_arch = "wasm32"))'.dev-dependencies.criterion]
+version = "0.5"
+features = ["html_reports"]
+
+[[bench]]
+name = "hus_bench"
+harness = false
+
+[features]
+default = ["std"]
+std = ["sha2/std", "serde", "serde_json", "ureq", "hex", "base64", "ark-std/std"]
+wasm-capture = []
+ml = ["tract-onnx"]
+
+[dependencies.tract-onnx]
+version = "0.21"
+optional = true
+default-features = false
+
+[[example]]
+name = "basic_integration"
+path = "examples/basic_integration.rs"
+required-features = ["std"]
+
+

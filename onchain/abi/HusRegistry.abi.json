@@ -1,0 +1,251 @@
+{
+	"ABI version": 2,
+	"version": "2.4",
+	"header": ["pubkey", "time", "expire"],
+	"functions": [
+		{
+			"name": "constructor",
+			"inputs": [
+				{"name":"appCode","type":"cell"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setProvingKey",
+			"inputs": [
+				{"name":"pk","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setVk",
+			"inputs": [
+				{"name":"vk","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setProvingKeyChunk",
+			"inputs": [
+				{"name":"index","type":"uint16"},
+				{"name":"chunk","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "clearProvingKeyChunks",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "setProvingKeyHash",
+			"inputs": [
+				{"name":"hash","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "registerApp",
+			"inputs": [
+				{"name":"appName","type":"string"},
+				{"name":"modalityIds","type":"uint8[]"}
+			],
+			"outputs": [
+				{"name":"appAddress","type":"address"}
+			]
+		},
+		{
+			"name": "proposeAppUpgrade",
+			"inputs": [
+				{"name":"appId","type":"uint256"},
+				{"name":"newCode","type":"cell"},
+				{"name":"newVk","type":"bytes"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "cancelAppUpgrade",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "executeAppUpgrade",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "getAppAddress",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"value0","type":"address"}
+			]
+		},
+		{
+			"name": "isAppRegistered",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"value0","type":"bool"}
+			]
+		},
+		{
+			"name": "getProvingKey",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"bytes"}
+			]
+		},
+		{
+			"name": "getVk",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"bytes"}
+			]
+		},
+		{
+			"name": "getUpgradeDelay",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"uint32"}
+			]
+		},
+		{
+			"name": "getPendingUpgrade",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"newCode","type":"cell"},
+				{"name":"newVk","type":"bytes"},
+				{"name":"proposedAt","type":"uint32"}
+			]
+		},
+		{
+			"name": "isUpgradeReady",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+				{"name":"value0","type":"bool"}
+			]
+		},
+		{
+			"name": "getProvingKeyChunkCount",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"uint16"}
+			]
+		},
+		{
+			"name": "getProvingKeyChunk",
+			"inputs": [
+				{"name":"index","type":"uint16"}
+			],
+			"outputs": [
+				{"name":"value0","type":"bytes"}
+			]
+		},
+		{
+			"name": "getProvingKeyHash",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"uint256"}
+			]
+		},
+		{
+			"name": "getVersion",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"string"}
+			]
+		}
+	],
+	"events": [
+		{
+			"name": "AppRegistered",
+			"inputs": [
+				{"name":"appId","type":"uint256"},
+				{"name":"appAddress","type":"address"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "ProvingKeySet",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "VkSet",
+			"inputs": [
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "AppUpgradeProposed",
+			"inputs": [
+				{"name":"appId","type":"uint256"},
+				{"name":"proposedAt","type":"uint32"},
+				{"name":"executeAt","type":"uint32"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "AppUpgradeCancelled",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
+			"name": "AppUpgradeExecuted",
+			"inputs": [
+				{"name":"appId","type":"uint256"}
+			],
+			"outputs": [
+			]
+		}
+	],
+	"fields": [
+		{"init":true,"name":"_pubkey","type":"uint256"},
+		{"init":false,"name":"_timestamp","type":"uint64"},
+		{"init":false,"name":"_constructorFlag","type":"bool"},
+		{"init":false,"name":"_appCode","type":"cell"},
+		{"init":false,"name":"_provingKey","type":"bytes"},
+		{"init":false,"name":"_vk","type":"bytes"},
+		{"init":false,"name":"_ownerPubkey","type":"uint256"},
+		{"init":false,"name":"_appRegistry","type":"map(uint256,address)"},
+		{"components":[{"name":"newCode","type":"cell"},{"name":"newVk","type":"bytes"},{"name":"proposedAt","type":"uint32"}],"init":false,"name":"_pendingUpgrades","type":"map(uint256,tuple)"},
+		{"init":false,"name":"_provingKeyChunks","type":"map(uint16,bytes)"},
+		{"init":false,"name":"_provingKeyChunkCount","type":"uint16"},
+		{"init":false,"name":"_provingKeyHash","type":"uint256"}
+	]
+}

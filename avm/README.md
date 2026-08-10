@@ -1,0 +1,51 @@
+# avm/ — Acki Nacki AVM / RUNWASM review artifacts
+
+This directory holds the artifacts submitted to the Acki Nacki team for the
+on-chain WASM execution (RUNWASM / AVM) review request
+(see [`docs/shellnet-runwasm-request.md`](../docs/shellnet-runwasm-request.md)).
+
+## Contents
+
+| Path | Description |
+|---|---|
+| `runwasm-smoke/` | Shellnet smoke-test contract `runWasmSmoke_pubkey.sol` (+ abi/code/tvc, deploy tvcs, `runWasmSmoke.sol`, `hellowasm.sol`) and the wired interface `add.wit` |
+| `wasm-smoke-harness/` | Local Rust harness reproducing the RUNWASM matrix offline (tvm-sdk v3.0.4.an, `wasm_external` + `wasmtime` features). Path deps expect a tvm-sdk checkout at `/tmp/opencode/tvm-sdk-3.0.4` |
+| `wasm-smoke-harness/config/wasm/66fddc0a…` | The wasm binary submitted to the Shellnet node, sha256-named |
+
+## Wasm sha256 table
+
+| File | sha256 |
+|---|---|
+| `wasm-smoke-harness/config/wasm/66fddc0a71151e975d5f2105cb5ba1db191bf19e5841d09907733525b571c48e` | `66fddc0a71151e975d5f2105cb5ba1db191bf19e5841d09907733525b571c48e` |
+
+The `docs:adder/add@0.1.0` component (`add([0x01,0x02]) → [3]`), 15,080 bytes,
+byte-identical to the file requested at the node's `config/wasm/` path.
+Source interface: `runwasm-smoke/add.wit`; the binary is built locally via
+`wasm-tools component` (the `add.wasm` build artifact is untracked).
+
+## Building the real HUS prover wasm (for the follow-up AVM review)
+
+The production-facing wasm is built from this workspace in two stages:
+
+1. Prover/feature crate as `wasm32-unknown-unknown` (SIMD via
+   [`.cargo/config.toml`](../.cargo/config.toml), `-C target-feature=+simd128`):
+
+   ```sh
+   cargo build --target wasm32-unknown-unknown -p hus-sdk --release
+   # optionally --features wasm-capture for the full capture+prove component
+   ```
+
+2. Verifier component (`verifier/`, wit-bindgen 0.41, interface
+   `verifier/wit/verifier.wit`, package `hus:verifier`), embedded VK from
+   `verifier/assets/vk.bin`; emitted as a component via `wasm-tools component`.
+
+Wire format agreed for the node call:
+`[proof_bytes | commitment]` → exit 0 and persisted result, as validated for
+the adder smoke test.
+
+## Shellnet status
+
+- `gosh.vergrth16` on-chain proof path: blocked (hardcoded ZkLogin VKs; custom
+  Poseidon circuit unsupported; ZKHALO2VERIFY targets Halo2/KZG, not Groth16).
+- `gosh.runwasm` path: validated end-to-end in the local harness; operator
+  request open — see `docs/shellnet-runwasm-request.md`.

@@ -1,0 +1,882 @@
+.fragment c4_to_c7, {
+	PUSHROOT
+	CTOS
+	LDU 256 ; pubkey c4
+	LDU 64 ; pubkey timestamp c4
+	LDU 1 ; ctor flag
+	LDREF
+	LDREF
+	LDREF
+	LDDICT
+	ENDS
+	SETGLOB 13
+	SETGLOB 12
+	SETGLOB 11
+	SETGLOB 10
+	SETGLOB 6
+	SETGLOB 3
+	SETGLOB 2
+}
+
+.fragment c7_to_c4, {
+	GETGLOB 13
+	GETGLOB 12
+	GETGLOB 11
+	GETGLOB 10
+	GETGLOB 3
+	GETGLOB 2
+	NEWC
+	STU 256
+	STU 64
+	STONE
+	STREF
+	STREF
+	STREF
+	STDICT
+	ENDC
+	POPROOT
+}
+
+.fragment constructor, {
+	DROP
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	GETGLOB 6
+	THROWIF 51
+	LDREF
+	ENDS
+	.loc HusRegistry.sol, 27
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 2
+	EQUAL
+	THROWIFNOT 100
+	.loc HusRegistry.sol, 28
+	ACCEPT
+	.loc HusRegistry.sol, 29
+	SETGLOB 10
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment getAppAddress_62182b14_internal, {
+	.loc HusRegistry.sol, 80
+	GETGLOB 13
+	PUSHPOW2 8
+	DICTUGET
+	PUSHCONT {
+		PUSHSLICE x2_
+	}
+	IFNOT
+	.loc HusRegistry.sol, 0
+}
+
+.fragment upd_only_time_in_c4, {
+	PUSHROOT
+	CTOS
+	LDU 256
+	LDU 64
+	NIP
+	GETGLOB 3
+	ROT
+	NEWC
+	STU 256
+	STU 64
+	STSLICE
+	ENDC
+	POPROOT
+}
+
+.fragment getAppAddress, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 79
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline getAppAddress_62182b14_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 1
+		STUR 98
+		SWAP
+		NEWC
+		STSLICECONST x8ab05b3c
+		STSLICE
+		STBREFR
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getProvingKey_704b6f43_internal, {
+	.loc HusRegistry.sol, 88
+	GETGLOB 11
+	.loc HusRegistry.sol, 0
+}
+
+.fragment getProvingKey, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 87
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline getProvingKey_704b6f43_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 2260161011
+		STUR 130
+		STREF
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getVersion_0d8e6e2c_internal, {
+	.loc HusRegistry.sol, 96
+	PUSHREF {
+		.blob x322e332e30
+	}
+	.loc HusRegistry.sol, 0
+}
+
+.fragment getVersion, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	.loc HusRegistry.sol, 95
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline getVersion_0d8e6e2c_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 3225994738
+		STUR 130
+		STREF
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getVk_824783c8_internal, {
+	.loc HusRegistry.sol, 92
+	GETGLOB 12
+	.loc HusRegistry.sol, 0
+}
+
+.fragment getVk, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 91
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline getVk_824783c8_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 3697897521
+		STUR 130
+		STREF
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment isAppRegistered_a180ac35_internal, {
+	.loc HusRegistry.sol, 84
+	GETGLOB 13
+	PUSHPOW2 8
+	DICTUGET
+	PUSHCONT {
+		PUSHSLICE x2_
+	}
+	IFNOT
+	PUSHREFSLICE {
+		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
+	}
+	SDEQ
+	NOT
+	.loc HusRegistry.sol, 0
+}
+
+.fragment isAppRegistered, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 83
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline isAppRegistered_a180ac35_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 4066825928
+		STUR 130
+		STI 1
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment registerApp_b3a55f64_internal, {
+	.loc HusRegistry.sol, 51
+	ACCEPT
+	.loc HusRegistry.sol, 52
+	GETGLOB 10
+	CTOS
+	SBITS
+	THROWIFNOT 102
+	.loc HusRegistry.sol, 54
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	NEWC
+	STU 256
+	STREF
+	ENDC
+	HASHCU
+	.loc HusRegistry.sol, 55
+	DUP
+	GETGLOB 13
+	PUSHPOW2 8
+	DICTUGET
+	PUSHCONT {
+		PUSHSLICE x2_
+	}
+	IFNOT
+	PUSHREFSLICE {
+		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
+	}
+	SDEQ
+	THROWIFNOT 103
+	.loc HusRegistry.sol, 57
+	NOW
+	OVER
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	NEWC
+	STU 256
+	STU 256
+	STU 32
+	ENDC
+	CTOS
+	SHA256U
+	.loc HusRegistry.sol, 59
+	PUSHINT 0
+	NULL
+	PAIR
+	NULL
+	PUSHINT 0
+	BLKPUSH 2, 0
+	PUSHREF {
+	}
+	PUSH S7
+	MYADDR
+	NEWC
+	PUSHINT 321
+	STZEROES
+	STSLICE
+	ROLLREV 7
+	NEWC
+	STU 256
+	STREF
+	STU 256
+	STU 32
+	STU 32
+	STDICT
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
+	STBREFR
+	ENDC
+	GETGLOB 10
+	NEWC
+	STSLICECONST x2_
+	STDICT
+	STDICT
+	STZERO
+	ENDC
+	.loc HusRegistry.sol, 64
+	GETGLOB 12
+	XCPU S1, S0
+	HASHCU
+	NEWC
+	STSLICECONST x801_
+	STU 256
+	ENDC
+	CTOS
+	ROLLREV 3
+	PUSH S3
+	NEWC
+	STSLICECONST x62_
+	STSLICE
+	PUSHSLICE x405f5e1000000000000000000000000000007_
+	STSLICER
+	OVER
+	CALLREF {
+		CTOS
+		LDI 1
+		SWAP
+		PUSHCONT {
+			LDI 5
+			NIP
+		}
+		IF
+		LDI 1
+		SWAP
+		PUSHCONT {
+			LDI 2
+			NIP
+		}
+		IF
+		LDDICT
+		LDDICT
+		LDDICT
+		ENDS
+		BLKDROP 3
+	}
+	STREF
+	STONE
+	ROTREV
+	NEWC
+	STSLICECONST x00000001
+	STREF
+	STU 256
+	STBREFR
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	.loc HusRegistry.sol, 71
+	PUSH2 S0, S1
+	GETGLOB 13
+	PUSHPOW2 8
+	DICTUSET
+	SETGLOB 13
+	.loc HusRegistry.sol, 73
+	PUXC S0, S1
+	PUSHSLICE xc00000000000000000000000004c375de2
+	NEWC
+	STSLICE
+	STU 256
+	STSLICE
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	.loc HusRegistry.sol, 0
+}
+
+.fragment registerApp, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 50
+	LDREF
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline registerApp_b3a55f64_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 1
+		STUR 98
+		SWAP
+		NEWC
+		STSLICECONST xdd8b4256
+		STSLICE
+		STBREFR
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment setProvingKey_34e41c8e_internal, {
+	.loc HusRegistry.sol, 35
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 2
+	EQUAL
+	THROWIFNOT 100
+	.loc HusRegistry.sol, 36
+	ACCEPT
+	.loc HusRegistry.sol, 37
+	SETGLOB 11
+	.loc HusRegistry.sol, 38
+	PUSHREF {
+		.blob xc0000000000000000000000000259d395b
+	}
+	PUSHINT 0
+	SENDRAWMSG
+	.loc HusRegistry.sol, 0
+}
+
+.fragment setProvingKey, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 34
+	LDREF
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline setProvingKey_34e41c8e_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment setVk_b4622e6d_internal, {
+	.loc HusRegistry.sol, 42
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 2
+	EQUAL
+	THROWIFNOT 100
+	.loc HusRegistry.sol, 43
+	ACCEPT
+	.loc HusRegistry.sol, 44
+	SETGLOB 12
+	.loc HusRegistry.sol, 45
+	PUSHREF {
+		.blob xc000000000000000000000000068bafdd2
+	}
+	PUSHINT 0
+	SENDRAWMSG
+	.loc HusRegistry.sol, 0
+}
+
+.fragment setVk, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc HusRegistry.sol, 41
+	LDREF
+	ENDS
+	.loc HusRegistry.sol, 0
+	CALLREF {
+		.inline setVk_b4622e6d_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment public_function_selector, {
+	DUP
+	PUSHINT 775502033
+	LEQ
+	IFJMPREF {
+		DUP
+		EQINT 1
+		IFJMPREF {
+			.inline constructor
+		}
+		DUP
+		PUSHINT 112677363
+		EQUAL
+		IFJMPREF {
+			.inline getProvingKey
+		}
+		DUP
+		PUSHINT 179329852
+		EQUAL
+		IFJMPREF {
+			.inline getAppAddress
+		}
+		DUP
+		PUSHINT 775502033
+		EQUAL
+		IFJMPREF {
+			.inline setVk
+		}
+	}
+	DUP
+	PUSHINT 1568905995
+	LEQ
+	IFJMPREF {
+		DUP
+		PUSHINT 1078511090
+		EQUAL
+		IFJMPREF {
+			.inline getVersion
+		}
+		DUP
+		PUSHINT 1550413873
+		EQUAL
+		IFJMPREF {
+			.inline getVk
+		}
+		DUP
+		PUSHINT 1568905995
+		EQUAL
+		IFJMPREF {
+			.inline setProvingKey
+		}
+	}
+	DUP
+	PUSHINT 1569407574
+	EQUAL
+	IFJMPREF {
+		.inline registerApp
+	}
+	DUP
+	PUSHINT 1919342280
+	EQUAL
+	IFJMPREF {
+		.inline isAppRegistered
+	}
+}
+
+.fragment main_external, {
+	OVER
+	CALLREF {
+		.inline c4_to_c7
+	}
+	LDU 1 ; haveSign msgSlice
+	SWAP
+	PUSHCONT {
+		PUSHPOW2 9
+		LDSLICEX
+		DUP
+		MYADDR
+		NEWC
+		STSLICE
+		STSLICE
+		ENDC
+		HASHCU
+		SWAP
+		LDU 1 ; signatureSlice hashMsgSlice hasPubkey msgSlice
+		SWAP
+		PUSHCONT {
+			LDU 256 ; signatureSlice hashMsgSlice pubkey msgSlice
+			XCHG2 S3, S3
+		}
+		PUSHCONT {
+			XCHG S2
+			GETGLOB 2
+		}
+		IFELSE
+		DUP
+		SETGLOB 5
+		CHKSIGNU
+		THROWIFNOT 40
+	}
+	PUSHCONT {
+		LDU 1 ; hasPubkey msgSlice
+		SWAP
+		THROWIF 58
+	}
+	IFELSE
+	LDU 64 ; timestamp msgSlice
+	SWAP
+	.inline __replayProtection
+	LDU 32 ; expireAt msgSlice
+	SWAP
+	NOW ; msgSlice expireAt now
+	GREATER ; msgSlice expireAt>now
+	THROWIFNOT 57
+	LDU 32 ; funcId body
+	SWAP
+	CALLREF {
+		.inline public_function_selector
+	}
+	THROW 60
+}
+
+.fragment main_internal, {
+	PUSHROOT
+	CTOS
+	PUSHINT 320
+	SDSKIPFIRST
+	PLDI 1
+	SETGLOB 6
+	PUSH S2
+	CTOS
+	PLDU 4
+	MODPOW2 1
+	IFRET
+	OVER
+	SEMPTY ; isEmpty
+	IFJMPREF {
+		GETGLOB 6
+		THROWIFNOT 76
+	}
+	OVER
+	LDUQ 32  ; [funcId] body' ok
+	THROWIFNOT 60
+	OVER
+	IFNOTJMPREF {
+		GETGLOB 6
+		THROWIFNOT 76
+	}
+	SWAP
+	CALLREF {
+		.inline public_function_selector
+	}
+	THROW 60
+}
+
+.fragment default_data_cell, {
+	NULL
+	PUSHREF {
+	}
+	BLKPUSH 2, 0
+	NEWC
+	PUSHINT 321
+	STZEROES
+	STREF
+	STREF
+	STREF
+	STDICT
+	ENDC
+}
+
+.fragment onTickTock, {
+}
+
+; The code below forms a value of the StateInit type.
+.blob x4_ ; split_depth = nothing
+.blob x4_ ; special = nothing
+.blob xc_ ; code = just
+.cell { ; code cell
+	PUSHREFCONT {
+		DICTPUSHCONST 32
+		DICTUGETJMPZ
+		THROW 78
+		.code-dict-cell 32, {
+		}
+		.cell { ; version
+			.blob x736f6c20302e37392e33 ; sol 0.79.3
+		}
+	}
+	POPCTR c3
+	DUP
+	IFNOTJMPREF {
+		.inline main_internal
+	}
+	DUP
+	EQINT -1
+	IFJMPREF {
+		.inline main_external
+	}
+	DUP
+	EQINT -2
+	IFJMPREF {
+		.inline onTickTock
+	}
+	THROW 11
+}
+.blob xc_ ; data = just
+.cell { 
+	.inline-computed-cell default_data_cell, 0
+}
+.blob x4_ ; library = hme_empty

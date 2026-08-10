@@ -1,0 +1,46 @@
+
+# Docs build
+# IDE
+# Internal docs (not for public repo)
+# Local config
+# Models (large binary files)
+# Nested git repos
+# OS
+# Rust
+# WASM
+*.swo
+*.swp
+*.wasm
+.DS_Store
+.idea/
+.vscode/
+Cargo.lock
+Thumbs.db
+docs/_build/
+models/*.onnx
+plan.md
+target
+target/
+tvm-cli.conf.json
+docs/question.md
+# Wallet keys — NEVER commit
+hus-testnet/**/*.keys.json
+hus-testnet/*.keys.json
+docs/codebase-overview.md
+# Internal/tooling docs — not for remote
+AGENTS.md
+check/
+eval.md
+testing
+docs/error-card.md
+docs/gas-fee.md
+hus-testnet/
+# Scripts
+get-test-tokens.sh
+
+# Local keep — never push
+# Review files
+review/
+keep
+# Environment — NEVER commit or deploy
+.env

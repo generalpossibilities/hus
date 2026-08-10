@@ -1,0 +1,16 @@
+package hus:verifier@0.1.0;
+
+interface verifier-interface {
+    /// Verify a Groth16 proof against the embedded HUS verifying key.
+    ///
+    /// Args layout (list<u8>):
+    ///   proof_size (varuint), proof bytes (compressed),
+    ///   commitment (32 bytes, uncompressed LE)
+    ///
+    /// Returns: [0x01] if valid, [0x00] if invalid.
+    verify: func(args: list<u8>) -> list<u8>;
+}
+
+world verifier {
+    export verifier-interface;
+}

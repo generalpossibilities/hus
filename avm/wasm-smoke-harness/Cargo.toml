@@ -1,0 +1,35 @@
+[package]
+name = "wasm-smoke-harness"
+version = "0.1.0"
+edition = "2021"
+description = "Local end-to-end RUNWASM smoke test (deploy + runWasm5) with a node-identical executor setup"
+
+[workspace]
+
+[patch.crates-io]
+halo2-base = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+halo2-axiom = { git = "https://github.com/gosh-sh/halo2-axiom", branch = "main" }
+
+[patch."https://github.com/axiom-crypto/halo2-lib.git"]
+halo2-base = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+halo2-ecc = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+zkevm-hashes = { git = "https://github.com/gosh-sh/halo2-lib-zkevm-sha256-and-bls12-381", branch = "bump-halo2-lib-v0.4.1" }
+
+[patch."https://github.com/axiom-crypto/axiom-eth"]
+axiom-eth = { git = "https://github.com/gosh-sh/axiom-eth", rev = "1d61be00a63ec73b3f709d74eb9e6b09b754b911" }
+
+[dependencies]
+tvm_block = { path = "/tmp/opencode/tvm-sdk-3.0.4/tvm_block" }
+tvm_client = { path = "/tmp/opencode/tvm-sdk-3.0.4/tvm_client" }
+tvm_executor = { path = "/tmp/opencode/tvm-sdk-3.0.4/tvm_executor", features = ["gosh", "signature_with_id", "wasmtime"] }
+tvm_types = { path = "/tmp/opencode/tvm-sdk-3.0.4/tvm_types" }
+tvm_vm = { path = "/tmp/opencode/tvm-sdk-3.0.4/tvm_vm", features = ["gosh", "wasmtime", "wasm_external"] }
+anyhow = "1"
+base64 = "0.21"
+hex = "0.4"
+log = { version = "0.4", features = ["std"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+simplelog = "0.12"
+tokio = { version = "1", features = ["full"] }
+wasmtime = "36"

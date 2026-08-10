@@ -1,0 +1,4820 @@
+{
+  "040714a8fa8a9e1244dc62b4de7d1bc3be8f55959eb9de8248fbd5157310246d": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1562
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1563
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1564
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1565
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1568
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1569
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1570
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1571
+    }
+  },
+  "048b824cdde2d5c106dbe4127a879d3fd12d62935b7bce6de0bd3e94a3d1872b": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "40": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 188
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 189
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 190
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 190
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 190
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 190
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 190
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 191
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 191
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 191
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 192
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 193
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 193
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 193
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 193
+    },
+    "200": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 194
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 194
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 195
+    },
+    "248": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 195
+    },
+    "256": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 195
+    },
+    "264": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 195
+    },
+    "280": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 195
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 112
+    },
+    "296": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 197
+    },
+    "312": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 197
+    }
+  },
+  "06d73c0efb592216fb1aae4aa3e25ceda34c94d3eb02cf7e263f24ca7d534345": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 860
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 861
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 862
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 863
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 864
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 865
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 231
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 871
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 874
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 875
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 876
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 877
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 878
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 879
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 880
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 881
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 882
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 883
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 884
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 885
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 886
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 887
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 888
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 889
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 890
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 891
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 892
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 893
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 894
+    },
+    "408": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 895
+    },
+    "416": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 896
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 897
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 899
+    },
+    "448": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 900
+    },
+    "464": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 902
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 903
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 906
+    }
+  },
+  "07b00e2f3cb494d74d16557a417b60ad55cb112300d3f377c9d600c05072a049": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 72
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 72
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 72
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 72
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 72
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 73
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 74
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 74
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 74
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 74
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 74
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "352": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "360": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "368": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "384": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "400": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "408": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    },
+    "416": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 75
+    }
+  },
+  "0be9abdecbd46c22be7a28caa6f9246512d2f0e004244d2a52006dd9e3a7e73b": {},
+  "0d2ee155c349a5a5694ef9306858cd367efb0802c9e7d6dff0dc02f27ebd58cb": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1041
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1042
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1043
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1044
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1045
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1046
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 244
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1052
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1055
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1056
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1057
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1058
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1059
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1060
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1061
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1062
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1063
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1064
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1065
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1066
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1067
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1068
+    },
+    "320": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1069
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1070
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1071
+    },
+    "360": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1072
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1073
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1074
+    },
+    "392": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1075
+    },
+    "408": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1077
+    },
+    "416": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1078
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1080
+    },
+    "432": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1081
+    },
+    "448": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1084
+    }
+  },
+  "1b18b666f52ab8f76f5ce26753d02124ce2727643149949128854102ffa92c0c": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1632
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1633
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1634
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1635
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1636
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1637
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1638
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1639
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1640
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1641
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1642
+    },
+    "176": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1643
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1644
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1645
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1649
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1650
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1651
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1652
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1653
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1657
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1658
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1661
+    }
+  },
+  "1ba3c1619103fa091b8c655bd9a401185aa3e94f93e17313d89d3a1b470b4f79": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "248": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "256": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "272": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 158
+    }
+  },
+  "20dc8408c57184e16cd61ac6f3bf80e9c21738a0c817d0f3b3a6dad5bb8bc7d9": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 134
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 136
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 136
+    },
+    "40": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 136
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 136
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 139
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 139
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 139
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 139
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 139
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    },
+    "200": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 140
+    }
+  },
+  "229a831e3400b1a444605ef1ca88e8b5717ac7e739e217b9743170fe3b544b0a": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 114
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 120
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 122
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 123
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "216": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "256": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "272": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "288": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "304": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "320": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "336": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "352": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "360": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "368": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 125
+    },
+    "384": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "400": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "416": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "432": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "448": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "464": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "480": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "496": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "512": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 126
+    },
+    "528": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 127
+    },
+    "544": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 127
+    },
+    "552": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 127
+    },
+    "560": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 128
+    },
+    "568": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 128
+    },
+    "576": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 257
+    },
+    "584": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 259
+    },
+    "592": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 261
+    },
+    "600": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "608": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 124
+    },
+    "624": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 267
+    },
+    "632": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 268
+    },
+    "640": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 133
+    },
+    "648": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 133
+    },
+    "664": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 133
+    },
+    "672": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 133
+    },
+    "680": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 134
+    }
+  },
+  "2ca3ef7db4f063a18642e90e9aee8e271526179bad113abb990a58fb51131374": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1127
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1128
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1129
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1130
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1131
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1132
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 215
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 215
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1139
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1142
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1143
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1144
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1145
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1146
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1147
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1148
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1149
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1150
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1151
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1152
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1153
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1154
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1155
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1156
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1157
+    },
+    "360": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1158
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1159
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1160
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1161
+    },
+    "408": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1162
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1163
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1164
+    },
+    "456": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1165
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1166
+    },
+    "480": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1167
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1168
+    },
+    "496": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1169
+    },
+    "504": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1170
+    },
+    "520": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1172
+    },
+    "528": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1173
+    },
+    "544": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1175
+    },
+    "552": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1176
+    },
+    "568": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1179
+    }
+  },
+  "302ff827e84872bac9b11b2dc796875820c9738ce219690728278b95add8f0da": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 228
+    }
+  },
+  "45ed0b42603ba18b51a934b8b774d8e881361161d48b6c9e13e845066bd82936": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 142
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "40": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 144
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 145
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 145
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 146
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 146
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 147
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 147
+    },
+    "200": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 148
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 148
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 148
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "248": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "256": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "272": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "280": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "296": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "312": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "328": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "344": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "360": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "376": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "392": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "408": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "432": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "440": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "456": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "464": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "480": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "488": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "496": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "512": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "528": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "544": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "560": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "576": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 150
+    },
+    "584": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "592": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 149
+    },
+    "608": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 373
+    },
+    "616": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 374
+    },
+    "624": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "632": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "648": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "656": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "672": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "680": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "696": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "712": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 152
+    },
+    "728": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "744": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "752": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "768": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "776": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "792": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "800": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "808": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "824": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "840": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "856": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "872": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "888": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 154
+    },
+    "896": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 154
+    },
+    "904": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 154
+    },
+    "920": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 154
+    },
+    "936": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 417
+    },
+    "944": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "968": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    },
+    "984": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 157
+    }
+  },
+  "50141a15657adb5b6d97b5b82f71c21e2b0ac578f07c0f2f106920ccea62ee01": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1475
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1476
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1477
+    },
+    "40": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1480
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1481
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1482
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1483
+    }
+  },
+  "56d82bfd51195211afd7d450e90dda81f10926cdf780b615e7fccab2eb832fb8": {},
+  "5960cdfa5c1edc7c1cca0680ffee514079112816d657006b38c10e23673b06a7": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 201
+    }
+  },
+  "5cffe078baa6c16655c4d3909e7776cab5099218a8c42dae02a5146f9e99fd8e": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 62
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 63
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 63
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 63
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 63
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 64
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 64
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 64
+    },
+    "200": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 64
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "248": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "264": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "272": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "288": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "304": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "320": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 65
+    },
+    "344": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "352": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "368": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "376": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "392": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    }
+  },
+  "6481f968b3602c537d67e1a32832e1eaafcece69ba7908a87d0c7b11242dd2ed": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 822
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 823
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 824
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 825
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 826
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 827
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 71
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 841
+    },
+    "176": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 844
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 847
+    }
+  },
+  "6c289009379e42112fb8ba5afc68946a8839ea7887efe45afa6b89caada19d8e": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1715
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1725
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1726
+    },
+    "32": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1727
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1730
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1731
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1732
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1735
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1736
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1737
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1740
+    }
+  },
+  "6c3181d2fe87b4298d68401ac78b8a5a679b5b296d5ff668889a4a7d1dadcce5": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 170
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 170
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 170
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 170
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 170
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 171
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 171
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 171
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 171
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 172
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 172
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 172
+    }
+  },
+  "70fb982b7946b8a5df8659b5583f0fa1d952576b6a78986d1ecd53cf2d67d6f9": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 237
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 237
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 237
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 237
+    }
+  },
+  "796955c099ea001d725afcd10fd713e5323888660b5aa700244be57c0d0d7fbd": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    }
+  },
+  "7a644eac902ceb480ab255e6cecc9e976a4cebd04daf09d015b244ce9ad17996": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1413
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1414
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1415
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1416
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1417
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1418
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 80
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1432
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1435
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1436
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1437
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1438
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1439
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1440
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1441
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1442
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1443
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1444
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1445
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1446
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1447
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1448
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1449
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1450
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1451
+    },
+    "456": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1452
+    },
+    "464": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1453
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1454
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1456
+    },
+    "496": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1457
+    },
+    "504": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1459
+    },
+    "512": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1460
+    },
+    "528": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1463
+    }
+  },
+  "7e018b57a6335859fb3aae2ce605040cdcc4daab29d73b6829b304f74ddba611": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 86
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 88
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 88
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 88
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 88
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 90
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 90
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 91
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 93
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 93
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 93
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 93
+    }
+  },
+  "8003e692d0ff44a719e24de4e7a1528526cfb21459a57c77f3de2bdf132e1d06": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 102
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 104
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 104
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 104
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 104
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 106
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 107
+    },
+    "216": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 109
+    }
+  },
+  "86254e47c93f2955c18dd082bbb179f4a3ea73a02771e4f03c78c696b48c1cb9": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 917
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 918
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 919
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 920
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 921
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 922
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 240
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 928
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 931
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 932
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 933
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 934
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 935
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 936
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 937
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 938
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 939
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 940
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 941
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 942
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 943
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 944
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 945
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 946
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 947
+    },
+    "360": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 949
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 950
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 952
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 953
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 956
+    }
+  },
+  "90a80b1440bffa5cc5cf5c6c993fee7b4cde330852b38321011fc80c7bc98e9d": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 255
+    }
+  },
+  "920db6ddf055cfcfe1c1d4fc88d01841a4b4cc5b91979893ef69d8fd50f55260": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 241
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 241
+    }
+  },
+  "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7": {},
+  "981ed7395a495acbaa7ace79d62de9cf686b43074134d5797801ec4575e9c358": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1578
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1579
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1582
+    },
+    "40": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1583
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1584
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1585
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1586
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1587
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1588
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1589
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1590
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1591
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1592
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1593
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1594
+    },
+    "176": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1595
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1596
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1597
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1598
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1599
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1601
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1602
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1603
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1605
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1606
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1607
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1609
+    },
+    "320": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1610
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1611
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1612
+    },
+    "360": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1614
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1615
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1616
+    },
+    "392": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "408": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "416": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "424": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "440": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "448": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "464": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "488": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "496": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "536": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "544": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "552": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "568": {
+      "filename": "stdlib.sol",
+      "line": 24
+    },
+    "584": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1618
+    },
+    "600": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1619
+    },
+    "608": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1620
+    },
+    "624": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1621
+    },
+    "632": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1622
+    },
+    "648": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1623
+    },
+    "664": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1624
+    },
+    "672": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1625
+    },
+    "688": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1628
+    }
+  },
+  "99c573ea708a64c9089d4012b527778cf39cbfc4d321ee84fc4557d0fd94d738": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 212
+    }
+  },
+  "9e8a1c7b32c3cecfaa212b2a63d6031c991f29ae451c927ea47371e8fcd7d753": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    }
+  },
+  "a45d3fad287d65fe511d354232b75b92f0d92d8593c80c5ee477e231be3be2e0": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "40": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 153
+    }
+  },
+  "a4ea6bd08aa414c259b9fc18b65685de787c02e26f6cb229de013b0e5a3fe83a": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    }
+  },
+  "a8706c6358fecfba3c31d885dcf337fed67609c22ebf972396a9aca8faf7a108": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1722
+    }
+  },
+  "aee461c1896e93ba1d3fa5b1dc1eff288fa84d454995735c4389a14e173853b0": {},
+  "b10bcea89be99781f1d1a0266e3f950a9d42310ce87f2ddf4b8d174b327c4f20": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 255
+    }
+  },
+  "b254c1fe37f9d8a9ad2e5ae49a34a5c138210fe9497b9f18a2123738ac76ae9c": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1711
+    },
+    "1": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1712
+    },
+    "2": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1713
+    },
+    "3": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1742
+    },
+    "4": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1746
+    }
+  },
+  "b55778db77bb312b9f1cb5b1f165d2cd00835c377ede224caa8ae4233d82873f": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1539
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1540
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1541
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1542
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1545
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1546
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1547
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1548
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1551
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1552
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1553
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1554
+    }
+  },
+  "b83656cced9b4bd5787dca34a29b764ed6be28ab53e55b033bd557f9f168bb15": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1510
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1511
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1512
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1513
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1516
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1517
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1518
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1519
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1522
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1523
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1524
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1525
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1528
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1529
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1530
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1531
+    }
+  },
+  "c4f7b564ee990aed36e748f3f83569d930690d9157b4e64611f0720c62ac8248": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 642
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 643
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 644
+    },
+    "32": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 645
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 648
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 649
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 650
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 651
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 652
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 653
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 654
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 655
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 657
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 658
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 660
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 661
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 662
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 663
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 664
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 665
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 666
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 667
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 55
+    },
+    "256": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 56
+    },
+    "264": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 56
+    },
+    "280": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 56
+    },
+    "296": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 56
+    },
+    "320": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 57
+    },
+    "328": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 57
+    },
+    "344": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 58
+    },
+    "352": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 58
+    },
+    "368": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 59
+    },
+    "376": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 59
+    },
+    "392": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 60
+    },
+    "400": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 60
+    },
+    "416": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "424": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "432": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "448": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "464": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "472": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 782
+    },
+    "496": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 783
+    },
+    "504": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 785
+    },
+    "520": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 788
+    }
+  },
+  "d116f83a67ebd2d02cf2cfa3d985e53f64df2efe1c9b8701fca9985b14bfbb0d": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 496
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 497
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 498
+    },
+    "32": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 501
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 502
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 503
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 504
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 505
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 506
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 507
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 508
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 509
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 510
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 512
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 513
+    }
+  },
+  "d740ccd06ca650120447e1fe69b29a1649cd0cb9fd5ca859c7a8facec434d9b2": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1328
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1329
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1330
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1331
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1332
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1333
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "168": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "216": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 97
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1353
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1356
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1357
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1358
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1359
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1360
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1361
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1362
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1363
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1364
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1365
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1366
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1367
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1368
+    },
+    "416": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1369
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1370
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1371
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1372
+    },
+    "504": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1373
+    },
+    "512": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1374
+    },
+    "520": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1375
+    },
+    "536": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1377
+    },
+    "544": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1378
+    },
+    "552": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1380
+    },
+    "560": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1381
+    },
+    "576": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1384
+    }
+  },
+  "d8b6147f4294aba697829e6fca8889aeb0b2a525544a824c8a245771a188d986": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 166
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 166
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 166
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 166
+    }
+  },
+  "d97be9ae5eecc901150880ca3df387873406f53003dd6083ee08290164b8203c": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 517
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 518
+    },
+    "32": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 519
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 520
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 521
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 522
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 523
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 524
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 525
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 526
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 527
+    },
+    "176": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 528
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 529
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 530
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 531
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 532
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 533
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 534
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 535
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 536
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 537
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 538
+    },
+    "320": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 539
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 540
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 541
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 542
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 543
+    },
+    "392": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 544
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 545
+    },
+    "416": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 546
+    },
+    "432": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 547
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 548
+    },
+    "448": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 549
+    },
+    "456": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 550
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 551
+    },
+    "480": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 552
+    },
+    "496": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 553
+    },
+    "512": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 554
+    },
+    "528": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 555
+    },
+    "536": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 556
+    },
+    "544": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 557
+    },
+    "552": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 558
+    }
+  },
+  "dbcc741568054a1f2a5ba50aa446710cb0ebac1c38f9ab1571b3f0c226e80c51": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1189
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1190
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1191
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1192
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1193
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1194
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 227
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1200
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1203
+    },
+    "120": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1204
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1205
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1206
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1207
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1208
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1209
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1210
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1211
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1212
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1213
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1214
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1215
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1216
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1217
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1218
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1219
+    },
+    "360": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1221
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1222
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1224
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1225
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1228
+    }
+  },
+  "dc91b4520450cf6e47ef2a17fe23b83f114634e4874ef07c2c3dd0168a0ae1df": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 201
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 201
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 201
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 201
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 202
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 203
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 203
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 203
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 203
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 203
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 204
+    },
+    "280": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 204
+    },
+    "296": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "304": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "320": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "328": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "336": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "352": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 205
+    },
+    "360": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 206
+    }
+  },
+  "dcecdab840abaef4cfaec6e8d1bf0875c96f94c177e99a9bede4b1ed93484630": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1240
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1241
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1242
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 254
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1246
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1249
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1250
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1251
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1252
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1253
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1254
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1255
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1256
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1257
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1258
+    },
+    "192": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1259
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1260
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1261
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1262
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1263
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1264
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1265
+    },
+    "312": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1267
+    },
+    "320": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1268
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1270
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1271
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1274
+    }
+  },
+  "e1a81fabd4a71da5a4b6bc7df57fb30b73aecd652394db9c995015475d4ec676": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1278
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1279
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1280
+    },
+    "32": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1283
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1284
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1285
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1286
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1287
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1288
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1289
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1290
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1291
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1292
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1294
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1295
+    }
+  },
+  "e26c78527be44ff1d202debd081b7281436b34db184d08d9387bc1cd4df38e0f": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 450
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 451
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 452
+    },
+    "40": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 453
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 454
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 455
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 456
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 457
+    },
+    "104": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 458
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 459
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 460
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 461
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 462
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 463
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 464
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 465
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 466
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 467
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 468
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 469
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 470
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 471
+    },
+    "280": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 472
+    },
+    "288": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 473
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 474
+    },
+    "320": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 475
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 476
+    },
+    "344": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 477
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 478
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 479
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 480
+    },
+    "392": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 481
+    },
+    "408": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 482
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 483
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 484
+    },
+    "456": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 485
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 486
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 487
+    },
+    "504": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 488
+    },
+    "520": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 489
+    },
+    "536": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 490
+    },
+    "552": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 491
+    },
+    "568": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 492
+    }
+  },
+  "e27dfe799cec76decfdb2581469e8261e9da36a51e24882b5fe5fd807f76ebb1": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 178
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 179
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 179
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "240": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "264": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "280": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "296": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "312": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "328": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "344": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "368": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "376": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 181
+    },
+    "392": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "400": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "408": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "424": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "432": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "440": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "456": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 182
+    },
+    "464": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "472": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 180
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 165
+    },
+    "496": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 166
+    },
+    "504": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 184
+    },
+    "520": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 184
+    }
+  },
+  "e4dee7175bd882eaad2fa82b3f31090f669783fa9d9a083e9b1191d1a81a2ac7": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 222
+    },
+    "8": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 222
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 222
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 222
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "184": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "200": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "248": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    },
+    "264": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 224
+    }
+  },
+  "e54c767f5fe6ed997690cbf59557d3cae73468579c866e84c39a73d65bf2549e": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "40": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 249
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 250
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 250
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 250
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 250
+    }
+  },
+  "e6936e8f0e7b8fe98c2ca66eee9d4e9dafcfc747defef9cb795288fabb1b7ef3": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 575
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 576
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 577
+    },
+    "40": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 578
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 579
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 580
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 581
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 582
+    },
+    "96": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 583
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 584
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 585
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 586
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 587
+    }
+  },
+  "e94f88f55d3f9717baafcfa31bcc1cab3101d811e4f50ee7162c773dd57d7ab5": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 245
+    }
+  },
+  "e9e5b08e673e611d8c08a9e26ee041127b0214182769f41d2f307b6369752fb3": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1716
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1717
+    },
+    "40": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1718
+    }
+  },
+  "edfbaebb80998ec5dc1f4c317f3d29c0bef58aadfb5a3d6a8a80c60a68ad04c0": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 986
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 987
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 988
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 989
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 990
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 991
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 248
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 248
+    },
+    "112": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 998
+    },
+    "128": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1001
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1002
+    },
+    "152": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1003
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1004
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1005
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1006
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1007
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1008
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1009
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1010
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1011
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1012
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1013
+    },
+    "328": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1014
+    },
+    "336": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1015
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1016
+    },
+    "368": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1017
+    },
+    "384": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1018
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1019
+    },
+    "416": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1020
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1021
+    },
+    "432": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1022
+    },
+    "448": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1024
+    },
+    "456": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1025
+    },
+    "464": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1027
+    },
+    "472": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1028
+    },
+    "488": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1031
+    }
+  },
+  "ef678b95a36cde033dedb1f18ccd341fb0210cc1c18f1c08ad69331f16f9206d": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "24": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 66
+    },
+    "64": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "144": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "160": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "176": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "192": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "208": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 67
+    },
+    "224": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    },
+    "232": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 61
+    }
+  },
+  "f0110f7ce7f99054117efe4facd320c030f7ff7d9249557f7f7c82e654e24f7f": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1471
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1472
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1473
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1474
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1487
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1488
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1489
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1490
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1493
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1494
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1495
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1496
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1499
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1500
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1501
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1502
+    }
+  },
+  "f24e1e7aa04d89aad2945816b6e9b921f2b3892da9ba53e2383c148351b96d0c": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1646
+    },
+    "16": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1647
+    }
+  },
+  "f3e3c6912050dc0d88bc6c29c1d2879767e68ff4f72dc83b6e6c63a1f074983e": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 591
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 592
+    },
+    "24": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 593
+    },
+    "48": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 594
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 595
+    },
+    "72": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 596
+    },
+    "88": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "104": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "136": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "152": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 211
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 610
+    },
+    "176": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 613
+    },
+    "184": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 614
+    },
+    "200": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 615
+    },
+    "208": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 616
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 617
+    },
+    "232": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 618
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 619
+    },
+    "256": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 620
+    },
+    "264": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 621
+    },
+    "272": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 622
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 623
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 624
+    },
+    "352": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 625
+    },
+    "376": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 626
+    },
+    "392": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 627
+    },
+    "400": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 628
+    },
+    "408": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 629
+    },
+    "424": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 631
+    },
+    "432": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 632
+    },
+    "440": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 634
+    },
+    "448": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 635
+    },
+    "464": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 638
+    }
+  },
+  "fb39b9e4a5a6c651dc7c5dc7fa6efe18e82edfb03b2faa926bec64968bc705c5": {
+    "0": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1467
+    },
+    "8": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1468
+    },
+    "56": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1469
+    },
+    "64": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1470
+    },
+    "80": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1506
+    },
+    "88": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1507
+    },
+    "136": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1508
+    },
+    "144": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1509
+    },
+    "160": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1535
+    },
+    "168": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1536
+    },
+    "216": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1537
+    },
+    "224": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1538
+    },
+    "240": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1558
+    },
+    "248": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1559
+    },
+    "296": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1560
+    },
+    "304": {
+      "filename": "contracts/onchain/build//HusApp.code",
+      "line": 1561
+    }
+  },
+  "fd58736bdc10d60e4060c37802f01a6829f3116f9e6fb63afcaa16c22a4a1286": {
+    "0": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "16": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "32": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "48": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "56": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "72": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "80": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "96": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "112": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "120": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    },
+    "128": {
+      "filename": "contracts/onchain/HusApp.sol",
+      "line": 223
+    }
+  }
+}

@@ -1,0 +1,19 @@
+[package]
+name = "hus-gateway"
+version = "0.2.0"
+edition = "2021"
+
+[dependencies]
+hus-sdk = { path = "../sdk" }
+hus-onchain = { path = "../onchain" }
+tvm_client = { git = "https://github.com/tvmlabs/tvm-sdk.git", rev = "3b6a038067fa162c5ab11ef28851d2cc9655a705" }
+
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+clap = { version = "4", features = ["derive", "env"] }
+tower-http = { version = "0.5", features = ["cors"] }
+hex = "0.4"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }

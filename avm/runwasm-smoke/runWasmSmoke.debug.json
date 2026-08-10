@@ -1,0 +1,990 @@
+{
+  "4255715a5003b071ea62c229a101a8c58816ad292db86fe161618294efb1409c": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 279
+    },
+    "16": {
+      "filename": "./runWasmSmoke.code",
+      "line": 280
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 281
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 282
+    },
+    "64": {
+      "filename": "./runWasmSmoke.code",
+      "line": 283
+    },
+    "88": {
+      "filename": "./runWasmSmoke.code",
+      "line": 284
+    },
+    "104": {
+      "filename": "./runWasmSmoke.code",
+      "line": 285
+    },
+    "112": {
+      "filename": "./runWasmSmoke.code",
+      "line": 286
+    },
+    "120": {
+      "filename": "./runWasmSmoke.code",
+      "line": 287
+    },
+    "144": {
+      "filename": "./runWasmSmoke.code",
+      "line": 288
+    },
+    "168": {
+      "filename": "./runWasmSmoke.code",
+      "line": 289
+    },
+    "176": {
+      "filename": "./runWasmSmoke.code",
+      "line": 290
+    },
+    "184": {
+      "filename": "./runWasmSmoke.code",
+      "line": 291
+    },
+    "200": {
+      "filename": "./runWasmSmoke.code",
+      "line": 292
+    },
+    "216": {
+      "filename": "./runWasmSmoke.code",
+      "line": 296
+    },
+    "224": {
+      "filename": "./runWasmSmoke.code",
+      "line": 297
+    },
+    "248": {
+      "filename": "./runWasmSmoke.code",
+      "line": 298
+    },
+    "264": {
+      "filename": "./runWasmSmoke.code",
+      "line": 299
+    },
+    "272": {
+      "filename": "./runWasmSmoke.code",
+      "line": 300
+    },
+    "288": {
+      "filename": "./runWasmSmoke.code",
+      "line": 304
+    },
+    "296": {
+      "filename": "./runWasmSmoke.code",
+      "line": 305
+    },
+    "312": {
+      "filename": "./runWasmSmoke.code",
+      "line": 308
+    }
+  },
+  "6708d1c6b3b31cd1f4eef0532046a6ac811c79422c8a670a0e8cae25dd80a759": {},
+  "68ef3c981b610b426041987082203d0e1d20716a0c51eccab6370267af4d7700": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 341
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 351
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 352
+    },
+    "32": {
+      "filename": "./runWasmSmoke.code",
+      "line": 353
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 356
+    },
+    "56": {
+      "filename": "./runWasmSmoke.code",
+      "line": 357
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 358
+    },
+    "88": {
+      "filename": "./runWasmSmoke.code",
+      "line": 361
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 362
+    },
+    "112": {
+      "filename": "./runWasmSmoke.code",
+      "line": 363
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 366
+    }
+  },
+  "6ff06f1ab74ebdd9a74c986a51cf8ed225226a576417f4381e076b70cb823249": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 240
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 241
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 244
+    },
+    "40": {
+      "filename": "./runWasmSmoke.code",
+      "line": 245
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 246
+    },
+    "64": {
+      "filename": "./runWasmSmoke.code",
+      "line": 247
+    },
+    "80": {
+      "filename": "./runWasmSmoke.code",
+      "line": 248
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 249
+    },
+    "104": {
+      "filename": "./runWasmSmoke.code",
+      "line": 250
+    },
+    "120": {
+      "filename": "./runWasmSmoke.code",
+      "line": 251
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 252
+    },
+    "136": {
+      "filename": "./runWasmSmoke.code",
+      "line": 253
+    },
+    "144": {
+      "filename": "./runWasmSmoke.code",
+      "line": 254
+    },
+    "152": {
+      "filename": "./runWasmSmoke.code",
+      "line": 255
+    },
+    "168": {
+      "filename": "./runWasmSmoke.code",
+      "line": 256
+    },
+    "176": {
+      "filename": "./runWasmSmoke.code",
+      "line": 257
+    },
+    "192": {
+      "filename": "./runWasmSmoke.code",
+      "line": 258
+    },
+    "208": {
+      "filename": "./runWasmSmoke.code",
+      "line": 259
+    },
+    "224": {
+      "filename": "./runWasmSmoke.code",
+      "line": 261
+    },
+    "232": {
+      "filename": "./runWasmSmoke.code",
+      "line": 262
+    },
+    "248": {
+      "filename": "./runWasmSmoke.code",
+      "line": 263
+    },
+    "256": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "272": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "280": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "288": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "304": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "312": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "328": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "352": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "360": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "400": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "408": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "416": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "432": {
+      "filename": "stdlib.sol",
+      "line": 24
+    },
+    "448": {
+      "filename": "./runWasmSmoke.code",
+      "line": 265
+    },
+    "464": {
+      "filename": "./runWasmSmoke.code",
+      "line": 266
+    },
+    "472": {
+      "filename": "./runWasmSmoke.code",
+      "line": 267
+    },
+    "488": {
+      "filename": "./runWasmSmoke.code",
+      "line": 268
+    },
+    "496": {
+      "filename": "./runWasmSmoke.code",
+      "line": 269
+    },
+    "512": {
+      "filename": "./runWasmSmoke.code",
+      "line": 270
+    },
+    "528": {
+      "filename": "./runWasmSmoke.code",
+      "line": 271
+    },
+    "536": {
+      "filename": "./runWasmSmoke.code",
+      "line": 272
+    },
+    "552": {
+      "filename": "./runWasmSmoke.code",
+      "line": 275
+    }
+  },
+  "837e6f4ec599909cab9d98bf530e28571973d094a12c5f8ffff7006e53d6af90": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 337
+    },
+    "1": {
+      "filename": "./runWasmSmoke.code",
+      "line": 338
+    },
+    "2": {
+      "filename": "./runWasmSmoke.code",
+      "line": 339
+    },
+    "3": {
+      "filename": "./runWasmSmoke.code",
+      "line": 368
+    },
+    "4": {
+      "filename": "./runWasmSmoke.code",
+      "line": 372
+    }
+  },
+  "8c90da845c3514e7cb2fca95bba4c518895a24d63face322c4b59fde70458064": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 111
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 112
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 113
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 114
+    },
+    "64": {
+      "filename": "./runWasmSmoke.code",
+      "line": 115
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 116
+    },
+    "88": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "96": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "104": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "112": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "120": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "136": {
+      "filename": "runWasmSmoke.sol",
+      "line": 33
+    },
+    "144": {
+      "filename": "./runWasmSmoke.code",
+      "line": 127
+    },
+    "160": {
+      "filename": "./runWasmSmoke.code",
+      "line": 130
+    },
+    "168": {
+      "filename": "./runWasmSmoke.code",
+      "line": 131
+    },
+    "184": {
+      "filename": "./runWasmSmoke.code",
+      "line": 132
+    },
+    "192": {
+      "filename": "./runWasmSmoke.code",
+      "line": 133
+    },
+    "200": {
+      "filename": "./runWasmSmoke.code",
+      "line": 134
+    },
+    "216": {
+      "filename": "./runWasmSmoke.code",
+      "line": 135
+    },
+    "232": {
+      "filename": "./runWasmSmoke.code",
+      "line": 136
+    },
+    "240": {
+      "filename": "./runWasmSmoke.code",
+      "line": 137
+    },
+    "248": {
+      "filename": "./runWasmSmoke.code",
+      "line": 138
+    },
+    "256": {
+      "filename": "./runWasmSmoke.code",
+      "line": 139
+    },
+    "280": {
+      "filename": "./runWasmSmoke.code",
+      "line": 140
+    },
+    "288": {
+      "filename": "./runWasmSmoke.code",
+      "line": 141
+    },
+    "336": {
+      "filename": "./runWasmSmoke.code",
+      "line": 142
+    },
+    "360": {
+      "filename": "./runWasmSmoke.code",
+      "line": 143
+    },
+    "368": {
+      "filename": "./runWasmSmoke.code",
+      "line": 144
+    },
+    "376": {
+      "filename": "./runWasmSmoke.code",
+      "line": 145
+    },
+    "384": {
+      "filename": "./runWasmSmoke.code",
+      "line": 146
+    },
+    "400": {
+      "filename": "./runWasmSmoke.code",
+      "line": 148
+    },
+    "408": {
+      "filename": "./runWasmSmoke.code",
+      "line": 149
+    },
+    "416": {
+      "filename": "./runWasmSmoke.code",
+      "line": 151
+    },
+    "424": {
+      "filename": "./runWasmSmoke.code",
+      "line": 152
+    },
+    "440": {
+      "filename": "./runWasmSmoke.code",
+      "line": 155
+    }
+  },
+  "92c6d78b9b49876856ca3356316f6d33f12907a0e71a954541e8dfb2ff19774d": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 214
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 215
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 216
+    },
+    "40": {
+      "filename": "./runWasmSmoke.code",
+      "line": 219
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 220
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 221
+    },
+    "104": {
+      "filename": "./runWasmSmoke.code",
+      "line": 222
+    },
+    "120": {
+      "filename": "./runWasmSmoke.code",
+      "line": 225
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 226
+    },
+    "176": {
+      "filename": "./runWasmSmoke.code",
+      "line": 227
+    },
+    "184": {
+      "filename": "./runWasmSmoke.code",
+      "line": 228
+    },
+    "200": {
+      "filename": "./runWasmSmoke.code",
+      "line": 231
+    },
+    "208": {
+      "filename": "./runWasmSmoke.code",
+      "line": 232
+    },
+    "256": {
+      "filename": "./runWasmSmoke.code",
+      "line": 233
+    },
+    "264": {
+      "filename": "./runWasmSmoke.code",
+      "line": 234
+    }
+  },
+  "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7": {},
+  "9b81cff2dd080dde01222a941ff1afd3255b14bdc9909e1fcd3f7df22900864d": {
+    "0": {
+      "filename": "runWasmSmoke.sol",
+      "line": 55
+    },
+    "16": {
+      "filename": "runWasmSmoke.sol",
+      "line": 56
+    },
+    "32": {
+      "filename": "runWasmSmoke.sol",
+      "line": 57
+    },
+    "48": {
+      "filename": "runWasmSmoke.sol",
+      "line": 57
+    }
+  },
+  "a8706c6358fecfba3c31d885dcf337fed67609c22ebf972396a9aca8faf7a108": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 348
+    }
+  },
+  "ad9262e05721e91a44c3122476e14774d3e6d4dc06d34630891176d717fba4c2": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 29
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 30
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 31
+    },
+    "32": {
+      "filename": "./runWasmSmoke.code",
+      "line": 32
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 35
+    },
+    "64": {
+      "filename": "./runWasmSmoke.code",
+      "line": 36
+    },
+    "80": {
+      "filename": "./runWasmSmoke.code",
+      "line": 37
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 38
+    },
+    "104": {
+      "filename": "runWasmSmoke.sol",
+      "line": 15
+    },
+    "120": {
+      "filename": "runWasmSmoke.sol",
+      "line": 16
+    },
+    "136": {
+      "filename": "runWasmSmoke.sol",
+      "line": 16
+    },
+    "160": {
+      "filename": "runWasmSmoke.sol",
+      "line": 17
+    },
+    "176": {
+      "filename": "runWasmSmoke.sol",
+      "line": 18
+    },
+    "192": {
+      "filename": "runWasmSmoke.sol",
+      "line": 18
+    },
+    "208": {
+      "filename": "./runWasmSmoke.code",
+      "line": 50
+    },
+    "224": {
+      "filename": "./runWasmSmoke.code",
+      "line": 53
+    }
+  },
+  "b0966876ea7bde9bb290bdde27ee5efdd1ca0835afc5512ee2b02b606dcdca25": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 16
+    },
+    "16": {
+      "filename": "./runWasmSmoke.code",
+      "line": 17
+    },
+    "32": {
+      "filename": "./runWasmSmoke.code",
+      "line": 18
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 19
+    },
+    "56": {
+      "filename": "./runWasmSmoke.code",
+      "line": 20
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 21
+    },
+    "88": {
+      "filename": "./runWasmSmoke.code",
+      "line": 22
+    },
+    "104": {
+      "filename": "./runWasmSmoke.code",
+      "line": 23
+    },
+    "120": {
+      "filename": "./runWasmSmoke.code",
+      "line": 24
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 25
+    }
+  },
+  "ba711465035b5549f634970957eaacf0d9b3567122bff32569648d3cb3314f5e": {
+    "0": {
+      "filename": "runWasmSmoke.sol",
+      "line": 40
+    },
+    "16": {
+      "filename": "runWasmSmoke.sol",
+      "line": 41
+    },
+    "32": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "48": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "56": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "64": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "72": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "88": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "96": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "104": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "112": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "128": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "136": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "144": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "152": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "168": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "176": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "184": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "192": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "208": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "216": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "232": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "240": {
+      "filename": "runWasmSmoke.sol",
+      "line": 42
+    },
+    "256": {
+      "filename": "runWasmSmoke.sol",
+      "line": 48
+    },
+    "272": {
+      "filename": "runWasmSmoke.sol",
+      "line": 48
+    },
+    "288": {
+      "filename": "runWasmSmoke.sol",
+      "line": 49
+    },
+    "296": {
+      "filename": "runWasmSmoke.sol",
+      "line": 49
+    },
+    "304": {
+      "filename": "runWasmSmoke.sol",
+      "line": 49
+    }
+  },
+  "d4961e382e0be585a26e72cb1f82df82292f3e183935054684ba946df4628113": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 193
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 194
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 195
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 196
+    },
+    "64": {
+      "filename": "./runWasmSmoke.code",
+      "line": 197
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 198
+    },
+    "88": {
+      "filename": "runWasmSmoke.sol",
+      "line": 54
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 204
+    },
+    "112": {
+      "filename": "./runWasmSmoke.code",
+      "line": 207
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 210
+    }
+  },
+  "e8bfe59b11c0afabb3a71b5e2bc872fdd5a1557a7466336e9cc0ad5777fc089c": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 159
+    },
+    "8": {
+      "filename": "./runWasmSmoke.code",
+      "line": 160
+    },
+    "16": {
+      "filename": "./runWasmSmoke.code",
+      "line": 161
+    },
+    "32": {
+      "filename": "./runWasmSmoke.code",
+      "line": 164
+    },
+    "48": {
+      "filename": "./runWasmSmoke.code",
+      "line": 165
+    },
+    "56": {
+      "filename": "./runWasmSmoke.code",
+      "line": 166
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 167
+    },
+    "232": {
+      "filename": "./runWasmSmoke.code",
+      "line": 168
+    },
+    "240": {
+      "filename": "./runWasmSmoke.code",
+      "line": 169
+    },
+    "248": {
+      "filename": "./runWasmSmoke.code",
+      "line": 170
+    },
+    "264": {
+      "filename": "./runWasmSmoke.code",
+      "line": 171
+    },
+    "272": {
+      "filename": "./runWasmSmoke.code",
+      "line": 172
+    },
+    "280": {
+      "filename": "./runWasmSmoke.code",
+      "line": 173
+    },
+    "296": {
+      "filename": "./runWasmSmoke.code",
+      "line": 175
+    },
+    "304": {
+      "filename": "./runWasmSmoke.code",
+      "line": 176
+    }
+  },
+  "e9e5b08e673e611d8c08a9e26ee041127b0214182769f41d2f307b6369752fb3": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 342
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 343
+    },
+    "40": {
+      "filename": "./runWasmSmoke.code",
+      "line": 344
+    }
+  },
+  "f24e1e7aa04d89aad2945816b6e9b921f2b3892da9ba53e2383c148351b96d0c": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 293
+    },
+    "16": {
+      "filename": "./runWasmSmoke.code",
+      "line": 294
+    }
+  },
+  "f2bec2a79affc07cb0bf47010531616f2369e8bc74ec5a7781b83cf80877f402": {
+    "0": {
+      "filename": "./runWasmSmoke.code",
+      "line": 2
+    },
+    "16": {
+      "filename": "./runWasmSmoke.code",
+      "line": 3
+    },
+    "24": {
+      "filename": "./runWasmSmoke.code",
+      "line": 4
+    },
+    "40": {
+      "filename": "./runWasmSmoke.code",
+      "line": 5
+    },
+    "56": {
+      "filename": "./runWasmSmoke.code",
+      "line": 6
+    },
+    "72": {
+      "filename": "./runWasmSmoke.code",
+      "line": 7
+    },
+    "88": {
+      "filename": "./runWasmSmoke.code",
+      "line": 8
+    },
+    "96": {
+      "filename": "./runWasmSmoke.code",
+      "line": 9
+    },
+    "112": {
+      "filename": "./runWasmSmoke.code",
+      "line": 10
+    },
+    "128": {
+      "filename": "./runWasmSmoke.code",
+      "line": 11
+    },
+    "144": {
+      "filename": "./runWasmSmoke.code",
+      "line": 12
+    }
+  },
+  "f454305d5d4d28726692e11b435343aaff21666dbfbdd213ee633368ce0ebef8": {
+    "0": {
+      "filename": "runWasmSmoke.sol",
+      "line": 22
+    },
+    "16": {
+      "filename": "runWasmSmoke.sol",
+      "line": 22
+    },
+    "32": {
+      "filename": "runWasmSmoke.sol",
+      "line": 22
+    },
+    "88": {
+      "filename": "runWasmSmoke.sol",
+      "line": 22
+    },
+    "96": {
+      "filename": "runWasmSmoke.sol",
+      "line": 22
+    },
+    "104": {
+      "filename": "runWasmSmoke.sol",
+      "line": 25
+    },
+    "160": {
+      "filename": "runWasmSmoke.sol",
+      "line": 25
+    }
+  }
+}

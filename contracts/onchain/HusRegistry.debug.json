@@ -1,0 +1,3299 @@
+{
+  "05372d95bb0bcb2cf21815fdf353da069c1b892e08e7508a6de9fa29cdeb091e": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1108
+    },
+    "16": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1109
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1110
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1111
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1112
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1113
+    },
+    "104": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1114
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1115
+    },
+    "120": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1116
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1117
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1118
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1119
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1120
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1121
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1125
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1126
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1127
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1128
+    },
+    "272": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1129
+    },
+    "288": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1133
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1134
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1137
+    }
+  },
+  "065adfd52690fec4586b1cbf48e74b96021a42718fcfc0ef49fed7950511e138": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 60
+    },
+    "16": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 61
+    },
+    "32": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 62
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 63
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 64
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 65
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 66
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 67
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 68
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 69
+    },
+    "152": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 70
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 71
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 72
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 73
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 74
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 75
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 76
+    },
+    "256": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 77
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 78
+    },
+    "280": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 79
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 80
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 81
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 82
+    }
+  },
+  "0be962b8706e5f3902517ac876a43d1233005d5c810dea0e8b04e424a91e0d63": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 33
+    },
+    "16": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 34
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 35
+    },
+    "40": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 36
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 37
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 38
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 39
+    },
+    "104": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 40
+    },
+    "120": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 41
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 42
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 43
+    },
+    "152": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 44
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 45
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 46
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 47
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 48
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 49
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 50
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 51
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 52
+    },
+    "280": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 53
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 54
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 55
+    },
+    "328": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 56
+    }
+  },
+  "2f5ac9943eb91178ff96709da0e8e5dc2f765f52813a1a66f005f8709870674f": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 701
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 702
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 703
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 704
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 705
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 706
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "208": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "224": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 40
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 726
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 729
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 732
+    }
+  },
+  "372380ecd4cee614f24c82621159cf7081ae95f15da7e924add43df824515ad4": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "8": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 69
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "176": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "208": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "224": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "232": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    },
+    "256": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 70
+    }
+  },
+  "3936b88cdb3354807c6485272a635681850443d2f5e94bd8cf5930d78c84f2a9": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 151
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 152
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 153
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 154
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 155
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 156
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 64
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 172
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 175
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 176
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 177
+    },
+    "240": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 178
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 179
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 180
+    },
+    "280": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 181
+    },
+    "288": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 182
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 183
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 184
+    },
+    "328": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 185
+    },
+    "336": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 186
+    },
+    "384": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 187
+    },
+    "408": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 188
+    },
+    "424": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 189
+    },
+    "432": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 190
+    },
+    "440": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 191
+    },
+    "456": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 193
+    },
+    "464": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 194
+    },
+    "472": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 196
+    },
+    "480": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 197
+    },
+    "496": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 200
+    }
+  },
+  "3a9958b05477a3486e4e96fa24a2afa1b353a42496266fb1193724d072e0f860": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "8": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "176": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "216": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "224": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "240": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "248": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 23
+    },
+    "272": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 57
+    },
+    "280": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 57
+    },
+    "304": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 58
+    },
+    "320": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "328": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "336": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "352": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "368": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "376": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 59
+    },
+    "392": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "408": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "424": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "440": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "456": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "472": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "480": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "496": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "504": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "520": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "536": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "552": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "560": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "584": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "592": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 60
+    },
+    "616": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "624": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "640": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "648": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "664": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "680": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "696": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "704": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "720": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "728": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "744": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "752": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "768": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "776": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "792": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "808": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "816": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "832": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "840": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "856": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    },
+    "872": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 61
+    }
+  },
+  "41d86f939124c1a83854555844af2358f50f933dd30ef1ecbd5d43f57fafa848": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 252
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 253
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 254
+    },
+    "32": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 255
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 258
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 259
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 260
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "176": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 33
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 34
+    },
+    "216": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "232": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "240": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "248": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "256": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "264": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "272": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "280": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 35
+    },
+    "296": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 36
+    },
+    "304": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 36
+    },
+    "320": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 37
+    },
+    "328": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 37
+    },
+    "344": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 292
+    },
+    "360": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 295
+    }
+  },
+  "4931251b5d885ef0cb8cb85f4b4604bb3ab8b424ff61eca253efc6a3a572e1c7": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 118
+    }
+  },
+  "4b5cdfa74c7ea8d0b4be139cccd6783b42722fa5b7883e9cab1ffec535f50833": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 531
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 532
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 533
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 113
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 537
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 540
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 541
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 542
+    },
+    "104": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 543
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 544
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 545
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 546
+    },
+    "152": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 547
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 548
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 549
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 550
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 551
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 552
+    },
+    "272": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 553
+    },
+    "280": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 554
+    },
+    "288": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 555
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 556
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 558
+    },
+    "320": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 559
+    },
+    "328": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 561
+    },
+    "336": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 562
+    },
+    "352": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 565
+    }
+  },
+  "56cc330c32a27d9739fa193659bcba6faf48c66a20dfbc14f0f79f827e4cad6b": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "8": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 46
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 47
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 47
+    },
+    "224": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 48
+    },
+    "240": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "248": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "256": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "272": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "288": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "304": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "312": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "328": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "336": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "344": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "360": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "376": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    }
+  },
+  "59b504c12e430f039c31372b97086a33269b801eabff8075b149c4360fdd9306": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 880
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 881
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 882
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 883
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 884
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 885
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 52
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 901
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 904
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 907
+    }
+  },
+  "60f34534325216684f337a33781753c1b9d4495d4aac24c4bf1e5729d7a82d99": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 86
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 87
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 88
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 89
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 90
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 91
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 93
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 97
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 100
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 103
+    }
+  },
+  "64c702f4be905072d0f184e3929224b5e1828c17d75ddfa0203473366606e81b": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1052
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1053
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1056
+    },
+    "40": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1057
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1058
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1059
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1060
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1061
+    },
+    "104": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1062
+    },
+    "120": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1063
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1064
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1065
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1066
+    },
+    "152": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1067
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1068
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1069
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1070
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1071
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1072
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1073
+    },
+    "240": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1075
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1076
+    },
+    "256": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1077
+    },
+    "272": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1079
+    },
+    "280": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1080
+    },
+    "288": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1081
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1082
+    },
+    "320": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1083
+    },
+    "336": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1085
+    },
+    "344": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1086
+    },
+    "360": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1087
+    },
+    "368": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1088
+    },
+    "384": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1090
+    },
+    "392": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1091
+    },
+    "408": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1092
+    },
+    "416": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "432": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "440": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "448": {
+      "filename": "stdlib.sol",
+      "line": 22
+    },
+    "464": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "472": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "488": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "512": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "520": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "560": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "568": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "576": {
+      "filename": "stdlib.sol",
+      "line": 23
+    },
+    "592": {
+      "filename": "stdlib.sol",
+      "line": 24
+    },
+    "608": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1094
+    },
+    "624": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1095
+    },
+    "632": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1096
+    },
+    "648": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1097
+    },
+    "656": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1098
+    },
+    "672": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1099
+    },
+    "688": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1100
+    },
+    "696": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1101
+    },
+    "712": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1104
+    }
+  },
+  "662dfea33c6170d38ed87b3d3bb639a582d8bc3e6b4c9deb091c304479fb8670": {},
+  "6875867a0a67744686346e75624c0ece7dcf05f577ba67835bb3873036924a9a": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 596
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 597
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 598
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 599
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 600
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 601
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 83
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 615
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 618
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 619
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 620
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 621
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 622
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 623
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 624
+    },
+    "256": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 625
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 626
+    },
+    "272": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 627
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 628
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 629
+    },
+    "352": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 630
+    },
+    "376": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 631
+    },
+    "392": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 632
+    },
+    "400": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 633
+    },
+    "408": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 634
+    },
+    "424": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 636
+    },
+    "432": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 637
+    },
+    "440": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 639
+    },
+    "448": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 640
+    },
+    "464": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 643
+    }
+  },
+  "6ca6d24a8b9d658a9c212269f78cfd74c296dde87144a3ec8f2347c2ddb3e6fc": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 94
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 95
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "160": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "176": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 96
+    },
+    "208": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 97
+    },
+    "216": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 97
+    }
+  },
+  "7049ac98e579c82e9d4877ef727854a1e9480fc96a42500b5cf61e9878e91176": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 759
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 760
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 761
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 762
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 763
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 764
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 100
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 778
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 781
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 784
+    }
+  },
+  "75b35000c89eb857c5d4faf9da7c52499e136051c3941713901e919dd73557b0": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 963
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 964
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 965
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 966
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 991
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 992
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 993
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 994
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1020
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1021
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1022
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1023
+    },
+    "240": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1043
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1044
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1045
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1046
+    }
+  },
+  "7803e6230f22fce07026dad24fd387385e6e2985834192c6f883924fe5bce127": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 88
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 88
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 89
+    },
+    "160": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 90
+    }
+  },
+  "78c5e6cdc7174a89b97341f03a58127d06147323ca36d9a2c24bce9b1598bb73": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 107
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 107
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 108
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 109
+    },
+    "184": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 109
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 110
+    },
+    "208": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 110
+    }
+  },
+  "7f94ced4345bbf0bdc6db6f0c54b91fa7ae7ce1e98065952fb39fd054d45ff5f": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    }
+  },
+  "95b9f9764e95a1772c2184756505e78f5e774b548e3f1591730aa20c2bdb2785": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1162
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1172
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1173
+    },
+    "32": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1174
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1177
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1178
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1179
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1182
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1183
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1184
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1187
+    }
+  },
+  "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7": {},
+  "a61b0d41419ab21ca763e10e7ebc2188d639e37649a56a431c8cff541490db14": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1158
+    },
+    "1": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1159
+    },
+    "2": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1160
+    },
+    "3": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1189
+    },
+    "4": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1193
+    }
+  },
+  "a8706c6358fecfba3c31d885dcf337fed67609c22ebf972396a9aca8faf7a108": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1169
+    }
+  },
+  "ac165244115ace66658b50e85fb073fb3c02e37f9d6349ed4c6c2b0cc5564c2d": {},
+  "b126e3969dbe6d7dbaeb410ef617b23f00391efbbc0393eb497f19dbc5534777": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    },
+    "160": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 84
+    }
+  },
+  "b5478a36d1589f14e2dda43811cc69819577ce92bb7befa7d4cd39ae5b180c80": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 231
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 232
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 233
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 234
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 235
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 236
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 106
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 242
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 245
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 248
+    }
+  },
+  "b8391546ae93a4f6eb9e3e2c4ed76b96c6f9b9ecf0297d85dcc2b9202d199369": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 49
+    }
+  },
+  "b9ea58b67d186f6bc1d043eb2abfde3eda294a649974ef2fdad0510acb40ffad": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 114
+    }
+  },
+  "c162dc92eaa654ec6e6c1d7b095a00cb9ba3312a8ca1b3940165b6ea3d5416a4": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "8": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "168": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 79
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "216": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "232": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "248": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "264": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "272": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "288": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "296": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "304": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "320": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "336": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "344": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "360": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "368": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "384": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "400": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "416": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "432": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "440": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "456": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "464": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "472": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "488": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "504": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "512": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "528": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "536": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "552": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "568": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    }
+  },
+  "cf9fbe2d437c23c63582f3022ba52d6df316a4a467de65df5347ce599396942a": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 305
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 306
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 307
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 308
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 309
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 310
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 117
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 316
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 319
+    },
+    "120": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 320
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 321
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 322
+    },
+    "152": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 323
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 324
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 325
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 326
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 327
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 328
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 329
+    },
+    "240": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 330
+    },
+    "288": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 331
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 332
+    },
+    "328": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 333
+    },
+    "336": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 334
+    },
+    "344": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 335
+    },
+    "360": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 337
+    },
+    "368": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 338
+    },
+    "376": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 340
+    },
+    "384": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 341
+    },
+    "400": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 344
+    }
+  },
+  "d936dd9ae5a35dcdad7543bfb1063c90cb21bc06a43c150681702594fac03a14": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "32": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "64": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "80": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 28
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 101
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 101
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 102
+    },
+    "160": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 103
+    }
+  },
+  "e4ed6e8ca01c0c1470157e81304709b608f750f326a87664abfc92f16081cec1": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 465
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 466
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 467
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 468
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 469
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 470
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 73
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 484
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 487
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 488
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 489
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 490
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 491
+    },
+    "232": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 492
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 493
+    },
+    "256": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 494
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 495
+    },
+    "272": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 496
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 497
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 498
+    },
+    "312": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 499
+    },
+    "336": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 500
+    },
+    "352": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 501
+    },
+    "360": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 502
+    },
+    "408": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 503
+    },
+    "424": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 504
+    },
+    "440": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 505
+    },
+    "456": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 506
+    },
+    "472": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 507
+    },
+    "480": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 508
+    },
+    "488": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 509
+    },
+    "496": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 510
+    },
+    "512": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 512
+    },
+    "520": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 513
+    },
+    "536": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 515
+    },
+    "544": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 516
+    },
+    "560": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 519
+    }
+  },
+  "e6936e8f0e7b8fe98c2ca66eee9d4e9dafcfc747defef9cb795288fabb1b7ef3": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 135
+    },
+    "16": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 136
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 137
+    },
+    "40": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 138
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 139
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 140
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 141
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 142
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 143
+    },
+    "112": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 144
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 145
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 146
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 147
+    }
+  },
+  "e6b8ec5de3a429c709a55deb4f8fa0e791bb767ac1393da5cd3e0a618c2adfe3": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 114
+    }
+  },
+  "e9e5b08e673e611d8c08a9e26ee041127b0214182769f41d2f307b6369752fb3": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1163
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1164
+    },
+    "40": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1165
+    }
+  },
+  "eb17e646ce6d8001d86f607d644a04202e81cf3d81d2e52f18ed2ff6a25a3f5e": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 934
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 935
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 936
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 937
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 938
+    },
+    "72": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 939
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "104": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "120": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "136": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "152": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 87
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 953
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 956
+    },
+    "192": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 959
+    }
+  },
+  "f0d29ebcf5647687bce74404e2811949e04adea874d39e66c912f11c481c5770": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 967
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 968
+    },
+    "24": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 969
+    },
+    "40": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 972
+    },
+    "48": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 973
+    },
+    "96": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 974
+    },
+    "104": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 975
+    },
+    "120": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 978
+    },
+    "128": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 979
+    },
+    "176": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 980
+    },
+    "184": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 981
+    },
+    "200": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 984
+    },
+    "208": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 985
+    },
+    "256": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 986
+    },
+    "264": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 987
+    }
+  },
+  "f24e1e7aa04d89aad2945816b6e9b921f2b3892da9ba53e2383c148351b96d0c": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1122
+    },
+    "16": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1123
+    }
+  },
+  "f53a65910b5a5b3b44e2489ed5c6b576246eb656aca2c769780895d7691d9fc5": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1024
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1025
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1026
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1027
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1030
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1031
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1032
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1033
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1036
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1037
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1038
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1039
+    }
+  },
+  "f693f13f8c09776cc3d77c7fb085287a1ccb18e72502a032892ba4d6d27b5cc8": {
+    "0": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "16": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "24": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "40": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "48": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "56": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "72": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "88": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "96": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "112": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "128": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "144": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "160": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "176": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "192": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "200": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "216": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "224": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "232": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "248": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "264": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    },
+    "272": {
+      "filename": "contracts/onchain/HusRegistry.sol",
+      "line": 80
+    }
+  },
+  "ff78a1cde235e7a2b48328af426353918eb7d33c724415eba5542f2dc3e5ce79": {
+    "0": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 995
+    },
+    "8": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 996
+    },
+    "56": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 997
+    },
+    "64": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 998
+    },
+    "80": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1001
+    },
+    "88": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1002
+    },
+    "136": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1003
+    },
+    "144": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1004
+    },
+    "160": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1007
+    },
+    "168": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1008
+    },
+    "216": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1009
+    },
+    "224": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1010
+    },
+    "240": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1013
+    },
+    "248": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1014
+    },
+    "296": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1015
+    },
+    "304": {
+      "filename": "/home/kodics/hus/contracts/onchain//HusRegistry.code",
+      "line": 1016
+    }
+  }
+}
