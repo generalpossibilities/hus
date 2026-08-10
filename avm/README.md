@@ -2,7 +2,7 @@
 
 This directory holds the artifacts submitted to the Acki Nacki team for the
 on-chain WASM execution (RUNWASM / AVM) review request
-(see [`docs/shellnet-runwasm-request.md`](../docs/shellnet-runwasm-request.md)).
+(see [`shellnet-runwasm-request.md`](./shellnet-runwasm-request.md)).
 
 ## Contents
 
@@ -48,4 +48,4 @@ the adder smoke test.
 - `gosh.vergrth16` on-chain proof path: blocked (hardcoded ZkLogin VKs; custom
   Poseidon circuit unsupported; ZKHALO2VERIFY targets Halo2/KZG, not Groth16).
 - `gosh.runwasm` path: validated end-to-end in the local harness; operator
-  request open — see `docs/shellnet-runwasm-request.md`.
+  request open — see [shellnet-runwasm-request.md](./shellnet-runwasm-request.md).

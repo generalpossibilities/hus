@@ -47,6 +47,23 @@ Wasm result proven: `add([0x01,0x02])` returns `[3]` and the contract persists i
 - Measure real SHELL gas cost per `runwasm` call for the audit.
 - Then swap the `docs:adder` stub for the real HUS prover wasm and test the `[proof_bytes | commitment]` wire format.
 
+## A wish for the roadmap
+
+While `gosh.runwasm` is the pragmatic path for today — and we're genuinely
+excited to run our prover as WASM on the node — HUS's long-term design goal
+is **native Groth16 verification on-chain**: an opcode that lets a contract
+verify a proof against *its own* verifying key, not only the protocol's
+hardcoded ZkLogin keys. Something along the lines of the
+`vergrth16WithVK(vk, public_inputs, proof)` instruction teased in the Acki
+Nacki News SDK notes, or simply opening up `gosh.vergrth16` to accept a VK
+parameter.
+
+With such a primitive, the whole uniqueness check stays inside the chain —
+no off-chain verifier, no WASM hop: just a proof, a commitment, and finality.
+This is not a blocker for the request above; consider it a humble feature
+wish from a team building privacy-preserving identity infrastructure on
+Acki Nacki.
+
 ## Artifacts (already in repo)
 
 - Contract: `avm/runwasm-smoke/runWasmSmoke_pubkey.sol` (+ `.abi.json`, `.code`, deploy tvc in same dir)
