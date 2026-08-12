@@ -129,10 +129,10 @@ fn capture_impl_raw(modality: Modality) -> Result<RawCapture, crate::error::Capt
 }
 
 #[cfg(not(target_arch = "wasm32"))]
-fn capture_impl_raw(modality: Modality) -> Result<RawCapture, crate::error::CaptureError> {
-    use crate::capture::Capture;
-    let mut mock = MockCapture::new(modality);
-    mock.capture()
+fn capture_impl_raw(_modality: Modality) -> Result<RawCapture, crate::error::CaptureError> {
+    Err(crate::error::CaptureError::NotSupported(
+        "sensor capture requires a wasm32 target; use the native/FFI capture path",
+    ))
 }
 
 // ---------------------------------------------------------------------------
