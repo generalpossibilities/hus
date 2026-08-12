@@ -13,17 +13,13 @@ use crate::error::ExtractionError;
 // ---------------------------------------------------------------------------
 // Modality <-> u32  (user-facing numbering for JS)
 // ---------------------------------------------------------------------------
+/// Map the on-chain modality id to a [`Modality`] (0=Face … 6=Gait,
+/// matching `Modality::id()` / `from_id` — the JS-facing numbering must
+/// never diverge from the on-chain encoding).
 fn u32_to_modality(m: u32) -> Option<Modality> {
-    match m {
-        0 => Some(Modality::Keystroke),
-        1 => Some(Modality::TouchGesture),
-        2 => Some(Modality::Gait),
-        3 => Some(Modality::Face),
-        4 => Some(Modality::Iris),
-        5 => Some(Modality::Voice),
-        6 => Some(Modality::Fingerprint),
-        _ => None,
-    }
+    u8::try_from(m)
+        .ok()
+        .and_then(|id| Modality::from_id(id).ok())
 }
 
 // ---------------------------------------------------------------------------
@@ -333,7 +329,8 @@ pub fn capture_gait() -> Result<Vec<f32>, JsValue> {
 
 /// Extract an embedding from raw capture data.
 ///
-/// * `modality` — 0=Keystroke, 1=Touch, 2=Gait, 3=Face, 4=Iris, 5=Voice, 6=Fingerprint
+/// * `modality` — on-chain modality id: 0=Face, 1=Iris, 2=Voice, 3=Fingerprint,
+///   4=Keystroke, 5=TouchGesture, 6=Gait
 /// * `raw_json` — JSON array of f32 values `[f32,...]`
 ///
 /// Returns the embedding vector as a JSON string, or `{"error": "..."}` on failure.
