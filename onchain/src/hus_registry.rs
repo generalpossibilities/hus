@@ -234,7 +234,7 @@ impl HusRegistry {
         let onchain_hash = self.get_proving_key_hash().await?;
         if !onchain_hash.is_empty() && onchain_hash != "0" {
             let computed = Self::sha256(&pk);
-            let expected = hex::decode(&onchain_hash).map_err(|e| format!("hex decode hash: {e}"))?;
+            let expected = Self::decode_uint256(&onchain_hash)?;
             if computed != expected.as_slice() {
                 return Err("proving key hash mismatch — data may be corrupt".to_string());
             }
@@ -260,6 +260,50 @@ impl HusRegistry {
     fn sha256(data: &[u8]) -> Vec<u8> {
         use sha2::Digest;
         sha2::Sha256::digest(data).to_vec()
+    }
+
+    /// Decode an on-chain `uint256` value into its 32 bytes big-endian form.
+    ///
+    /// The stored `_provingKeyHash` is `uint256`. tvm-client/ABI responses
+    /// serialize `uint256` as a *decimal* string, while our upload path sends
+    /// `0x<hex>`; accept both and zero-pad to exactly 32 bytes so the result
+    /// always compares against the raw SHA-256 digest.
+    fn decode_uint256(value: &str) -> Result<Vec<u8>, String> {
+        let bytes = if let Some(hex_part) = value.strip_prefix("0x") {
+            hex::decode(hex_part).map_err(|e| format!("hex decode hash: {e}"))?
+        } else if value.bytes().all(|b| b.is_ascii_digit()) {
+            Self::decimal_to_be_bytes(value)?
+        } else {
+            return Err(format!("invalid uint256 hash value: {value}"));
+        };
+        if bytes.len() > 32 {
+            return Err(format!("hash value exceeds 32 bytes: {value}"));
+        }
+        let mut padded = vec![0u8; 32 - bytes.len()];
+        padded.extend_from_slice(&bytes);
+        Ok(padded)
+    }
+
+    fn decimal_to_be_bytes(s: &str) -> Result<Vec<u8>, String> {
+        let mut digits: Vec<u8> = s.bytes().map(|b| b - b'0').collect();
+        let mut out: Vec<u8> = Vec::new();
+        while !digits.iter().all(|&d| d == 0) {
+            let mut rem: u32 = 0;
+            for d in digits.iter_mut() {
+                let cur = rem * 10 + *d as u32;
+                *d = (cur / 256) as u8;
+                rem = cur % 256;
+            }
+            out.push(rem as u8);
+            while digits.first() == Some(&0) && digits.len() > 1 {
+                digits.remove(0);
+            }
+        }
+        if out.is_empty() {
+            out.push(0);
+        }
+        out.reverse();
+        Ok(out)
     }
 
     // ── App management ─────────────────────────────────────────
@@ -455,5 +499,50 @@ impl HusRegistry {
         };
         let output = self.run_tvm(call_set).await?;
         Ok(output["value0"].as_str().ok_or("no value0")?.to_string())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::HusRegistry;
+
+    #[test]
+    fn decode_uint256_accepts_hex_and_decimal_equivalents() {
+        let hash: Vec<u8> = (0u8..16).collect();
+        let padded: Vec<u8> = vec![0u8; 16].into_iter().chain(hash.clone()).collect();
+        let hex_form = format!("0x{}", hex::encode(&hash));
+        let decimal = format!("{}", hash.iter().fold(0u128, |acc, b| acc * 256 + *b as u128));
+
+        assert_eq!(
+            HusRegistry::decode_uint256(&hex_form).unwrap(),
+            padded.clone(),
+            "0x-hex form must decode to raw bytes, zero-padded to 32"
+        );
+        assert_eq!(
+            HusRegistry::decode_uint256(&decimal).unwrap(),
+            padded,
+            "decimal form (tvm uint256 JSON encoding) must decode to raw bytes"
+        );
+    }
+
+    #[test]
+    fn decode_uint256_zero_pads_and_rejects_oversize() {
+        assert_eq!(
+            HusRegistry::decode_uint256("0xdeadbeef").unwrap(),
+            vec![0u8; 28].into_iter().chain([0xde, 0xad, 0xbe, 0xef]).collect::<Vec<u8>>(),
+        );
+        assert!(HusRegistry::decode_uint256("0x1234").is_ok());
+        assert!(HusRegistry::decode_uint256("not-a-number").is_err());
+        assert!(HusRegistry::decode_uint256(&format!("0x{}", "ff".repeat(33))).is_err());
+    }
+
+    #[test]
+    fn upload_store_roundtrip_consistency() {
+        let hash: Vec<u8> = (200u8..216).collect();
+        let padded: Vec<u8> = vec![0u8; 16].into_iter().chain(hash.clone()).collect();
+        let hex_form = format!("0x{}", hex::encode(&hash));
+        let decoded = HusRegistry::decode_uint256(&hex_form).unwrap();
+        let decimal = format!("{}", decoded.iter().fold(0u128, |acc, b| acc * 256 + *b as u128));
+        assert_eq!(HusRegistry::decode_uint256(&decimal).unwrap(), padded);
     }
 }
