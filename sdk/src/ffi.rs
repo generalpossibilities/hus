@@ -3,7 +3,6 @@
 extern crate alloc;
 
 use alloc::alloc::{alloc, dealloc, Layout};
-use alloc::string::String;
 use alloc::vec::Vec;
 use core::ffi::{c_char, c_void};
 use core::mem::{align_of, size_of};
@@ -17,11 +16,12 @@ use crate::MAX_PROJ_DIM;
 // Thread-local error buffer
 // ---------------------------------------------------------------------------
 std::thread_local! {
-    static LAST_ERROR: std::cell::RefCell<Option<String>> = const { std::cell::RefCell::new(None) };
+    static LAST_ERROR: std::cell::RefCell<Option<std::ffi::CString>> =
+        const { std::cell::RefCell::new(None) };
 }
 
 fn set_error(msg: &str) {
-    LAST_ERROR.with(|e| *e.borrow_mut() = Some(String::from(msg)));
+    LAST_ERROR.with(|e| *e.borrow_mut() = Some(std::ffi::CString::new(msg).unwrap_or_default()));
 }
 
 // ---------------------------------------------------------------------------

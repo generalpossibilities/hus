@@ -398,7 +398,7 @@ fn check_gait_variance(data: &[u8]) -> bool {
         let z = f32::from_le_bytes(
             data[offset + 8..offset + 12].try_into().unwrap_or([0u8; 4]),
         );
-        if x != 0.0 || y != 0.0 || z != 0.0 || z.abs() > 0.01 {
+        if x != 0.0 || y != 0.0 || z != 0.0 {
             any_nonzero = true;
             break;
         }
