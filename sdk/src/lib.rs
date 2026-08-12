@@ -61,10 +61,20 @@ pub const V_OBF_SCALE: i64 = 1_000_000;
 /// Convert f32 V_obf values to the int64 fixed-point format expected by the
 /// on-chain contract (`SCALE = 10⁶`, matching `HusApp.THRESHOLD_SCALED`).
 ///
+/// The output is always exactly `MAX_PROJ_DIM` (128) elements, matching the
+/// shape the in-circuit commitment is computed over (`prover.rs` zero-pads
+/// `v_obf` to `MAX_PROJ_DIM` before hashing, and `HusApp` requires
+/// `vObfLen == projDim` with the default registry `projDim = 128`). Values
+/// beyond `MAX_PROJ_DIM` are truncated; shorter vectors are zero-padded.
+///
 /// Conversion is `(x as f64 * SCALE) as i64` with Rust's saturating
 /// float→int semantics (NaN/±Inf saturate to 0 / i64::MAX / i64::MIN).
 pub fn v_obf_to_contract(v: &[f32]) -> Vec<i64> {
-    v.iter()
+    let mut padded = alloc::vec![0.0f32; MAX_PROJ_DIM];
+    let n = v.len().min(MAX_PROJ_DIM);
+    padded[..n].copy_from_slice(&v[..n]);
+    padded
+        .iter()
         .map(|x| (*x as f64 * V_OBF_SCALE as f64) as i64)
         .collect()
 }
