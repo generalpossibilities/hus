@@ -296,10 +296,7 @@ fn hex_decode32(s: &str) -> Option<[u8; 32]> {
 }
 
 fn vobf_to_fixed(v_obf: &[f32]) -> Vec<i64> {
-    v_obf
-        .iter()
-        .map(|v| (*v as f64 * 1_000_000.0) as i64)
-        .collect()
+    crate::v_obf_to_contract(v_obf)
 }
 
 // ---------------------------------------------------------------------------

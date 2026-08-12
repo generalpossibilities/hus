@@ -51,17 +51,22 @@ pub use quality_gate::{QualityGate, QualityReport};
 pub(crate) use circuit::r1cs::MAX_PROJ_DIM;
 pub(crate) const PROJ_DIM: usize = MAX_PROJ_DIM;
 
-/// Convert f32 V_obf values to the int64 format expected by the on-chain contract.
+/// Scale used for on-chain V_obf serialization (fixed-point ×10⁶).
 ///
-/// Each f32 is converted to its IEEE 754 bit pattern (u32), then sign-extended to i64.
-/// This is lossless: the contract serializes int64 → WASM which extracts the lower 32 bits.
-pub fn v_obf_to_contract(v: &[f32]) -> Vec<i64> {
-    v.iter().map(|x| f32_to_i64(*x)).collect()
-}
+/// The on-chain contract scores L2 distances against `THRESHOLD_SCALED`
+/// (5000000 = distance 5.0 at this scale), so the encoding MUST be fixed-point
+/// ×10⁶ — a raw IEEE-754 bit-pattern encoding makes distances meaningless.
+pub const V_OBF_SCALE: i64 = 1_000_000;
 
-fn f32_to_i64(x: f32) -> i64 {
-    let bits = x.to_bits();
-    bits as i64
+/// Convert f32 V_obf values to the int64 fixed-point format expected by the
+/// on-chain contract (`SCALE = 10⁶`, matching `HusApp.THRESHOLD_SCALED`).
+///
+/// Conversion is `(x as f64 * SCALE) as i64` with Rust's saturating
+/// float→int semantics (NaN/±Inf saturate to 0 / i64::MAX / i64::MIN).
+pub fn v_obf_to_contract(v: &[f32]) -> Vec<i64> {
+    v.iter()
+        .map(|x| (*x as f64 * V_OBF_SCALE as f64) as i64)
+        .collect()
 }
 
 /// Per-modality projection + proof result for on-chain submission.

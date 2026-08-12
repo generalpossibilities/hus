@@ -117,12 +117,12 @@ fn full_pipeline_keystroke() {
     let valid = verify_projected(&vk, &proof_bytes, &commitment, &v_obf).unwrap();
     assert!(valid, "proof must verify");
 
-    // v_obf_to_contract conversion is lossless for f32 bit patterns
+    // v_obf_to_contract uses fixed-point ×10⁶ (canonical on-chain encoding)
     let contract_v_obf = hus_sdk::v_obf_to_contract(&v_obf);
     assert_eq!(contract_v_obf.len(), v_obf.len());
     for (i, &val) in contract_v_obf.iter().enumerate() {
-        let orig: f32 = v_obf[i];
-        assert_eq!(val, orig.to_bits() as i64, "v_obf[{i}] mismatch");
+        let expected = (v_obf[i] as f64 * 1_000_000.0) as i64;
+        assert_eq!(val, expected, "v_obf[{i}] mismatch");
     }
 }
 
@@ -153,7 +153,8 @@ fn v_obf_contract_conversion_roundtrip() {
     let contract = hus_sdk::v_obf_to_contract(&v);
     assert_eq!(contract.len(), v.len());
     for (i, &val) in contract.iter().enumerate() {
-        assert_eq!(val as u32, v[i].to_bits());
+        let expected = (v[i] as f64 * 1_000_000.0) as i64;
+        assert_eq!(val, expected, "v_obf[{i}] mismatch");
     }
 }
 

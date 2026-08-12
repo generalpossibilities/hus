@@ -3,7 +3,6 @@
 extern crate alloc;
 
 use alloc::alloc::{alloc, dealloc, Layout};
-use alloc::vec::Vec;
 use core::ffi::{c_char, c_void};
 use core::mem::{align_of, size_of};
 use core::ptr;
@@ -202,8 +201,8 @@ pub extern "C" fn hus_prove(
                 *out_commitment = alloc_buf(&commitment);
                 *out_commitment_len = commitment.len();
 
-                // Build scaled V_obf as i64[] ×10⁶ fixed-point
-                let scaled: Vec<i64> = v.iter().map(|x| (*x as f64 * 1_000_000.0) as i64).collect();
+                // Build scaled V_obf as i64[] ×10⁶ fixed-point (canonical encoding)
+                let scaled = crate::v_obf_to_contract(v);
                 *out_v_obf_scaled = alloc_buf(&scaled);
                 *out_v_obf_scaled_len = scaled.len();
             }
