@@ -310,7 +310,7 @@ async fn verify_handler(
         &state.vk,
         &proof_bytes,
         &commitment,
-        &req.v_obf,
+        &hus_sdk::v_obf_to_contract(&req.v_obf),
     )
     .map_err(|e| AppError(e.to_string()))?;
     Ok(Json(VerifyResponse { valid }))
@@ -336,6 +336,24 @@ async fn submit_with_proof_handler(
     State(state): State<Arc<AppState>>,
     Json(req): Json<SubmitWithProofRequest>,
 ) -> Result<Json<MessageResponse>, AppError> {
+    // C1: the proof binds the v_obf vector (public inputs). Verify off-chain
+    // before relaying — because `gosh.vergrth16` is blocked on Shellnet, the
+    // contract itself cannot check the proof, so this is the purchase point:
+    // a proof made for one v_obf cannot be used with a different one.
+    let commitment = parse_hex_32(&req.commitment)?;
+    let proof_bytes = hex::decode(&req.proof)
+        .map_err(|e| AppError(format!("hex decode: {e}")))?;
+    let valid = hus_sdk::prover::verify_projected(
+        &state.vk,
+        &proof_bytes,
+        &commitment,
+        &req.v_obf,
+    )
+    .map_err(|e| AppError(e.to_string()))?;
+    if !valid {
+        return Err(AppError("proof does not match the submitted v_obf".into()));
+    }
+
     let signer = make_signer(req.wallet_keys);
     let app = hus_onchain::HusApp::new(Arc::clone(&state.client_context), &req.app_address);
     let result = app

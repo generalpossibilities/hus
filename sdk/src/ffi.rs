@@ -256,7 +256,10 @@ pub extern "C" fn hus_verify(
     }
     let v = unsafe { core::slice::from_raw_parts(v_obf, v_obf_len) };
 
-    match verify_projected(vk_slice, p, &c, v) {
+    // Verify against the canonical fixed-point encoding (v_obf is bound by
+    // the proof as a public input).
+    let v_contract = crate::v_obf_to_contract(v);
+    match verify_projected(vk_slice, p, &c, &v_contract) {
         Ok(true) => 1,
         Ok(false) => 0,
         Err(e) => {

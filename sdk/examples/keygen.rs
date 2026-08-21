@@ -28,12 +28,16 @@ fn main() {
     std::fs::create_dir_all("keep").unwrap();
     std::fs::write("keep/pk.bin", &pk_bytes).unwrap();
     std::fs::write("keep/vk.bin", &vk_bytes).unwrap();
+    std::fs::write("verifier/assets/vk.bin", &vk_bytes).unwrap();
     let pk_hex = hex::encode(&pk_bytes);
     let vk_hex = hex::encode(&vk_bytes);
     std::fs::write("keep/pk.hex", &pk_hex).unwrap();
     std::fs::write("keep/vk.hex", &vk_hex).unwrap();
     println!("PK hex written to keep/pk.hex ({} bytes)", pk_bytes.len());
     println!("VK hex written to keep/vk.hex ({} bytes)", vk_bytes.len());
+    println!(
+        "VK binary also written to verifier/assets/vk.bin (embedded in the WASM verifier)"
+    );
     println!("PK size: {} bytes", pk_bytes.len());
     println!("VK size: {} bytes", vk_bytes.len());
     println!("Keygen time: {:?}", keygen_time);

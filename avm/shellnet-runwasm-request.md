@@ -45,7 +45,7 @@ Wasm result proven: `add([0x01,0x02])` returns `[3]` and the contract persists i
 - Redeploy `runWasmSmoke_pubkey` v2 (addr `0:97360b6b41553bb85dfdf5784250c1cdfa6707f22f8226de4cfb9c16942f87e1`) or a fresh copy on Shellnet.
 - Call `runWasm5(hash, args, func, module, binary="")` and confirm exit 0 + persisted result `[3]` on-chain.
 - Measure real SHELL gas cost per `runwasm` call for the audit.
-- Then swap the `docs:adder` stub for the real HUS prover wasm and test the `[proof_bytes | commitment]` wire format.
+- Then swap the `docs:adder` stub for the real HUS prover wasm and test the `[proof_bytes | commitment | v_obf 128×i64 LE]` wire format.
 
 ## A wish for the roadmap
 

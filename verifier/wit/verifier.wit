@@ -5,7 +5,8 @@ interface verifier-interface {
     ///
     /// Args layout (list<u8>):
     ///   proof_size (varuint), proof bytes (compressed),
-    ///   commitment (32 bytes, uncompressed LE)
+    ///   commitment (32 bytes, uncompressed LE),
+    ///   v_obf (128 × i64, little-endian, fixed-point ×10⁶ — public input)
     ///
     /// Returns: [0x01] if valid, [0x00] if invalid.
     verify: func(args: list<u8>) -> list<u8>;

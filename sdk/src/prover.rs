@@ -9,10 +9,23 @@ use crate::circuit::r1cs::HusCircuit;
 use crate::circuit::r1cs::MAX_PROJ_DIM;
 use crate::error::SdkError;
 use crate::metrics::HUS_METRICS;
+use crate::v_obf_to_contract;
 
 type G16 = Groth16<Bn254>;
 
-/// Generate a Groth16 proof: Poseidon(v_obf || nonce) == commitment
+/// The circuit is defined over the *on-chain* encoding of V_obf: the
+/// fixed-point i64 values (`v_obf_to_contract`), zero-padded to
+/// `MAX_PROJ_DIM`. Proving and verifying must derive fields identically,
+/// so the proved vector is byte-for-byte the vector the contract stores.
+fn v_obf_i64_to_frs(v_obf: &[i64]) -> Vec<Fr> {
+    let mut padded = alloc::vec![0i64; MAX_PROJ_DIM];
+    let n = v_obf.len().min(MAX_PROJ_DIM);
+    padded[..n].copy_from_slice(&v_obf[..n]);
+    padded.iter().map(|v| Fr::from(*v)).collect()
+}
+
+/// Generate a Groth16 proof: Poseidon(v_obf_fixed || nonce) == commitment,
+/// with every `v_obf` element exposed as a public input.
 ///
 /// Returns (proof_bytes, commitment_hash).
 pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
@@ -24,12 +37,9 @@ pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), 
             reason: "PK deserialize failed",
         })?;
 
-    let mut padded = v_obf.to_vec();
-    padded.resize(MAX_PROJ_DIM, 0.0f32);
-    let v_obf_frs: Vec<Fr> = padded
-        .iter()
-        .map(|v| Fr::from(v.to_bits() as u64))
-        .collect();
+    // Canonical on-chain encoding (fixed-point ×10⁶, padded to 128).
+    let v_obf_contract = v_obf_to_contract(v_obf);
+    let v_obf_frs = v_obf_i64_to_frs(&v_obf_contract);
 
     let mut buf = [0u8; 32];
     getrandom::getrandom(&mut buf).map_err(|_| SdkError::CryptoError {
@@ -77,12 +87,14 @@ pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), 
 
 /// Off-chain verification of a Groth16 proof.
 ///
-/// Public input: commitment only (v_obf is private witness).
+/// Public inputs: commitment + every v_obf element (fixed-point i64,
+/// `v_obf_to_contract` encoding). The proof only verifies if the supplied
+/// `v_obf` is byte-identical to the vector the proof was generated over.
 pub fn verify_projected(
     vk: &[u8],
     proof: &[u8],
     commitment: &[u8; 32],
-    _v_obf: &[f32],
+    v_obf: &[i64],
 ) -> Result<bool, SdkError> {
     HUS_METRICS
         .proofs_verified
@@ -104,8 +116,10 @@ pub fn verify_projected(
             reason: "commitment deserialize failed",
         })?;
 
-    // Only commitment is a public input
-    let public_inputs = core::iter::once(public_comm).collect::<alloc::vec::Vec<_>>();
+    // Public inputs: [commitment] ++ v_obf (128 fixed-point elements).
+    let mut public_inputs =
+        core::iter::once(public_comm).collect::<alloc::vec::Vec<_>>();
+    public_inputs.extend(v_obf_i64_to_frs(v_obf));
 
     let result =
         G16::verify_proof(&pvk, &proof, &public_inputs).map_err(|_| SdkError::CryptoError {
@@ -167,6 +181,12 @@ mod tests {
         (pk, vk)
     }
 
+    fn to_fixed(v: &[f32]) -> Vec<i64> {
+        v.iter()
+            .map(|x| (*x as f64 * 1_000_000.0) as i64)
+            .collect()
+    }
+
     fn run_roundtrip(
         v_obf_input: &[f32],
         wrong_comm: Option<[u8; 32]>,
@@ -175,10 +195,12 @@ mod tests {
         let n = v_obf_input.len();
         let (pk, vk) = gen_keys_direct(n, &mut rng);
 
-        let v_obf_frs: Vec<Fr> = v_obf_input
+        // Unpadded fixed-point conversion — the 128-padding is an API-level
+        // normalization; the circuit itself accepts any length.
+        let v_obf_frs = to_fixed(v_obf_input)
             .iter()
-            .map(|v| Fr::from(v.to_bits() as u64))
-            .collect();
+            .map(|v| Fr::from(*v))
+            .collect::<alloc::vec::Vec<_>>();
         let mut buf = [0u8; 32];
         getrandom::getrandom(&mut buf).unwrap();
         let nonce = Fr::from_be_bytes_mod_order(&buf);
@@ -196,14 +218,19 @@ mod tests {
         )
         .unwrap();
 
-        // Only commitment is public input (v_obf is now private witness)
+        // Public inputs: [commitment] ++ v_obf (v_obf is now a public input)
         let verify_comm = wrong_comm
             .map(|c| Fr::from_be_bytes_mod_order(&c))
             .unwrap_or(commitment);
 
         let pvk = prepare_verifying_key(&vk);
-        let pub_inputs = vec![verify_comm];
-        G16::verify_proof(&pvk, &proof, &pub_inputs).unwrap_or(false)
+        let pub_inputs = core::iter::once(verify_comm)
+            .chain(v_obf_frs.iter().copied())
+            .collect::<alloc::vec::Vec<_>>();
+        match G16::verify_proof(&pvk, &proof, &pub_inputs) {
+            Ok(b) => b,
+            Err(_) => false,
+        }
     }
 
     #[test]
@@ -214,6 +241,60 @@ mod tests {
     #[test]
     fn wrong_commitment_rejected() {
         assert!(!run_roundtrip(&[0.5f32; 2], Some([0x99u8; 32])));
+    }
+
+    /// C1: the proof must bind v_obf itself — a proof made for one vector
+    /// must NOT verify against a different (even single-element) vector.
+    #[test]
+    fn tampered_v_obf_rejected() {
+        let mut rng = rand::rngs::OsRng;
+        let (pk, vk) = gen_keys_direct(2, &mut rng);
+
+        let v_obf: Vec<f32> = vec![0.5f32, -1.25f32];
+        let v_obf_contract = to_fixed(&v_obf);
+        let v_obf_frs = v_obf_contract
+            .iter()
+            .map(|v| Fr::from(*v))
+            .collect::<alloc::vec::Vec<_>>();
+        let mut buf = [0u8; 32];
+        getrandom::getrandom(&mut buf).unwrap();
+        let nonce = Fr::from_be_bytes_mod_order(&buf);
+        let commitment =
+            PoseidonConfig::new().hash_native(&[v_obf_frs.clone(), vec![nonce]].concat());
+
+        let proof = G16::create_random_proof_with_reduction(
+            HusCircuit {
+                v_obf: v_obf_frs.clone(),
+                nonce,
+                commitment,
+            },
+            &pk,
+            &mut rng,
+        )
+        .unwrap();
+
+        let pvk = prepare_verifying_key(&vk);
+
+        // Same vector → verifies.
+        let pub_inputs = core::iter::once(commitment)
+            .chain(v_obf_frs.iter().copied())
+            .collect::<alloc::vec::Vec<_>>();
+        assert!(G16::verify_proof(&pvk, &proof, &pub_inputs).unwrap());
+
+        // One element changed (0.5 → 0.500001) → must fail.
+        let mut tampered = v_obf_contract.clone();
+        tampered[0] += 1;
+        let tampered_frs = tampered
+            .iter()
+            .map(|v| Fr::from(*v))
+            .collect::<alloc::vec::Vec<_>>();
+        let pub_inputs = core::iter::once(commitment)
+            .chain(tampered_frs.iter().copied())
+            .collect::<alloc::vec::Vec<_>>();
+        assert!(
+            !G16::verify_proof(&pvk, &proof, &pub_inputs).unwrap(),
+            "a proof must not verify against a swapped v_obf"
+        );
     }
 
     #[test]

@@ -114,7 +114,7 @@ fn full_pipeline_keystroke() {
     let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
     assert!(!proof_bytes.is_empty());
 
-    let valid = verify_projected(&vk, &proof_bytes, &commitment, &v_obf).unwrap();
+    let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
     assert!(valid, "proof must verify");
 
     // v_obf_to_contract uses fixed-point ×10⁶, zero-padded to MAX_PROJ_DIM=128
@@ -145,7 +145,7 @@ fn full_pipeline_multimodal() {
         let v_obf = derive_and_project(&seed, &embedding.vector, cfg.proj_dim).unwrap();
 
         let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
-        let valid = verify_projected(&vk, &proof_bytes, &commitment, &v_obf).unwrap();
+        let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
         assert!(valid, "proof must verify for {:?}", modality);
     }
 }

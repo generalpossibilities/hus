@@ -217,7 +217,14 @@ impl HusHandle {
         };
         let v_obf: Vec<f32> = parse_f32_json(v_obf_json);
 
-        verify_projected(&self.vk, &proof_bytes, &commitment, &v_obf).unwrap_or(false)
+        // Canonical fixed-point encoding — v_obf is a public input of the proof.
+        verify_projected(
+            &self.vk,
+            &proof_bytes,
+            &commitment,
+            &crate::v_obf_to_contract(&v_obf),
+        )
+        .unwrap_or(false)
     }
 }
 
