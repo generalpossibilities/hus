@@ -41,9 +41,6 @@ HUS is a decentralized biometric middleware. It follows the **ISO/IEC 24745** st
 
 **Architecture:** `Phone → Off-chain verify → Acki Nacki chain` (on-chain Groth16 via `gosh.vergrth16` is blocked — built-in ZkLogin VKs, not custom circuit VKs. Off-chain proof verification + on-chain commitment storage is the current working path. On-node WASM execution via `gosh.runwasm` is validated end-to-end in a local executor harness and pending a live Shellnet run — see [avm/shellnet-runwasm-request.md](avm/shellnet-runwasm-request.md).)
 
-**Security:** Never deploy `.env` files to servers. The gateway reads config from `HUS_*` environment variables set by your deployment platform. See [SETUP.md](SETUP.md#stop--read-this-first).
-
----
 
 ## Integrate in any language
 
@@ -239,15 +236,7 @@ See [docs/security.md](docs/security.md) for the full threat model.
 | Chunked proving key upload (17MB) | ✅ Implemented |
 | Production audit | 📅 Planned |
 
----
 
-## Known Limitations
-
-- **`gosh.vergrth16` opcode** uses hardcoded ZkLogin proving keys — cannot verify custom circuit proofs on-chain. Workaround: off-chain proof verification + on-chain `submitCommitment`. The `gosh.runwasm` path (run the prover as WASM on the node) is proven in the local executor harness; live Shellnet validation awaits node-side `config/wasm/{hash}` file placement (see [avm/shellnet-runwasm-request.md](avm/shellnet-runwasm-request.md)).
-- **Proving key is 17MB** — uploaded in 32KB chunks (~544 transactions). Not feasible for client-side download on mobile. Gateway serves as relay.
-- **Single owner pubkey** — if lost, owner functions are permanently locked. Multi-sig planned.
-
----
 
 ## License
 
