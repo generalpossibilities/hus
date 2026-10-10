@@ -1,0 +1,33 @@
+[descriptor]
+execution_mode = "message_isolated"
+state_schema_id = "4855534752313600000000000000000000000000000000000000000000000001"
+
+[abi]
+state_root_type_id = 1
+
+# State: verified count (u64 LE) | last result (u8: 1 ok, 0 rejected) | 7 zero bytes
+[[abi.types]]
+id = 1
+kind = "fixed_bytes"
+name = "hus_groth16_state"
+len = 16
+
+# A G1 | B G2 | C G1 | commitment Fr (BE) | v_obf 128 x i64 LE
+[[abi.types]]
+id = 2
+kind = "bytes"
+name = "hus_groth16_raw_proof_args"
+
+[[abi.methods]]
+name = "hus.verify"
+input_type_id = 2
+
+[[abi.errors]]
+status_code = 2000
+name = "proof_rejected"
+message = "the Groth16 proof does not verify against the embedded HUS verifying key"
+
+[[abi.errors]]
+status_code = 2001
+name = "invalid_state"
+message = "contract state is malformed"

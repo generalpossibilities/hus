@@ -1,0 +1,21 @@
+[workspace]
+
+[package]
+name = "hus-g16-bn"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+avm-contract-sdk = { path = "../../crates/avm-contract-sdk" }
+substrate-bn = { version = "0.6", default-features = false }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

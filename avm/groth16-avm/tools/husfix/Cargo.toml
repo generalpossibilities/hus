@@ -1,0 +1,19 @@
+[package]
+name = "husfix"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+hus-sdk = { path = "../../../../sdk", features = ["std"] }
+ark-groth16 = { version = "0.4", default-features = false }
+ark-bn254 = { version = "0.4", default-features = false, features = ["curve"] }
+ark-ff = { version = "0.4", default-features = false }
+ark-ec = { version = "0.4", default-features = false }
+ark-serialize = { version = "0.4", default-features = false }
+substrate-bn = { version = "0.6", default-features = false }
+
+[[bin]]
+name = "convert"
+path = "src/convert.rs"
+
+[workspace]
