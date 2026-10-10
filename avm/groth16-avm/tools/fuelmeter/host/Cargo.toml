@@ -1,0 +1,7 @@
+[package]
+name = "fuelhost"
+version = "0.1.0"
+edition = "2021"
+[dependencies]
+wasmtime = { version = "36", default-features = false, features = ["cranelift", "runtime", "std"] }
+[workspace]
