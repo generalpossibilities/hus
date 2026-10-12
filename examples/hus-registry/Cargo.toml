@@ -1,0 +1,14 @@
+[workspace]
+
+[package]
+name = "hus-registry"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "One person, one registration: a HUS uniqueness registry for AVM"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+avm-contract-sdk = { path = "../../crates/avm-contract-sdk" }

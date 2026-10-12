@@ -1,0 +1,69 @@
+[descriptor]
+execution_mode = "message_isolated"
+state_schema_id = "4855535247000000000000000000000000000000000000000000000000000001"
+
+[abi]
+state_root_type_id = 1
+init_input_type_id = 2
+
+# Config (see Config in src/registry.rs) | count u32 LE | records
+[[abi.types]]
+id = 1
+kind = "bytes"
+name = "hus_registry_state"
+
+# Config bytes, see Config::encode
+[[abi.types]]
+id = 2
+kind = "bytes"
+name = "hus_registry_config"
+
+# commitment 32 B | v_obf dim x i64 LE (x10^6 fixed point) | proof (opaque)
+[[abi.types]]
+id = 3
+kind = "bytes"
+name = "hus_registration"
+
+[[abi.methods]]
+name = "hus.register"
+input_type_id = 3
+
+[[abi.errors]]
+status_code = 3000
+name = "invalid_config_or_state"
+message = "registry config or state is malformed"
+
+[[abi.errors]]
+status_code = 3001
+name = "invalid_registration"
+message = "registration bytes are malformed or have the wrong dimension"
+
+[[abi.errors]]
+status_code = 3002
+name = "not_an_attestor"
+message = "only a configured attestor may register in attestor mode"
+
+[[abi.errors]]
+status_code = 3003
+name = "duplicate_person"
+message = "a stored registration is closer than the duplicate threshold"
+
+[[abi.errors]]
+status_code = 3004
+name = "commitment_replayed"
+message = "this commitment is already registered"
+
+[[abi.errors]]
+status_code = 3005
+name = "registry_full"
+message = "this registry shard holds its maximum number of registrations"
+
+[[abi.errors]]
+status_code = 3006
+name = "value_out_of_range"
+message = "a v_obf value does not fit the stored i32 range"
+
+[[abi.errors]]
+status_code = 3007
+name = "proof_verification_unavailable"
+message = "native Groth16 verification is not available on this AVM runtime"

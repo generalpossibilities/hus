@@ -1,0 +1,23 @@
+[package]
+name = "hus-zk"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "BN254 operations (EIP-196/197) and Groth16 verification for AVM contracts, native-ready"
+
+[features]
+default = []
+# Use the proposed AVM host functions (module "avm_crypto") instead of the
+# pure-WASM backend. Only for a runtime that provides them.
+native = []
+
+[dependencies]
+substrate-bn = { version = "0.6", default-features = false }
+
+[dev-dependencies]
+ark-bn254 = { version = "0.4", default-features = false, features = ["curve"] }
+ark-ec = { version = "0.4", default-features = false }
+ark-ff = { version = "0.4", default-features = false }
+ark-std = { version = "0.4", default-features = false }
+
+[workspace]
