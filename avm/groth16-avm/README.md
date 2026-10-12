@@ -64,3 +64,49 @@ VM status 31 appeared regardless of `fuel_fee_shells`, from 10⁶ to 10⁹. The 
 | Intel i7 M620 (2010 laptop) | 39.9 s | 0.05 s | 45.6 s (proving itself ≈ 5.7 s) | ~39 ms |
 
 `prove_projected` deserialises the 17 MB proving key with full point validation on every call, and that dominates the total. Checking the key's SHA-256 once (HusRegistry publishes it) and then loading it unchecked, or keeping it in memory, removes the delay.
+
+## Optimised pure-WASM verifier (12 October 2026)
+
+`tools/fuelopt/` measures the best case for a verifier written as a plain AVM
+contract: the verifying key is embedded and trusted, so its points are built
+without curve or subgroup checks, and `e(α, β)` could be a constant. The
+proof's B is a G2 point supplied by the user, so its subgroup check stays.
+Built for `wasm32-unknown-unknown` with `-C target-cpu=mvp` (AVM rejects SIMD),
+metered with `tools/fuelmeter/host`:
+
+```
+cd tools/fuelopt && RUSTFLAGS="-C target-cpu=mvp" cargo build --release --target wasm32-unknown-unknown
+../fuelmeter/host/target/release/fuelhost target/wasm32-unknown-unknown/release/fuelopt.wasm 0 1 2 3 4 5 6 7 8 9 10 11 12
+```
+
+| Step | FUEL |
+|---|---|
+| Build all key and proof points, unchecked | 0.1M |
+| Proof A and C on-curve checks | 0.15M |
+| **Proof B G2 subgroup check** (required) | **57M** |
+| MSM, 2 public inputs | 17M (one G1 scalar multiplication ≈ 8M) |
+| MSM, 129 public inputs (today's circuit) | 175M |
+| 1 Miller loop | 68M |
+| 3 Miller loops (with `e(α, β)` precomputed) | 161M |
+| 4 Miller loops | 208M |
+| 1 Miller loop + final exponentiation | 159M (final exponentiation ≈ 91M) |
+| Full verification, today's circuit, unchecked key | 533M |
+| **Best case: 2 inputs, `e(α, β)` constant** | **≈ 326M** (57 + 17 + 161 + 91) |
+
+**What this means for the request.** Even the best pure-WASM verifier is
+about 30–50× over the 6–12M per-message cap, and every building block is
+over or at the cap on its own: one G1 multiplication (≈ 8M), the G2 subgroup
+check (57M), one Miller loop (68M), the final exponentiation (≈ 91M). A
+single native pairing check is therefore not enough. The smallest native set
+that makes Groth16 practical is the three operations Ethereum has had since
+2017: **G1 add, G1 scalar multiplication and the pairing check** (EIP-196 and
+EIP-197, priced as in EIP-1108). With them a Groth16 verification is a few
+host calls and well under the cap.
+
+**Duplicate detection.** One squared L2 distance between two 128-dimension
+`i64` vectors costs about 25k FUEL (stages 11–12, including generating the
+vectors), so one message can compare a new registration against only about
+250–400 stored ones. A registry that scans every registration stops working
+after a few hundred users per app. Registrations have to be partitioned (for
+example by a locality-sensitive hash of the obfuscated vector), so that each
+check scans one small bucket.
