@@ -22,7 +22,8 @@ Everything here is MIT-licensed. It is laid out like
 
 Deploy one registry per app; the deploy salt names the app, and the init data
 is the config (`Config::encode` in `src/registry.rs`): vector dimension,
-duplicate threshold, LSH parameters and seed, verification mode, attestors.
+duplicate threshold, LSH parameters and seed, storage precision, verification
+mode, attestors.
 
 `hus.register` takes `commitment (32) | v_obf (dim × i64 LE, ×10⁶ fixed point) | proof`
 and returns status 0 or one of:
@@ -48,6 +49,16 @@ On synthetic data (128-dimension Gaussian vectors, rescans with noise σ = 0.1
 per coordinate, threshold L2 < 5; not real biometrics), with 1,500 people
 registered: **2,999 of 3,000 rescans caught**, and a new person is compared
 with 25 stored vectors on average, 133 at worst.
+
+**Compact records, because storage rent is per byte.** Each registration
+stores a 16-byte replay key (the commitment's two halves XORed), its bucket
+(2 bytes), and `v_obf` at a configurable precision: `cell` bytes per
+coordinate (1, 2 or 4) in steps of `quant_step`. The default, 1 byte in steps
+of 1/16 (values beyond ±8.0 are clamped), makes a 128-dimension record
+146 bytes instead of 546, about a quarter of the rent. Only the stored copy is
+rounded; the incoming vector keeps full precision, and on the synthetic data
+above recall is unchanged. `cell = 4, quant_step = 1` stores vectors exactly
+(530 bytes) for apps whose vectors do not suit the default range.
 
 **Verification modes.**
 - `Attestor`: only configured external signers (gateways that verified the
@@ -78,7 +89,11 @@ These may be useful to the AVM team and to other developers:
 4. **`init` receives the whole canonical deploy payload (`ACDP`)**, code
    included, and the SDK has no accessor for the init data inside it.
    `deploy_init_data` in `hus-registry` reads it from the layout of this
-   release; an SDK helper would make that robust.
+   release (salt length u16 at 266, init field length u32 at 268, salt at
+   288, then the init field as an ABI `bytes` value). Decoding it by hand is
+   fragile: our first version read another field that happened to equal the
+   old config's length, and broke as soon as the config grew. An SDK
+   accessor would make this robust.
 5. **Contracts must be built without SIMD** (`-C target-cpu=mvp` when building
    outside `avm-contract-build`): the profile disables `wasm_simd`.
 6. **Unused `fuel_fee_shells` is burned** when the message requests no

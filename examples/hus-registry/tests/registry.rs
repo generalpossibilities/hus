@@ -12,7 +12,7 @@ impl Rng {
 
 /// HUS-like config: duplicate when L2 < 5.0 (×10⁶ fixed point), 256 buckets.
 fn config(attestors: Vec<[u8; 32]>) -> Config {
-    Config { dim: DIM as u16, lsh_bits: 8, probe_margin: 3_000_000, dup_dist_sq: 25_000_000_000_000,
+    Config { dim: DIM as u16, lsh_bits: 8, cell: 1, quant_step: 62_500, probe_margin: 3_000_000, dup_dist_sq: 25_000_000_000_000,
              seed: [7; 32], mode: VerifyMode::Attestor, attestors }
 }
 
@@ -113,4 +113,39 @@ fn groth16_registration_with_real_proof() {
     let (ga, ba) = (args(good), args(bad));
     assert_eq!(verify_proof(&reg.parse_registration(&ga).unwrap()), Ok(()));
     assert_eq!(verify_proof(&reg.parse_registration(&ba).unwrap()), Err(Error::BadProof));
+}
+
+#[test]
+fn compact_records() {
+    let mut rng = Rng(11);
+    let c = config(vec![]);
+    assert_eq!(c.record_len(), 146);
+    let mut state = initial_state(&c);
+    let p = rng.person();
+    try_register(&mut state, commit(1), &p).unwrap();
+    assert_eq!(state.len(), c.len() + 4 + 146);
+    // An exact rescan is a duplicate despite the rounding of the stored copy.
+    assert_eq!(try_register(&mut state.clone(), commit(2), &p), Err(Error::Duplicate));
+    // Values beyond the 1-byte range (±8.0 at 1/16) are clamped, not rejected.
+    let mut far = rng.person();
+    far[0] = 1_000.0;
+    try_register(&mut state, commit(3), &far).unwrap();
+}
+
+#[test]
+fn exact_cells_keep_old_behaviour() {
+    let mut rng = Rng(5);
+    let mut c = config(vec![]);
+    (c.cell, c.quant_step) = (4, 1);
+    assert_eq!(c.record_len(), 16 + 2 + 512);
+    let mut state = initial_state(&c);
+    let people: Vec<Vec<f64>> = (0..300).map(|_| rng.person()).collect();
+    for (i, p) in people.iter().enumerate() {
+        try_register(&mut state, commit(i as u64), p).unwrap();
+    }
+    let caught = (0..300).filter(|&t| {
+        let rescan: Vec<f64> = people[t].iter().map(|x| x + 0.1 * rng.gauss()).collect();
+        try_register(&mut state.clone(), commit(1_000 + t as u64), &rescan) == Err(Error::Duplicate)
+    }).count();
+    assert!(caught >= 297, "{caught}/300");
 }

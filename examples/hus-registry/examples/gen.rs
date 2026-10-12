@@ -18,7 +18,7 @@ fn main() {
                 let v: Vec<u8> = (0..32).map(|i| u8::from_str_radix(&h[2 * i..2 * i + 2], 16).unwrap()).collect();
                 v.try_into().unwrap()
             }).collect();
-            let c = Config { dim: 128, lsh_bits: 8, probe_margin: 3_000_000, dup_dist_sq: 25_000_000_000_000,
+            let c = Config { dim: 128, lsh_bits: 8, cell: 1, quant_step: 62_500, probe_margin: 3_000_000, dup_dist_sq: 25_000_000_000_000,
                              seed: [7; 32], mode: VerifyMode::Attestor, attestors };
             println!("{}", hex(&c.encode()));
         }

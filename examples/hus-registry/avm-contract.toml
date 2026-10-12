@@ -1,6 +1,6 @@
 [descriptor]
 execution_mode = "message_isolated"
-state_schema_id = "4855535247000000000000000000000000000000000000000000000000000001"
+state_schema_id = "4855535247000000000000000000000000000000000000000000000000000002"
 
 [abi]
 state_root_type_id = 1
@@ -61,7 +61,7 @@ message = "this registry shard holds its maximum number of registrations"
 [[abi.errors]]
 status_code = 3006
 name = "value_out_of_range"
-message = "a v_obf value does not fit the stored i32 range"
+message = "a v_obf value does not fit i32"
 
 [[abi.errors]]
 status_code = 3007

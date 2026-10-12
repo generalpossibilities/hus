@@ -33,19 +33,19 @@ mod contract {
     /// The init data of a deploy. `init` receives the whole canonical deploy
     /// payload ("ACDP"), and the SDK has no accessor for the init data inside
     /// it, so this reads the layout of release avm-dev-335a0f09fdbc: a length
-    /// table at 264 (salt length u16 at 266, init length u32 at 276), then the
-    /// salt at 288 followed by the init data with its own u32 length, which
-    /// must match the table. Anything that is not an ACDP payload is taken as
-    /// the init data itself (an ABI `bytes` value, or raw).
+    /// table at 264 (salt length u16 at 266, init field length u32 at 268),
+    /// then the salt at 288 followed by the init field, an ABI `bytes` value
+    /// (u32 length, then the data) whose size must match the table. Anything
+    /// that is not an ACDP payload is taken as the init data itself (an ABI
+    /// `bytes` value, or raw).
     fn deploy_init_data(body: &[u8]) -> Option<&[u8]> {
         if body.get(..4) != Some(b"ACDP".as_slice()) {
             return abi_bytes(body).or(Some(body));
         }
-        let u32_at = |o: usize| body.get(o..o + 4).map(|b| u32::from_le_bytes(b.try_into().unwrap()) as usize);
         let salt_len = u16::from_le_bytes(body.get(266..268)?.try_into().ok()?) as usize;
-        let init_len = u32_at(276)?;
+        let field_len = u32::from_le_bytes(body.get(268..272)?.try_into().ok()?) as usize;
         let at = 288 + salt_len;
-        (u32_at(at)? == init_len).then(|| body.get(at + 4..at + 4 + init_len)).flatten()
+        abi_bytes(body.get(at..at.checked_add(field_len)?)?)
     }
 
     fn fail(e: Error) -> MessageOutput {

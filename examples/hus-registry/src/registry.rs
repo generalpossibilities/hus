@@ -12,14 +12,25 @@
 //! flipping a bit whose projection margin is below `probe_margin` (at most
 //! MAX_FLIPS of them), so a noisy rescan of the same person near a hyperplane
 //! is still found.
+//!
+//! Storage rent is charged per stored byte, so records are compact: the
+//! commitment is kept as a 16-byte replay key (its two halves XORed), and each
+//! `v_obf` coordinate as a `cell`-byte integer in steps of `quant_step`
+//! (default 1 byte in steps of 1/16, so 146 bytes per 128-dimension record
+//! instead of 546). The stored value is rounded and clamped; the incoming
+//! vector keeps full precision, so only the stored side adds error.
 
 use alloc::vec::Vec;
 
 pub const MAGIC: &[u8; 4] = b"HUSR";
-pub const VERSION: u8 = 1;
+/// Config bytes before the attestor list.
+const HEAD: usize = 4 + 1 + 2 + 1 + 1 + 1 + 4 + 8 + 16 + 32 + 1;
+pub const VERSION: u8 = 2;
 pub const MAX_ATTESTORS: usize = 8;
 pub const MAX_LSH_BITS: u8 = 12;
 pub const MAX_FLIPS: usize = 4;
+/// Bytes of the replay key stored per record.
+pub const KEY_LEN: usize = 16;
 /// Records per registry shard. Bounds state size and the exact-replay scan.
 pub const MAX_RECORDS: u32 = 2_000;
 
@@ -39,6 +50,10 @@ pub enum VerifyMode {
 pub struct Config {
     pub dim: u16,
     pub lsh_bits: u8,
+    /// Bytes per stored coordinate: 1, 2 or 4 (signed).
+    pub cell: u8,
+    /// `v_obf` units per stored step (1 with `cell = 4` stores values exactly).
+    pub quant_step: u32,
     pub probe_margin: u64,
     pub dup_dist_sq: u128,
     pub seed: [u8; 32],
@@ -60,8 +75,9 @@ pub enum Error {
 }
 
 impl Config {
-    /// MAGIC | VERSION | dim u16 | lsh_bits u8 | mode u8 | probe_margin u64 |
-    /// dup_dist_sq u128 | seed [32] | n u8 | attestors [n × 32]   (all LE)
+    /// MAGIC | VERSION | dim u16 | lsh_bits u8 | mode u8 | cell u8 |
+    /// quant_step u32 | probe_margin u64 | dup_dist_sq u128 | seed [32] |
+    /// n u8 | attestors [n × 32]   (all LE)
     pub fn encode(&self) -> Vec<u8> {
         let mut b = Vec::with_capacity(self.len());
         b.extend_from_slice(MAGIC);
@@ -69,6 +85,8 @@ impl Config {
         b.extend_from_slice(&self.dim.to_le_bytes());
         b.push(self.lsh_bits);
         b.push(self.mode as u8);
+        b.push(self.cell);
+        b.extend_from_slice(&self.quant_step.to_le_bytes());
         b.extend_from_slice(&self.probe_margin.to_le_bytes());
         b.extend_from_slice(&self.dup_dist_sq.to_le_bytes());
         b.extend_from_slice(&self.seed);
@@ -80,12 +98,12 @@ impl Config {
     }
 
     pub fn len(&self) -> usize {
-        4 + 1 + 2 + 1 + 1 + 8 + 16 + 32 + 1 + 32 * self.attestors.len()
+        HEAD + 32 * self.attestors.len()
     }
 
     pub fn decode(b: &[u8]) -> Result<Config, Error> {
         let e = Error::BadState;
-        if b.len() < 66 || &b[0..4] != MAGIC || b[4] != VERSION {
+        if b.len() < HEAD || &b[0..4] != MAGIC || b[4] != VERSION {
             return Err(e);
         }
         let dim = u16::from_le_bytes([b[5], b[6]]);
@@ -95,24 +113,50 @@ impl Config {
             1 => VerifyMode::NativeGroth16,
             _ => return Err(e),
         };
-        let probe_margin = u64::from_le_bytes(b[9..17].try_into().map_err(|_| e)?);
-        let dup_dist_sq = u128::from_le_bytes(b[17..33].try_into().map_err(|_| e)?);
-        let seed: [u8; 32] = b[33..65].try_into().map_err(|_| e)?;
-        let n = b[65] as usize;
-        if dim == 0 || lsh_bits > MAX_LSH_BITS || n > MAX_ATTESTORS || b.len() < 66 + 32 * n {
+        let cell = b[9];
+        let quant_step = u32::from_le_bytes(b[10..14].try_into().map_err(|_| e)?);
+        let probe_margin = u64::from_le_bytes(b[14..22].try_into().map_err(|_| e)?);
+        let dup_dist_sq = u128::from_le_bytes(b[22..38].try_into().map_err(|_| e)?);
+        let seed: [u8; 32] = b[38..70].try_into().map_err(|_| e)?;
+        let n = b[70] as usize;
+        if dim == 0
+            || lsh_bits > MAX_LSH_BITS
+            || !matches!(cell, 1 | 2 | 4)
+            || quant_step == 0
+            || n > MAX_ATTESTORS
+            || b.len() < HEAD + 32 * n
+        {
             return Err(e);
         }
-        let attestors = (0..n).map(|i| b[66 + 32 * i..98 + 32 * i].try_into().unwrap()).collect();
-        Ok(Config { dim, lsh_bits, probe_margin, dup_dist_sq, seed, mode, attestors })
+        let attestors = (0..n).map(|i| b[HEAD + 32 * i..HEAD + 32 * (i + 1)].try_into().unwrap()).collect();
+        Ok(Config { dim, lsh_bits, cell, quant_step, probe_margin, dup_dist_sq, seed, mode, attestors })
     }
 
-    fn record_len(&self) -> usize {
-        32 + 2 + 4 * self.dim as usize
+    pub fn record_len(&self) -> usize {
+        KEY_LEN + 2 + self.cell as usize * self.dim as usize
+    }
+
+    /// The stored form of one coordinate: rounded to `quant_step`, clamped to the cell.
+    fn quantize(&self, v: i32) -> i32 {
+        let (s, h) = (self.quant_step as i64, self.quant_step as i64 / 2);
+        let q = if v >= 0 { (v as i64 + h) / s } else { -((-(v as i64) + h) / s) };
+        let max = match self.cell { 1 => i8::MAX as i64, 2 => i16::MAX as i64, _ => i32::MAX as i64 };
+        q.clamp(-max - 1, max) as i32
+    }
+
+    /// Coordinate `i` of a stored vector, back in `v_obf` units.
+    fn stored(&self, cells: &[u8], i: usize) -> i64 {
+        let q = match self.cell {
+            1 => cells[i] as i8 as i64,
+            2 => i16::from_le_bytes([cells[2 * i], cells[2 * i + 1]]) as i64,
+            _ => i32::from_le_bytes(cells[4 * i..4 * i + 4].try_into().unwrap()) as i64,
+        };
+        q * self.quant_step as i64
     }
 }
 
 /// Parsed state: config, then count u32 LE, then `count` records of
-/// commitment [32] | bucket u16 LE | v_obf [dim × i32 LE].
+/// replay key [16] | bucket u16 LE | v_obf [dim × cell, signed LE].
 pub struct Registry<'a> {
     pub config: Config,
     pub count: u32,
@@ -194,8 +238,9 @@ impl<'a> Registry<'a> {
             return Err(Error::Full);
         }
         // A replayed commitment (the same proof sent twice).
+        let key = replay_key(&reg.commitment);
         for i in 0..self.count as usize {
-            if self.record(i)[..32] == reg.commitment {
+            if self.record(i)[..KEY_LEN] == key {
                 return Err(Error::Replay);
             }
         }
@@ -204,36 +249,47 @@ impl<'a> Registry<'a> {
         let mut min_dist_sq: Option<u128> = None;
         for i in 0..self.count as usize {
             let r = self.record(i);
-            let b = u16::from_le_bytes([r[32], r[33]]);
+            let b = u16::from_le_bytes([r[KEY_LEN], r[KEY_LEN + 1]]);
             if !probes.contains(&b) {
                 continue;
             }
             compared += 1;
-            let d = dist_sq(&reg.v_obf, &r[34..]);
+            let d = self.config.dist_sq(&reg.v_obf, &r[KEY_LEN + 2..]);
             if d < self.config.dup_dist_sq {
                 return Err(Error::Duplicate);
             }
             min_dist_sq = Some(min_dist_sq.map_or(d, |m| m.min(d)));
         }
         let mut record = Vec::with_capacity(self.config.record_len());
-        record.extend_from_slice(&reg.commitment);
+        record.extend_from_slice(&key);
         record.extend_from_slice(&bucket.to_le_bytes());
         for v in &reg.v_obf {
-            record.extend_from_slice(&v.to_le_bytes());
+            let q = self.config.quantize(*v).to_le_bytes();
+            record.extend_from_slice(&q[..self.config.cell as usize]);
         }
         Ok((record, Accepted { bucket, probed: probes.len(), compared, min_dist_sq }))
     }
 }
 
-/// Squared L2 distance between a vector and a stored record (i32 LE).
-fn dist_sq(a: &[i32], stored: &[u8]) -> u128 {
-    let mut s: u128 = 0;
-    for (i, x) in a.iter().enumerate() {
-        let y = i32::from_le_bytes(stored[4 * i..4 * i + 4].try_into().unwrap());
-        let d = (*x as i64 - y as i64).unsigned_abs() as u128;
-        s += d * d;
+impl Config {
+    /// Squared L2 distance between a vector and a stored record's cells.
+    fn dist_sq(&self, a: &[i32], cells: &[u8]) -> u128 {
+        let mut s: u128 = 0;
+        for (i, x) in a.iter().enumerate() {
+            let d = (*x as i64 - self.stored(cells, i)).unsigned_abs() as u128;
+            s += d * d;
+        }
+        s
     }
-    s
+}
+
+/// The 16 bytes kept per record to reject a replayed commitment: its two
+/// halves XORed, so every bit of the field element counts. Different
+/// commitments with the same key exist, but one only blocks a registration if
+/// it also carries a valid proof (or an attestor's signature), which takes
+/// about 2^128 attempts.
+pub fn replay_key(commitment: &[u8; 32]) -> [u8; KEY_LEN] {
+    core::array::from_fn(|i| commitment[i] ^ commitment[KEY_LEN + i])
 }
 
 /// The HUS verifying key (production circuit: 129 public inputs, the
