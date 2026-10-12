@@ -16,7 +16,7 @@ avm-local-stand init $S --dapp-id $DAPP > init.json || { echo "init failed"; exi
 CFG=$($GEN config)
 D=(--wasm "$A/contract.wasm" --acab "$A/contract.acab" --descriptor "$A/contract.descriptor" --salt-hex 6170702d64656d6f
    --init-json "\"0x$CFG\"" --block-time 1800000000 --created-at 1800000000 --expire-at 1800003600 --fuel-fee-shells 100000)
-avm-local-stand deploy $S "${D[@]}" > need.json
+avm-local-stand deploy $S "${D[@]}" > need.json 2> need.err  # exits 2 (funding_required) and prints usage
 ADDR=$(jq -r '.address // empty' need.json); [ -n "$ADDR" ] || { echo "no address"; cat need.json; exit 1; }
 avm-local-stand fund-user $S --address "$ADDR" --shells 1000000000 > fund.json
 avm-local-stand deploy $S "${D[@]}" > deploy.json || { echo "deploy failed"; cat deploy.json; exit 1; }

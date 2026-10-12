@@ -12,7 +12,7 @@ S="--state $RUN/s --wasmtime-profile $PROFILE"
 avm-local-stand init $S --dapp-id 1111111111111111111111111111111111111111111111111111111111111111 > init.json
 D=(--wasm "$A/contract.wasm" --acab "$A/contract.acab" --descriptor "$A/contract.descriptor" --salt-hex 6c6f6164
    --init-json "\"0x$($GEN config)\"" --block-time 1800000000 --created-at 1800000000 --expire-at 1800003600 --fuel-fee-shells 100000)
-ADDR=$(avm-local-stand deploy $S "${D[@]}" | jq -r .address)
+ADDR=$(avm-local-stand deploy $S "${D[@]}" 2>/dev/null | jq -r .address)  # funding_required
 avm-local-stand fund-user $S --address "$ADDR" --shells 1000000000 > /dev/null
 avm-local-stand deploy $S "${D[@]}" > deploy.json
 T=1800000010

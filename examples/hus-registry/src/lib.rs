@@ -13,7 +13,7 @@ pub mod registry;
 #[cfg(target_arch = "wasm32")]
 mod contract {
     use crate::registry::{initial_state, Config, Error, Registry, VerifyMode};
-    use avm_contract_sdk::{Caller, Contract, MessageInput, MessageOutput, StateUpdate};
+    use avm_contract_sdk::{Caller, Contract, MessageInput, MessageOutput, StateOutputMode, StatePatch, StateUpdate};
     use alloc::vec::Vec;
 
     /// An ABI `bytes` value arrives as a u32 LE length followed by the data.
@@ -82,13 +82,38 @@ mod contract {
                         }
                     }
                 }
-                // No AVM runtime exposes BN254 host functions yet.
+                #[cfg(feature = "groth16")]
+                VerifyMode::NativeGroth16 => {
+                    if let Err(e) = crate::registry::verify_proof(&registration) {
+                        return fail(e);
+                    }
+                }
+                // Built without proof verification (no AVM runtime has the BN254 host functions yet).
+                #[cfg(not(feature = "groth16"))]
                 VerifyMode::NativeGroth16 => return fail(Error::NoVerifier),
             }
-            match reg.register(&registration) {
-                Ok((next, _)) => MessageOutput::success(StateUpdate::FullReplace(abi_wrap(next))),
-                Err(e) => fail(e),
+            let (record, _) = match reg.check(&registration) {
+                Ok(r) => r,
+                Err(e) => return fail(e),
+            };
+            if input.required_state_output_mode == StateOutputMode::DataPatchList {
+                // Patch only what changes: the ABI length, the count, and the new record.
+                let old_len = state.len();
+                let new_len = (old_len + record.len()) as u32;
+                let at = 4 + reg.count_offset();
+                return MessageOutput::success(StateUpdate::DataPatchList(alloc::vec![
+                    StatePatch { offset: 0, old_len: 4, new_bytes: new_len.to_le_bytes().to_vec() },
+                    StatePatch { offset: at as u32, old_len: 4, new_bytes: (reg.count + 1).to_le_bytes().to_vec() },
+                    StatePatch { offset: (4 + old_len) as u32, old_len: 0, new_bytes: record },
+                ]));
             }
+            let mut next = Vec::with_capacity(4 + state.len() + record.len());
+            next.extend_from_slice(&((state.len() + record.len()) as u32).to_le_bytes());
+            next.extend_from_slice(&state[..reg.count_offset()]);
+            next.extend_from_slice(&(reg.count + 1).to_le_bytes());
+            next.extend_from_slice(&state[reg.count_offset() + 4..]);
+            next.extend_from_slice(&record);
+            MessageOutput::success(StateUpdate::FullReplace(next))
         }
     }
 

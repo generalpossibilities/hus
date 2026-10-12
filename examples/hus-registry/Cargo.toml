@@ -10,5 +10,22 @@ description = "One person, one registration: a HUS uniqueness registry for AVM"
 [lib]
 crate-type = ["cdylib", "rlib"]
 
+[features]
+default = []
+# Verify each registration's HUS Groth16 proof in the contract (VerifyMode::NativeGroth16).
+# `groth16` alone uses the pure-WASM backend: correct, and used by the native
+# tests, but far over AVM's per-message FUEL cap. `native-groth16` uses the
+# proposed AVM host functions (see ../hus-zk/HOST-FUNCTIONS.md).
+groth16 = ["dep:hus-zk"]
+native-groth16 = ["groth16", "hus-zk/native"]
+
 [dependencies]
 avm-contract-sdk = { path = "../../crates/avm-contract-sdk" }
+hus-zk = { path = "../hus-zk", optional = true }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

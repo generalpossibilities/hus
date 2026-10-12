@@ -97,3 +97,20 @@ fn probes_flip_only_weak_bits() {
     let mut sorted = probes.clone(); sorted.sort(); sorted.dedup();
     assert_eq!(sorted.len(), probes.len());
 }
+
+/// The NativeGroth16 path with the real HUS vectors (pure-WASM backend here).
+#[cfg(feature = "groth16")]
+#[test]
+fn groth16_registration_with_real_proof() {
+    let good = include_bytes!("../../hus-zk/vectors/good_raw.bin");
+    let bad = include_bytes!("../../hus-zk/vectors/bad_raw.bin");
+    let mut c = config(vec![]);
+    c.mode = VerifyMode::NativeGroth16;
+    let state = initial_state(&c);
+    let reg = Registry::parse(&state).unwrap();
+    // good_raw: proof 256 | commitment 32 | v_obf 128 × i64 → registration bytes.
+    let args = |raw: &[u8]| { let mut a = raw[256..288].to_vec(); a.extend_from_slice(&raw[288..]); a.extend_from_slice(&raw[..256]); a };
+    let (ga, ba) = (args(good), args(bad));
+    assert_eq!(verify_proof(&reg.parse_registration(&ga).unwrap()), Ok(()));
+    assert_eq!(verify_proof(&reg.parse_registration(&ba).unwrap()), Err(Error::BadProof));
+}

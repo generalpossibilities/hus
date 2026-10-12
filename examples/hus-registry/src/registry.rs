@@ -56,6 +56,7 @@ pub enum Error {
     Full = 3005,
     OutOfRange = 3006,
     NoVerifier = 3007,
+    BadProof = 3008,
 }
 
 impl Config {
@@ -173,6 +174,22 @@ impl<'a> Registry<'a> {
 
     /// Checks a registration and returns the new state on success.
     pub fn register(&self, reg: &Registration<'_>) -> Result<(Vec<u8>, Accepted), Error> {
+        let (record, acc) = self.check(reg)?;
+        let mut next = Vec::with_capacity(self.config.len() + 4 + self.records.len() + record.len());
+        next.extend_from_slice(&self.config.encode());
+        next.extend_from_slice(&(self.count + 1).to_le_bytes());
+        next.extend_from_slice(self.records);
+        next.extend_from_slice(&record);
+        Ok((next, acc))
+    }
+
+    /// Byte offset of the record count within the state.
+    pub fn count_offset(&self) -> usize {
+        self.config.len()
+    }
+
+    /// Checks a registration and returns the record to append on success.
+    pub fn check(&self, reg: &Registration<'_>) -> Result<(Vec<u8>, Accepted), Error> {
         if self.count >= MAX_RECORDS {
             return Err(Error::Full);
         }
@@ -198,16 +215,13 @@ impl<'a> Registry<'a> {
             }
             min_dist_sq = Some(min_dist_sq.map_or(d, |m| m.min(d)));
         }
-        let mut next = Vec::with_capacity(self.config.len() + 4 + self.records.len() + self.config.record_len());
-        next.extend_from_slice(&self.config.encode());
-        next.extend_from_slice(&(self.count + 1).to_le_bytes());
-        next.extend_from_slice(self.records);
-        next.extend_from_slice(&reg.commitment);
-        next.extend_from_slice(&bucket.to_le_bytes());
+        let mut record = Vec::with_capacity(self.config.record_len());
+        record.extend_from_slice(&reg.commitment);
+        record.extend_from_slice(&bucket.to_le_bytes());
         for v in &reg.v_obf {
-            next.extend_from_slice(&v.to_le_bytes());
+            record.extend_from_slice(&v.to_le_bytes());
         }
-        Ok((next, Accepted { bucket, probed: probes.len(), compared, min_dist_sq }))
+        Ok((record, Accepted { bucket, probed: probes.len(), compared, min_dist_sq }))
     }
 }
 
@@ -220,6 +234,27 @@ fn dist_sq(a: &[i32], stored: &[u8]) -> u128 {
         s += d * d;
     }
     s
+}
+
+/// The HUS verifying key (production circuit: 129 public inputs, the
+/// commitment then `v_obf`), raw format, see hus_zk::groth16.
+#[cfg(feature = "groth16")]
+pub const HUS_VK: &[u8] = include_bytes!("../../hus-zk/vectors/vk_raw.bin");
+
+/// Checks the registration's Groth16 proof (`proof` = A | B | C, 256 bytes)
+/// against the HUS key, with the commitment and `v_obf` as public inputs.
+#[cfg(feature = "groth16")]
+pub fn verify_proof(reg: &Registration<'_>) -> Result<(), Error> {
+    use hus_zk::groth16::{verify, VerifyingKey};
+    let vk = VerifyingKey::parse(HUS_VK).map_err(|_| Error::BadState)?;
+    let mut inputs = Vec::with_capacity(1 + reg.v_obf.len());
+    inputs.push(reg.commitment);
+    inputs.extend(reg.v_obf.iter().map(|v| hus_zk::scalar_from_i64(*v as i64)));
+    match verify(&vk, &inputs, reg.proof) {
+        Ok(true) => Ok(()),
+        Ok(false) => Err(Error::BadProof),
+        Err(_) => Err(Error::BadArgs),
+    }
 }
 
 /// SplitMix64: the deterministic stream the hyperplanes are drawn from.

@@ -8,6 +8,6 @@ CFG=$("$ROOT/examples/hus-registry/target/release/examples/gen" config)
 D=(--wasm "$A/contract.wasm" --acab "$A/contract.acab" --descriptor "$A/contract.descriptor" --salt-hex 6170
    --init-json "${INIT_JSON:-\"0x$CFG\"}" --block-time 1800000000 --created-at 1800000000 --expire-at 1800003600 --fuel-fee-shells 100000)
 avm-local-stand init $S --dapp-id 1111111111111111111111111111111111111111111111111111111111111111 > "$R/init.json"
-ADDR=$(avm-local-stand deploy $S "${D[@]}" | jq -r .address)
+ADDR=$(avm-local-stand deploy $S "${D[@]}" 2>/dev/null | jq -r .address)  # funding_required
 avm-local-stand fund-user $S --address "$ADDR" --shells 1000000000 > "$R/fund.json"
 avm-local-stand deploy $S "${D[@]}" | jq -c '{status, error, address}'

@@ -69,6 +69,35 @@ pub const FIELD_MODULUS: [u8; 32] = [
     0x97, 0x81, 0x6a, 0x91, 0x68, 0x71, 0xca, 0x8d, 0x3c, 0x20, 0x8c, 0x16, 0xd8, 0x7c, 0xfd, 0x47,
 ];
 
+/// The BN254 scalar-field modulus r, big-endian.
+pub const SCALAR_MODULUS: [u8; 32] = [
+    0x30, 0x64, 0x4e, 0x72, 0xe1, 0x31, 0xa0, 0x29, 0xb8, 0x50, 0x45, 0xb6, 0x81, 0x81, 0x58, 0x5d,
+    0x28, 0x33, 0xe8, 0x48, 0x79, 0xb9, 0x70, 0x91, 0x43, 0xe1, 0xf5, 0x93, 0xf0, 0x00, 0x00, 0x01,
+];
+
+/// A signed integer as a scalar (negative values become `r - |v|`), the way
+/// circuits take signed public inputs such as HUS's fixed-point `v_obf`.
+pub fn scalar_from_i64(v: i64) -> Scalar {
+    let mut s = [0u8; 32];
+    s[24..].copy_from_slice(&v.unsigned_abs().to_be_bytes());
+    if v >= 0 {
+        return s;
+    }
+    sub_be(&SCALAR_MODULUS, &s)
+}
+
+/// `a - b` for 256-bit big-endian numbers with `a >= b`.
+fn sub_be(a: &[u8; 32], b: &[u8; 32]) -> [u8; 32] {
+    let mut out = [0u8; 32];
+    let mut borrow = 0i16;
+    for i in (0..32).rev() {
+        let d = a[i] as i16 - b[i] as i16 - borrow;
+        out[i] = d.rem_euclid(256) as u8;
+        borrow = (d < 0) as i16;
+    }
+    out
+}
+
 /// `-p` for a G1 point: `(x, p - y)`, infinity stays infinity. Needs no curve
 /// arithmetic, so it is the same for both backends.
 pub fn g1_neg(p: &G1) -> G1 {
@@ -76,11 +105,6 @@ pub fn g1_neg(p: &G1) -> G1 {
         return *p;
     }
     let mut out = *p;
-    let mut borrow = 0i16;
-    for i in (0..32).rev() {
-        let d = FIELD_MODULUS[i] as i16 - p[32 + i] as i16 - borrow;
-        out[32 + i] = d.rem_euclid(256) as u8;
-        borrow = (d < 0) as i16;
-    }
+    out[32..].copy_from_slice(&sub_be(&FIELD_MODULUS, p[32..].try_into().unwrap()));
     out
 }

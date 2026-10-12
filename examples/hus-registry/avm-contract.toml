@@ -67,3 +67,8 @@ message = "a v_obf value does not fit the stored i32 range"
 status_code = 3007
 name = "proof_verification_unavailable"
 message = "native Groth16 verification is not available on this AVM runtime"
+
+[[abi.errors]]
+status_code = 3008
+name = "proof_rejected"
+message = "the Groth16 proof does not verify for this commitment and v_obf"

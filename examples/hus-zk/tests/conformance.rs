@@ -4,7 +4,7 @@ use ark_bn254::{Fq, Fr, G1Affine, G1Projective, G2Affine, G2Projective};
 use ark_ec::{AffineRepr, CurveGroup, Group};
 use ark_ff::{BigInteger, PrimeField, UniformRand};
 use hus_zk::groth16::{verify, VerifyingKey};
-use hus_zk::{g1_add, g1_mul, g1_neg, pairing_check, Error};
+use hus_zk::{g1_add, g1_mul, g1_neg, pairing_check, scalar_from_i64, Error};
 
 fn fq_be(x: &Fq) -> [u8; 32] { x.into_bigint().to_bytes_be().try_into().unwrap() }
 fn g1(p: &G1Affine) -> [u8; 64] {
@@ -78,7 +78,8 @@ fn hus_inputs(raw: &[u8]) -> Vec<[u8; 32]> {
     for i in 0..128 {
         let x = i64::from_le_bytes(raw[288 + 8 * i..296 + 8 * i].try_into().unwrap());
         let f = if x < 0 { -Fr::from(x.unsigned_abs()) } else { Fr::from(x as u64) };
-        v.push(fr_be(&f));
+        assert_eq!(scalar_from_i64(x), fr_be(&f));
+        v.push(scalar_from_i64(x));
     }
     v
 }
@@ -96,4 +97,12 @@ fn groth16_hus_vectors() {
     let mut p = good[..256].to_vec();
     p[255] ^= 1;
     assert!(verify(&vk, &hus_inputs(good), &p) != Ok(true));
+}
+
+#[test]
+fn signed_scalars_match_arkworks() {
+    for x in [0i64, 1, -1, 123_456, -123_456, i64::MAX, i64::MIN + 1] {
+        let f = if x < 0 { -Fr::from(x.unsigned_abs()) } else { Fr::from(x as u64) };
+        assert_eq!(scalar_from_i64(x), fr_be(&f), "{x}");
+    }
 }
