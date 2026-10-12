@@ -1,0 +1,28 @@
+[workspace]
+
+[package]
+name = "bn254-ops"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "BN254 operations (EIP-196/197) in an AVM contract, through hus-zk"
+
+[lib]
+crate-type = ["cdylib"]
+
+[features]
+default = []
+# Use the proposed AVM host functions; also enables the pairing op, which in
+# pure WASM neither fits a message nor the ~64 KiB deploy limit.
+native = ["hus-zk/native"]
+
+[dependencies]
+avm-contract-sdk = { path = "../../crates/avm-contract-sdk" }
+hus-zk = { path = "../hus-zk" }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

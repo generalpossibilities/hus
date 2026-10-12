@@ -10,8 +10,10 @@ provides them.
 ## Why
 
 Measured with Wasmtime fuel metering on the AVM build settings (release
-`avm-dev-335a0f09fdbc`), against a per-message cap we bracketed at 6.1M–12.3M
-FUEL:
+`avm-dev-335a0f09fdbc`). The per-message cap is **about 10M FUEL**: on
+`avm-local-stand` a G1 multiplication by an all-ones 104-bit scalar (9.88M
+FUEL metered) succeeds and a 105-bit one (9.97M) fails with VM status 31
+(`scripts/stand-fuel-cap.sh`).
 
 | Operation in pure WASM (`substrate-bn`) | FUEL |
 |---|---|
@@ -23,7 +25,7 @@ FUEL:
 | Final exponentiation | ≈ 91M |
 | Groth16, best case (trusted key, 2 public inputs, `e(α,β)` precomputed) | ≈ 342M |
 
-Everything but G1 addition is over the cap on its own, so no amount of
+Everything but G1 addition and short-scalar multiplication is over the cap on its own, so no amount of
 optimisation inside a contract makes Groth16 fit one message. Natively the same
 verification takes about 1–2 ms.
 

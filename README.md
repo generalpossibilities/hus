@@ -15,6 +15,7 @@ Everything here is MIT-licensed. It is laid out like
 | `examples/hus-registry/` | AVM contract: per-app uniqueness registry. Works today. |
 | `examples/hus-zk/` | Library: BN254 `g1_add`, `g1_mul`, `pairing_check` (EIP-196/197 encoding) and Groth16 verification, with a pure-WASM backend and a native backend over proposed host functions. |
 | `examples/hus-zk/HOST-FUNCTIONS.md` | The specification of the three host functions we ask AVM to add. |
+| `examples/bn254-ops/` | AVM contract: G1 add and multiplication through `hus-zk`, checked on the stand; with `--features native`, also the pairing check. |
 | `scripts/` | Local-stand end-to-end and load tests. |
 
 ## `hus-registry`
@@ -61,15 +62,19 @@ with 25 stored vectors on average, 133 at worst.
 
 These may be useful to the AVM team and to other developers:
 
-1. **Per-message FUEL cap between 6.1M and 12.3M**, whatever
-   `fuel_fee_shells` is. BN254 pairing work in WASM is 30–55× over it; see
+1. **The per-message FUEL cap is about 10M** (most likely exactly
+   10,000,000), whatever `fuel_fee_shells` is: a metered 9.88M-FUEL G1
+   multiplication passes and a 9.97M one fails with VM status 31
+   (`scripts/stand-fuel-cap.sh`). Groth16 in WASM is about 34× over it; see
    `examples/hus-zk/HOST-FUNCTIONS.md`.
 2. **Deploy bodies are limited to about 64 KiB** (`BodyTooLarge` between
    57.4 KB and 65.6 KB of WASM).
 3. **A full state replace is limited to about 64 KiB**: a `FullReplace` state
    of 65,594 bytes is accepted and one of 66,140 fails with VM status 43.
    Larger accounts work when the contract returns `DataPatchList` whenever the
-   runtime asks for it (`required_state_output_mode`).
+   runtime asks for it (`required_state_output_mode`): one `hus-registry`
+   account reached 709 KB (about 1,300 registrations) with every
+   registration accepted.
 4. **`init` receives the whole canonical deploy payload (`ACDP`)**, code
    included, and the SDK has no accessor for the init data inside it.
    `deploy_init_data` in `hus-registry` reads it from the layout of this
@@ -77,8 +82,15 @@ These may be useful to the AVM team and to other developers:
 5. **Contracts must be built without SIMD** (`-C target-cpu=mvp` when building
    outside `avm-contract-build`): the profile disables `wasm_simd`.
 6. **Unused `fuel_fee_shells` is burned** when the message requests no
-   callback. Callers should set a tight reserve or request a callback.
-7. **`avm-local-stand` needs an x86-64-v3 CPU** (AVX2, BMI2, FMA, MOVBE); on
+   callback. A registration succeeds with a reserve of 1 SHELL (0 is refused
+   with `RouteRequiresFee`), and is then charged 2 SHELL plus any storage rent
+   due; a reserve of 100,000 adds exactly 100,000.
+7. **Storage rent dominates the cost of a data-heavy contract.** On the local
+   stand rent is about 1 SHELL per byte per second, collected from the
+   account when it is next touched: a 23 KB registry owed about 2 billion
+   SHELL after one day. Mainnet pricing may differ; either way stored bytes
+   are what a registry should minimise.
+8. **`avm-local-stand` needs an x86-64-v3 CPU** (AVX2, BMI2, FMA, MOVBE); on
    older machines every deploy fails with `EngineBuildFailed`.
 
 ## Build and test
@@ -95,6 +107,10 @@ avm-contract-build build --manifest-path examples/hus-registry/Cargo.toml
 cargo build --release --example gen --manifest-path examples/hus-registry/Cargo.toml
 scripts/stand-e2e.sh          # deploy, register, rescan (3003), replay (3004)
 scripts/stand-load.sh 1000    # many registrations, then rescans
+avm-contract-build build --manifest-path examples/bn254-ops/Cargo.toml
+scripts/stand-bn254.sh        # G1 add/mul results vs Python; full-width mul exceeds the cap
+scripts/stand-fuel-cap.sh     # bisects the per-message FUEL cap
+scripts/stand-cost.sh 40      # charge per registration, and storage rent over time
 ```
 
 ## License
