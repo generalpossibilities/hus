@@ -59,6 +59,9 @@ pub extern "C" fn run(stage: u32) -> u32 {
         // Duplicate check: squared L2 distance between two 128-dim i64 vectors.
         11 => l2_scan(1) > 0,
         12 => l2_scan(1000) > 0,
+        13 => !(ic(1) * Fr::from_slice(&GOOD[256..288]).unwrap()).is_zero(), // one full-width G1 mul
+        14 => !(ic(1) * fr_i64(1_234_567)).is_zero(),                       // one 21-bit G1 mul
+        15 => !(ic(1) + ic(2)).is_zero(),                                   // one G1 add
         _ => false,
     };
     r as u32

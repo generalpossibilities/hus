@@ -76,7 +76,7 @@ metered with `tools/fuelmeter/host`:
 
 ```
 cd tools/fuelopt && RUSTFLAGS="-C target-cpu=mvp" cargo build --release --target wasm32-unknown-unknown
-../fuelmeter/host/target/release/fuelhost target/wasm32-unknown-unknown/release/fuelopt.wasm 0 1 2 3 4 5 6 7 8 9 10 11 12
+../fuelmeter/host/target/release/fuelhost target/wasm32-unknown-unknown/release/fuelopt.wasm 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 ```
 
 | Step | FUEL |
@@ -84,18 +84,21 @@ cd tools/fuelopt && RUSTFLAGS="-C target-cpu=mvp" cargo build --release --target
 | Build all key and proof points, unchecked | 0.1M |
 | Proof A and C on-curve checks | 0.15M |
 | **Proof B G2 subgroup check** (required) | **57M** |
-| MSM, 2 public inputs | 17M (one G1 scalar multiplication ≈ 8M) |
+| MSM, 2 public inputs (one full-width and one 3-bit scalar) | 17M |
+| One G1 scalar multiplication, full 254-bit scalar | **16.3M** |
+| One G1 scalar multiplication, 21-bit scalar | 1.3M (cost scales with scalar length) |
+| One G1 addition | 0.08M |
 | MSM, 129 public inputs (today's circuit) | 175M |
 | 1 Miller loop | 68M |
 | 3 Miller loops (with `e(α, β)` precomputed) | 161M |
 | 4 Miller loops | 208M |
 | 1 Miller loop + final exponentiation | 159M (final exponentiation ≈ 91M) |
 | Full verification, today's circuit, unchecked key | 533M |
-| **Best case: 2 inputs, `e(α, β)` constant** | **≈ 326M** (57 + 17 + 161 + 91) |
+| **Best case: 2 full-width inputs, `e(α, β)` constant** | **≈ 342M** (57 + 2 × 16.3 + 161 + 91) |
 
 **What this means for the request.** Even the best pure-WASM verifier is
-about 30–50× over the 6–12M per-message cap, and every building block is
-over or at the cap on its own: one G1 multiplication (≈ 8M), the G2 subgroup
+about 30–55× over the 6–12M per-message cap, and every building block is
+over the cap on its own: one full-width G1 multiplication (16.3M), the G2 subgroup
 check (57M), one Miller loop (68M), the final exponentiation (≈ 91M). A
 single native pairing check is therefore not enough. The smallest native set
 that makes Groth16 practical is the three operations Ethereum has had since
