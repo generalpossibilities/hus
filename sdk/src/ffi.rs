@@ -3,8 +3,6 @@
 extern crate alloc;
 
 use alloc::alloc::{alloc, dealloc, Layout};
-use alloc::string::String;
-use alloc::vec::Vec;
 use core::ffi::{c_char, c_void};
 use core::mem::{align_of, size_of};
 use core::ptr;
@@ -17,11 +15,12 @@ use crate::MAX_PROJ_DIM;
 // Thread-local error buffer
 // ---------------------------------------------------------------------------
 std::thread_local! {
-    static LAST_ERROR: std::cell::RefCell<Option<String>> = const { std::cell::RefCell::new(None) };
+    static LAST_ERROR: std::cell::RefCell<Option<std::ffi::CString>> =
+        const { std::cell::RefCell::new(None) };
 }
 
 fn set_error(msg: &str) {
-    LAST_ERROR.with(|e| *e.borrow_mut() = Some(String::from(msg)));
+    LAST_ERROR.with(|e| *e.borrow_mut() = Some(std::ffi::CString::new(msg).unwrap_or_default()));
 }
 
 // ---------------------------------------------------------------------------
@@ -202,8 +201,8 @@ pub extern "C" fn hus_prove(
                 *out_commitment = alloc_buf(&commitment);
                 *out_commitment_len = commitment.len();
 
-                // Build scaled V_obf as i64[] ×10⁶ fixed-point
-                let scaled: Vec<i64> = v.iter().map(|x| (*x as f64 * 1_000_000.0) as i64).collect();
+                // Build scaled V_obf as i64[] ×10⁶ fixed-point (canonical encoding)
+                let scaled = crate::v_obf_to_contract(v);
                 *out_v_obf_scaled = alloc_buf(&scaled);
                 *out_v_obf_scaled_len = scaled.len();
             }
@@ -257,7 +256,10 @@ pub extern "C" fn hus_verify(
     }
     let v = unsafe { core::slice::from_raw_parts(v_obf, v_obf_len) };
 
-    match verify_projected(vk_slice, p, &c, v) {
+    // Verify against the canonical fixed-point encoding (v_obf is bound by
+    // the proof as a public input).
+    let v_contract = crate::v_obf_to_contract(v);
+    match verify_projected(vk_slice, p, &c, &v_contract) {
         Ok(true) => 1,
         Ok(false) => 0,
         Err(e) => {

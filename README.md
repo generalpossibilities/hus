@@ -42,7 +42,6 @@ HUS is a decentralized biometric middleware. It follows the **ISO/IEC 24745** st
 **Architecture:** `Phone → Off-chain verify → Acki Nacki chain` (on-chain Groth16 via `gosh.vergrth16` is blocked — built-in ZkLogin VKs, not custom circuit VKs. Off-chain proof verification + on-chain commitment storage is the current working path. On-node WASM execution via `gosh.runwasm` is validated end-to-end in a local executor harness and pending a live Shellnet run — see [avm/shellnet-runwasm-request.md](avm/shellnet-runwasm-request.md).)
 
 
-
 ## Integrate in any language
 
 HUS exposes a **REST API** so any app — Python, JavaScript, Go, Rust, C, Java, Swift — can integrate without blockchain dependencies.
@@ -238,6 +237,7 @@ See [docs/security.md](docs/security.md) for the full threat model.
 | Production audit | 📅 Planned |
 
 
+
 ## License
 
-MIT License. See `LICENSE` for details.
+MIT License. See [`LICENSE.md`](LICENSE.md).

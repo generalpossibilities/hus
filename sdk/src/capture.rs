@@ -35,6 +35,11 @@ pub struct CaptureMeta {
     pub duration_ms: u32,
 }
 
+/// Earliest plausible capture timestamp: 2000-01-01T00:00:00Z in epoch ms.
+pub const MIN_TIMESTAMP_MS: u64 = 946_684_800_000;
+/// Maximum allowed device-clock drift into the future.
+pub const MAX_CLOCK_SKEW_MS: u64 = 5 * 60 * 1000;
+
 // ---------------------------------------------------------------------------
 // Raw sensor data — the app never sees this
 // ---------------------------------------------------------------------------
@@ -54,18 +59,50 @@ pub struct RawCapture {
 impl RawCapture {
     /// Validate capture metadata and data consistency.
     /// Returns `Ok(())` if all bounds checks pass.
+    ///
+    /// Under the `std` feature the timestamp is checked against the wall
+    /// clock (allowing `MAX_CLOCK_SKEW_MS` of device-clock drift). Without
+    /// `std` only the plausibility bounds are enforced.
     pub fn validate(&self) -> Result<(), CaptureError> {
+        #[cfg(feature = "std")]
+        {
+            let now_ms = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .map(|d| u64::try_from(d.as_millis()).unwrap_or(u64::MAX))
+                .unwrap_or(0);
+            self.validate_at(now_ms)
+        }
+        #[cfg(not(feature = "std"))]
+        {
+            self.validate_inner(None)
+        }
+    }
+
+    /// Validate against an explicit wall-clock value (`now_ms`, epoch
+    /// milliseconds). Rejects timestamps earlier than `MIN_TIMESTAMP_MS`
+    /// and timestamps more than `MAX_CLOCK_SKEW_MS` in the future.
+    pub fn validate_at(&self, now_ms: u64) -> Result<(), CaptureError> {
+        self.validate_inner(Some(now_ms))
+    }
+
+    fn validate_inner(&self, now_ms: Option<u64>) -> Result<(), CaptureError> {
         if self.data.is_empty() {
             return Err(CaptureError::InsufficientData);
         }
         if self.meta.timestamp_ms == 0 {
             return Err(CaptureError::InvalidMetadata("timestamp_ms is 0"));
         }
-        let max_age_ms: u64 = 365 * 24 * 60 * 60 * 1000;
-        if self.meta.timestamp_ms > max_age_ms {
+        if self.meta.timestamp_ms < MIN_TIMESTAMP_MS {
             return Err(CaptureError::InvalidMetadata(
-                "timestamp_ms is unreasonably large",
+                "timestamp_ms before 2000-01-01 (implausible)",
             ));
+        }
+        if let Some(now) = now_ms {
+            if self.meta.timestamp_ms > now.saturating_add(MAX_CLOCK_SKEW_MS) {
+                return Err(CaptureError::InvalidMetadata(
+                    "timestamp_ms is in the future",
+                ));
+            }
         }
         match self.meta.modality {
             Modality::Face | Modality::Iris => {
@@ -789,7 +826,7 @@ mod tests {
                 width: 32,
                 height: 32,
                 sample_rate: 0,
-                timestamp_ms: 1000,
+                timestamp_ms: 1_700_000_000_000,
                 duration_ms: 0,
             },
             data: vec![],
@@ -824,7 +861,7 @@ mod tests {
                 width: 0,
                 height: 0,
                 sample_rate: 0,
-                timestamp_ms: 1000,
+                timestamp_ms: 1_700_000_000_000,
                 duration_ms: 0,
             },
             data: vec![0x80; 100],
@@ -843,7 +880,7 @@ mod tests {
                 width: 0,
                 height: 0,
                 sample_rate: 0,
-                timestamp_ms: 1000,
+                timestamp_ms: 1_700_000_000_000,
                 duration_ms: 0,
             },
             data: vec![0x00; 1024],
@@ -862,12 +899,68 @@ mod tests {
                 width: 32,
                 height: 32,
                 sample_rate: 0,
-                timestamp_ms: 1000,
+                timestamp_ms: 1_700_000_000_000,
                 duration_ms: 0,
             },
             data: vec![0x80; 32 * 32 * 4],
         };
         assert!(cap.validate().is_ok());
+    }
+
+    #[test]
+    fn validate_rejects_implausible_timestamp() {
+        let cap = RawCapture {
+            meta: CaptureMeta {
+                modality: Modality::Face,
+                width: 32,
+                height: 32,
+                sample_rate: 0,
+                timestamp_ms: 1000,
+                duration_ms: 0,
+            },
+            data: vec![0x80; 32 * 32 * 4],
+        };
+        assert_eq!(
+            cap.validate(),
+            Err(CaptureError::InvalidMetadata(
+                "timestamp_ms before 2000-01-01 (implausible)"
+            ))
+        );
+    }
+
+    #[test]
+    fn validate_rejects_future_timestamp_beyond_skew() {
+        let cap = RawCapture {
+            meta: CaptureMeta {
+                modality: Modality::Face,
+                width: 32,
+                height: 32,
+                sample_rate: 0,
+                timestamp_ms: 1_700_000_000_000 + MAX_CLOCK_SKEW_MS + 1,
+                duration_ms: 0,
+            },
+            data: vec![0x80; 32 * 32 * 4],
+        };
+        assert_eq!(
+            cap.validate_at(1_700_000_000_000),
+            Err(CaptureError::InvalidMetadata("timestamp_ms is in the future"))
+        );
+    }
+
+    #[test]
+    fn validate_accepts_timestamp_within_skew() {
+        let cap = RawCapture {
+            meta: CaptureMeta {
+                modality: Modality::Face,
+                width: 32,
+                height: 32,
+                sample_rate: 0,
+                timestamp_ms: 1_700_000_000_000 + MAX_CLOCK_SKEW_MS,
+                duration_ms: 0,
+            },
+            data: vec![0x80; 32 * 32 * 4],
+        };
+        assert!(cap.validate_at(1_700_000_000_000).is_ok());
     }
 
     #[test]
@@ -878,7 +971,7 @@ mod tests {
                 width: 0,
                 height: 0,
                 sample_rate: 0,
-                timestamp_ms: 1000,
+                timestamp_ms: 1_700_000_000_000,
                 duration_ms: 0,
             },
             data: vec![0x00; 64],

@@ -246,7 +246,7 @@ async fn test_husapp_submit_with_proof() {
 
     // Off-chain verify first (sanity check)
     let ok = hus_sdk::prover::verify_projected(
-        &vk_bytes, &proof_bytes, &commitment_bytes, &v_obf_f32,
+        &vk_bytes, &proof_bytes, &commitment_bytes, &hus_sdk::v_obf_to_contract(&v_obf_f32),
     )
     .expect("verify_projected");
     assert!(ok, "off-chain proof should verify");

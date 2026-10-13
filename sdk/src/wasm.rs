@@ -13,17 +13,13 @@ use crate::error::ExtractionError;
 // ---------------------------------------------------------------------------
 // Modality <-> u32  (user-facing numbering for JS)
 // ---------------------------------------------------------------------------
+/// Map the on-chain modality id to a [`Modality`] (0=Face … 6=Gait,
+/// matching `Modality::id()` / `from_id` — the JS-facing numbering must
+/// never diverge from the on-chain encoding).
 fn u32_to_modality(m: u32) -> Option<Modality> {
-    match m {
-        0 => Some(Modality::Keystroke),
-        1 => Some(Modality::TouchGesture),
-        2 => Some(Modality::Gait),
-        3 => Some(Modality::Face),
-        4 => Some(Modality::Iris),
-        5 => Some(Modality::Voice),
-        6 => Some(Modality::Fingerprint),
-        _ => None,
-    }
+    u8::try_from(m)
+        .ok()
+        .and_then(|id| Modality::from_id(id).ok())
 }
 
 // ---------------------------------------------------------------------------
@@ -129,10 +125,10 @@ fn capture_impl_raw(modality: Modality) -> Result<RawCapture, crate::error::Capt
 }
 
 #[cfg(not(target_arch = "wasm32"))]
-fn capture_impl_raw(modality: Modality) -> Result<RawCapture, crate::error::CaptureError> {
-    use crate::capture::Capture;
-    let mut mock = MockCapture::new(modality);
-    mock.capture()
+fn capture_impl_raw(_modality: Modality) -> Result<RawCapture, crate::error::CaptureError> {
+    Err(crate::error::CaptureError::NotSupported(
+        "sensor capture requires a wasm32 target; use the native/FFI capture path",
+    ))
 }
 
 // ---------------------------------------------------------------------------
@@ -221,7 +217,14 @@ impl HusHandle {
         };
         let v_obf: Vec<f32> = parse_f32_json(v_obf_json);
 
-        verify_projected(&self.vk, &proof_bytes, &commitment, &v_obf).unwrap_or(false)
+        // Canonical fixed-point encoding — v_obf is a public input of the proof.
+        verify_projected(
+            &self.vk,
+            &proof_bytes,
+            &commitment,
+            &crate::v_obf_to_contract(&v_obf),
+        )
+        .unwrap_or(false)
     }
 }
 
@@ -296,10 +299,7 @@ fn hex_decode32(s: &str) -> Option<[u8; 32]> {
 }
 
 fn vobf_to_fixed(v_obf: &[f32]) -> Vec<i64> {
-    v_obf
-        .iter()
-        .map(|v| (*v as f64 * 1_000_000.0) as i64)
-        .collect()
+    crate::v_obf_to_contract(v_obf)
 }
 
 // ---------------------------------------------------------------------------
@@ -336,7 +336,8 @@ pub fn capture_gait() -> Result<Vec<f32>, JsValue> {
 
 /// Extract an embedding from raw capture data.
 ///
-/// * `modality` — 0=Keystroke, 1=Touch, 2=Gait, 3=Face, 4=Iris, 5=Voice, 6=Fingerprint
+/// * `modality` — on-chain modality id: 0=Face, 1=Iris, 2=Voice, 3=Fingerprint,
+///   4=Keystroke, 5=TouchGesture, 6=Gait
 /// * `raw_json` — JSON array of f32 values `[f32,...]`
 ///
 /// Returns the embedding vector as a JSON string, or `{"error": "..."}` on failure.

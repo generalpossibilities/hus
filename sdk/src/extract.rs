@@ -100,8 +100,7 @@ impl Extractor for KeystrokeExtractor {
         // Each chunk: key_code(u32) | press_time(u64) | release_time(u64)
         let mut hold_times = Vec::with_capacity(event_count);
         let mut inter_key_times = Vec::with_capacity(event_count.saturating_sub(1));
-        let mut prev_release: u64 = 0;
-
+        let mut prev_release: Option<u64> = None;
         for chunk in &events {
             if chunk.len() < 20 {
                 return Err(crate::error::ExtractionError::InvalidFormat);
@@ -117,10 +116,10 @@ impl Extractor for KeystrokeExtractor {
                     .map_err(|_| crate::error::ExtractionError::InvalidFormat)?,
             );
             hold_times.push((release.saturating_sub(press)) as f32);
-            if prev_release != 0 {
-                inter_key_times.push((press.saturating_sub(prev_release)) as f32);
+            if let Some(prev) = prev_release {
+                inter_key_times.push((press.saturating_sub(prev)) as f32);
             }
-            prev_release = release;
+            prev_release = Some(release);
         }
 
         // Build feature vector: [mean_hold, std_hold, mean_ikt, std_ikt,

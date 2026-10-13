@@ -114,15 +114,18 @@ fn full_pipeline_keystroke() {
     let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
     assert!(!proof_bytes.is_empty());
 
-    let valid = verify_projected(&vk, &proof_bytes, &commitment, &v_obf).unwrap();
+    let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
     assert!(valid, "proof must verify");
 
-    // v_obf_to_contract conversion is lossless for f32 bit patterns
+    // v_obf_to_contract uses fixed-point ×10⁶, zero-padded to MAX_PROJ_DIM=128
     let contract_v_obf = hus_sdk::v_obf_to_contract(&v_obf);
-    assert_eq!(contract_v_obf.len(), v_obf.len());
+    assert_eq!(contract_v_obf.len(), 128, "contract v_obf must be exactly 128");
     for (i, &val) in contract_v_obf.iter().enumerate() {
-        let orig: f32 = v_obf[i];
-        assert_eq!(val, orig.to_bits() as i64, "v_obf[{i}] mismatch");
+        let expected = match v_obf.get(i) {
+            Some(&x) => (x as f64 * 1_000_000.0) as i64,
+            None => 0,
+        };
+        assert_eq!(val, expected, "v_obf[{i}] mismatch");
     }
 }
 
@@ -142,7 +145,7 @@ fn full_pipeline_multimodal() {
         let v_obf = derive_and_project(&seed, &embedding.vector, cfg.proj_dim).unwrap();
 
         let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
-        let valid = verify_projected(&vk, &proof_bytes, &commitment, &v_obf).unwrap();
+        let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
         assert!(valid, "proof must verify for {:?}", modality);
     }
 }
@@ -151,9 +154,13 @@ fn full_pipeline_multimodal() {
 fn v_obf_contract_conversion_roundtrip() {
     let v = vec![0.5f32, -1.0f32, 3.14159f32, 0.0f32, 1.0f32];
     let contract = hus_sdk::v_obf_to_contract(&v);
-    assert_eq!(contract.len(), v.len());
+    assert_eq!(contract.len(), 128, "contract v_obf must be exactly 128");
     for (i, &val) in contract.iter().enumerate() {
-        assert_eq!(val as u32, v[i].to_bits());
+        let expected = match v.get(i) {
+            Some(&x) => (x as f64 * 1_000_000.0) as i64,
+            None => 0,
+        };
+        assert_eq!(val, expected, "v_obf[{i}] mismatch");
     }
 }
 
