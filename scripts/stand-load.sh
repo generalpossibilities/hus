@@ -32,3 +32,5 @@ done
 echo "== rescans of 20 registered people (expect 3003)"
 caught=0; for j in $(seq 1 20); do p=$(( (j * 37) % N + 1 )); out=$(call "$($GEN person $p 0.1 $((900000 + j)))"); [ "${out%% *}" = 3003 ] && caught=$((caught+1)); done
 echo "caught $caught/20; registration failures: $fails"
+echo "next new person (3005 once the shard holds 2000): $(call "$($GEN person $((N + 1)))")"
+echo "account size: $(avm-local-stand inspect $S | jq -r '.accounts[] | select(.address == "'"$ADDR"'") | .canonical_byte_length') bytes"

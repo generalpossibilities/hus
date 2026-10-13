@@ -149,3 +149,16 @@ fn exact_cells_keep_old_behaviour() {
     }).count();
     assert!(caught >= 297, "{caught}/300");
 }
+
+#[test]
+fn full_shard_still_rejects_duplicates() {
+    let mut rng = Rng(3);
+    let mut state = initial_state(&config(vec![]));
+    let people: Vec<Vec<f64>> = (0..MAX_RECORDS).map(|_| rng.person()).collect();
+    for (i, p) in people.iter().enumerate() {
+        try_register(&mut state, commit(i as u64), p).unwrap();
+    }
+    assert_eq!(try_register(&mut state.clone(), commit(1), &rng.person()), Err(Error::Replay));
+    assert_eq!(try_register(&mut state.clone(), commit(9_999), &people[7]), Err(Error::Duplicate));
+    assert_eq!(try_register(&mut state.clone(), commit(9_998), &rng.person()), Err(Error::Full));
+}

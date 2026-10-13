@@ -234,9 +234,6 @@ impl<'a> Registry<'a> {
 
     /// Checks a registration and returns the record to append on success.
     pub fn check(&self, reg: &Registration<'_>) -> Result<(Vec<u8>, Accepted), Error> {
-        if self.count >= MAX_RECORDS {
-            return Err(Error::Full);
-        }
         // A replayed commitment (the same proof sent twice).
         let key = replay_key(&reg.commitment);
         for i in 0..self.count as usize {
@@ -259,6 +256,10 @@ impl<'a> Registry<'a> {
                 return Err(Error::Duplicate);
             }
             min_dist_sq = Some(min_dist_sq.map_or(d, |m| m.min(d)));
+        }
+        // Checked last, so a full shard still recognises people it holds.
+        if self.count >= MAX_RECORDS {
+            return Err(Error::Full);
         }
         let mut record = Vec::with_capacity(self.config.record_len());
         record.extend_from_slice(&key);
