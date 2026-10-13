@@ -34,7 +34,7 @@ and returns status 0 or one of:
 | 3002 | caller is not an attestor (attestor mode) |
 | 3003 | **duplicate person**: a stored vector is closer than the threshold |
 | 3004 | the commitment is already registered (replay) |
-| 3005 | this registry shard is full |
+| 3005 | this registry shard is full (2,000 people; checked after 3003/3004, so a full shard still recognises people it holds) |
 | 3006 | a `v_obf` value does not fit i32 |
 | 3007 | proof verification requested but not built in (no native host functions) |
 | 3008 | the Groth16 proof does not verify |
@@ -84,8 +84,10 @@ These may be useful to the AVM team and to other developers:
    of 65,594 bytes is accepted and one of 66,140 fails with VM status 43.
    Larger accounts work when the contract returns `DataPatchList` whenever the
    runtime asks for it (`required_state_output_mode`): one `hus-registry`
-   account reached 709 KB (about 1,300 registrations) with every
-   registration accepted.
+   account holds a full shard of 2,000 registrations (292 KB with compact
+   records; the earlier 546-byte format reached 709 KB) with every
+   registration accepted and every rescan still caught
+   (`scripts/stand-load.sh 2000`).
 4. **`init` receives the whole canonical deploy payload (`ACDP`)**, code
    included, and the SDK has no accessor for the init data inside it.
    `deploy_init_data` in `hus-registry` reads it from the layout of this
@@ -102,8 +104,8 @@ These may be useful to the AVM team and to other developers:
    due; a reserve of 100,000 adds exactly 100,000.
 7. **Storage rent dominates the cost of a data-heavy contract.** On the local
    stand rent is about 1 SHELL per byte per second, collected from the
-   account when it is next touched: a 23 KB registry owed about 2 billion
-   SHELL after one day. Mainnet pricing may differ; either way stored bytes
+   account when it is next touched: a 40-person registry (6.3 KB) owed about
+   543 million SHELL after one day (`scripts/stand-cost.sh 40`). Mainnet pricing may differ; either way stored bytes
    are what a registry should minimise.
 8. **`avm-local-stand` needs an x86-64-v3 CPU** (AVX2, BMI2, FMA, MOVBE); on
    older machines every deploy fails with `EngineBuildFailed`.
@@ -121,7 +123,7 @@ cd ../hus-registry && cargo test --release --features groth16
 avm-contract-build build --manifest-path examples/hus-registry/Cargo.toml
 cargo build --release --example gen --manifest-path examples/hus-registry/Cargo.toml
 scripts/stand-e2e.sh          # deploy, register, rescan (3003), replay (3004)
-scripts/stand-load.sh 1000    # many registrations, then rescans
+scripts/stand-load.sh 2000    # a full shard, then rescans (3003) and one more (3005)
 avm-contract-build build --manifest-path examples/bn254-ops/Cargo.toml
 scripts/stand-bn254.sh        # G1 add/mul results vs Python; full-width mul exceeds the cap
 scripts/stand-fuel-cap.sh     # bisects the per-message FUEL cap
