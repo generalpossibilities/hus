@@ -7,6 +7,21 @@
 
 ---
 
+> **Update, 13 October 2026: newer measurements and a working contract.**
+> - **Per-message FUEL cap:** pinned to about **10M** (a metered 9.88M-FUEL
+>   operation passes, 9.97M fails with VM status 31).
+> - **Pure-WASM Groth16 after optimisation:** about **342M FUEL** in the best
+>   case (trusted key, 2 public inputs), **533M** for our current 129-input
+>   circuit. That's still 34–53× over the cap, so the figures below (681M,
+>   6–12M) are superseded.
+> - **Our ask is now the Ethereum-standard set:** `bn254_g1_add`,
+>   `bn254_g1_mul` and `bn254_pairing_check` (EIP-196/197), priced like
+>   EIP-1108. With them a 2-input verification costs about 1.9M FUEL.
+> - **Spec, library, test vectors and a working AVM registry contract** (MIT),
+>   laid out for the AVM SDK's `examples/`:
+>   [branch `avm-sdk`](https://github.com/generalpossibilities/hus/tree/avm-sdk),
+>   spec in `examples/hus-zk/HOST-FUNCTIONS.md`.
+
 ## TL;DR
 
 HUS is moving from our earlier TVM design to **AVM**. We need contracts to verify **Groth16 proofs on BN254 against their own verifying key**. Today that isn't possible in a single AVM message.
