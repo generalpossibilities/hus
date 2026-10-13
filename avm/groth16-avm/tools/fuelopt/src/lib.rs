@@ -62,6 +62,13 @@ pub extern "C" fn run(stage: u32) -> u32 {
         13 => !(ic(1) * Fr::from_slice(&GOOD[256..288]).unwrap()).is_zero(), // one full-width G1 mul
         14 => !(ic(1) * fr_i64(1_234_567)).is_zero(),                       // one 21-bit G1 mul
         15 => !(ic(1) + ic(2)).is_zero(),                                   // one G1 add
+        // 100 + b: one G1 multiplication by the all-ones b-bit scalar (2^b - 1).
+        100..=353 => {
+            let b = (stage - 100) as usize;
+            let mut be = [0u8; 32];
+            for i in 0..b { be[31 - i / 8] |= 1 << (i % 8); }
+            match Fr::from_slice(&be) { Ok(s) => !(ic(1) * s).is_zero(), Err(_) => false }
+        }
         _ => false,
     };
     r as u32
