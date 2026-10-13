@@ -102,11 +102,15 @@ These may be useful to the AVM team and to other developers:
    callback. A registration succeeds with a reserve of 1 SHELL (0 is refused
    with `RouteRequiresFee`), and is then charged 2 SHELL plus any storage rent
    due; a reserve of 100,000 adds exactly 100,000.
-7. **Storage rent dominates the cost of a data-heavy contract.** On the local
-   stand rent is about 1 SHELL per byte per second, collected from the
-   account when it is next touched: a 40-person registry (6.3 KB) owed about
-   543 million SHELL after one day (`scripts/stand-cost.sh 40`). Mainnet pricing may differ; either way stored bytes
-   are what a registry should minimise.
+7. **The local stand charges storage rent on every touch, unlike mainnet
+   TVM.** On `avm-local-stand` rent is about 1 SHELL per byte per second,
+   collected when the account is next touched: a 40-person registry (6.3 KB)
+   owed about 543 million SHELL after one day (`scripts/stand-cost.sh 40`).
+   On mainnet TVM, storage is charged only after an account has been
+   inactive for 30 days, and same-thread internal messages within a DApp are
+   effectively free. `docs/fuel-and-fees.md` says AVM's local-free route
+   "does not waive storage rent". Which rent policy will AVM mainnet
+   use? It decides whether a busy registry pays for storage at all.
 8. **`avm-local-stand` needs an x86-64-v3 CPU** (AVX2, BMI2, FMA, MOVBE); on
    older machines every deploy fails with `EngineBuildFailed`.
 
