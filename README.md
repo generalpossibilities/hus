@@ -69,7 +69,14 @@ above recall is unchanged. `cell = 4, quant_step = 1` stores vectors exactly
   functions and nothing else. The `groth16` feature alone uses the pure-WASM
   backend, which the native tests use with a real HUS proof.
 
-## What we learned about AVM (release `avm-dev-335a0f09fdbc`)
+## What we learned about AVM (release `avm-dev-335a0f09fdbc`, re-checked on SDK 0.2.0)
+
+Everything here was re-run on **AVM SDK 0.2.0** (`avm-dev-06e96ef71006`,
+14 October 2026): the registry passes `stand-e2e.sh`, one account took 500
+registrations (73,300 bytes) with every rescan caught, `stand-bn254.sh`
+matches, and the FUEL cap is unchanged (104-bit all-ones multiplication passes,
+105-bit fails). 0.2.0 builds with `--locked`, so each example's `Cargo.lock` was
+refreshed for guest SDK 0.1.1; the registry's WASM is 50.5 KB with it.
 
 These may be useful to the AVM team and to other developers:
 
@@ -91,8 +98,9 @@ These may be useful to the AVM team and to other developers:
 4. **`init` receives the whole canonical deploy payload (`ACDP`)**, code
    included, and the SDK has no accessor for the init data inside it.
    `deploy_init_data` in `hus-registry` reads it from the layout of this
-   release (salt length u16 at 266, init field length u32 at 268, salt at
-   288, then the init field as an ABI `bytes` value). Decoding it by hand is
+   release (UI-name length u16 at 264, salt length u16 at 266, init field
+   length u32 at 268; from 288 the UI name, the salt, then the init field as
+   an ABI `bytes` value). Decoding it by hand is
    fragile: our first version read another field that happened to equal the
    old config's length, and broke as soon as the config grew. An SDK
    accessor would make this robust.
