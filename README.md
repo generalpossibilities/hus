@@ -78,7 +78,10 @@ matches, and the FUEL cap is unchanged (104-bit all-ones multiplication passes,
 105-bit fails). 0.2.0 builds with `--locked`, so each example's `Cargo.lock` was
 refreshed for guest SDK 0.1.1; the registry's WASM is 50.5 KB with it.
 
-These may be useful to the AVM team and to other developers:
+These may be useful to the AVM team and to other developers. The AVM team
+answered our issues on 15 October 2026; see
+[docs/avm-team-answers.md](docs/avm-team-answers.md) for their answers and
+what they change below.
 
 1. **The per-message FUEL cap is about 10M** (most likely exactly
    10,000,000), whatever `fuel_fee_shells` is: a metered 9.88M-FUEL G1
@@ -94,7 +97,11 @@ These may be useful to the AVM team and to other developers:
    account holds a full shard of 2,000 registrations (292 KB with compact
    records; the earlier 546-byte format reached 709 KB) with every
    registration accepted and every rescan still caught
-   (`scripts/stand-load.sh 2000`).
+   (`scripts/stand-load.sh 2000`). The AVM team confirmed (#20) that 64 KiB
+   is the limit on the *previous whole account image* for `FullReplace`.
+   State data is capped at 1 MiB, and a patch at 262,144 bytes and 512
+   ranges. Status 43 means the runtime did not get the output mode it asked
+   for (`VM_ABI_OUTPUT_MISSING`).
 4. **`init` receives the whole canonical deploy payload (`ACDP`)**, code
    included, and the SDK has no accessor for the init data inside it.
    `deploy_init_data` in `hus-registry` reads it from the layout of this
@@ -103,7 +110,8 @@ These may be useful to the AVM team and to other developers:
    an ABI `bytes` value). Decoding it by hand is
    fragile: our first version read another field that happened to equal the
    old config's length, and broke as soon as the config grew. An SDK
-   accessor would make this robust.
+   accessor would make this robust. The unreleased candidate in avm-sdk
+   PR #17 adds `input.deploy()?.init_data()` (#1).
 5. **Contracts must be built without SIMD** (`-C target-cpu=mvp` when building
    outside `avm-contract-build`): the profile disables `wasm_simd`.
 6. **Unused `fuel_fee_shells` is burned** when the message requests no
@@ -119,6 +127,9 @@ These may be useful to the AVM team and to other developers:
    effectively free. `docs/fuel-and-fees.md` says AVM's local-free route
    "does not waive storage rent". Which rent policy will AVM mainnet
    use? It decides whether a busy registry pays for storage at all.
+   The team's answer (#21): the stand charges 1 SHELL per byte-second before
+   execution and freezes an account after its third unpaid attempt. No grace
+   period is specified, and the mainnet price is not set yet.
 8. **`avm-local-stand` needs an x86-64-v3 CPU** (AVX2, BMI2, FMA, MOVBE); on
    older machines every deploy fails with `EngineBuildFailed`.
 
