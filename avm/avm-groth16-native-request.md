@@ -166,3 +166,29 @@ Everything is in our repository under `avm/groth16-avm/` (see its README):
 Thank you for building AVM. We're glad to be early users, and we'd like HUS to be among the first projects that verify zero-knowledge proofs fully on-chain on it.
 
 **HUS team**
+
+---
+
+## Update, 16 October 2026: the AVM team's answers
+
+The AVM team answered our avm-sdk issues on 15 October 2026. Full notes are on
+the `avm-sdk` branch in `docs/avm-team-answers.md`.
+
+- **Native BN254 / Groth16 (avm-sdk #18):** not in the current candidate. It
+  needs a formal runtime/ABI proposal covering encodings, field and subgroup
+  checks, infinity and malformed-input handling, deterministic implementation
+  and FUEL prices, with a security review and cross-executor tests. Options 1
+  and 2 above would go through that process.
+- **Question 1 (#19):** the local stand uses 10,000,000 FUEL per message,
+  100,000,000 per bucket and 1,000,000 FUEL per SHELL. Mainnet values are not
+  set yet.
+- **Question 2 (#20):** a message body, including the deploy envelope, is
+  limited to 65,536 bytes; no increase is planned in the candidate. Account
+  state can grow to 1 MiB with patch output.
+- **Storage rent (#21):** the stand charges 1 SHELL per byte-second and freezes
+  an account after its third unpaid attempt. The mainnet price is not set yet.
+
+Questions 3 and 4 are still open: whether a crypto host interface is on the
+roadmap, and whether they would accept our help with a proposal.
+
+**HUS team**
