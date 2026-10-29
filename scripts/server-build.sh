@@ -20,7 +20,7 @@ cd "$(dirname "$0")/.."
 
 ssh "$HOST" "mkdir -p ${REMOTE}/src ${REMOTE}/target ${REMOTE}/cargo"
 rsync -a --delete \
-  --exclude /target --exclude '/verifier/target' --exclude '/keep' \
+  --exclude /target --exclude '/verifier/target' --exclude '/keep/*' \
   --exclude '/.git' --exclude 'node_modules' \
   ./ "${HOST}:${REMOTE}/src/"
 
