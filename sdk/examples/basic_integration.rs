@@ -129,7 +129,10 @@ fn main() {
         let embedding = &embeddings[&cfg.modality];
         let seed = seed_fn(cfg.modality);
         let v_obf = derive_and_project(&seed, embedding, cfg.proj_dim).unwrap();
-        let (proof_bytes, commitment_hash) = prove_projected(&pk, &v_obf).expect("prove_projected");
+        // In production: the verifier's challenge and the account's key.
+        let binding = hus_sdk::proof_binding(b"example-owner-key", b"example-challenge");
+        let (proof_bytes, commitment_hash) =
+            prove_projected(&pk, &v_obf, &binding).expect("prove_projected");
 
         let comm_hex: String = commitment_hash
             .iter()
@@ -175,6 +178,7 @@ fn generate_test_keys() -> (Vec<u8>, Vec<u8>) {
         v_obf: vec![Fr::ZERO; 128],
         nonce: Fr::ZERO,
         commitment: Fr::ZERO,
+        binding: Fr::ZERO,
     };
     let pk =
         Groth16::<Bn254>::generate_random_parameters_with_reduction(circuit, &mut rng).unwrap();

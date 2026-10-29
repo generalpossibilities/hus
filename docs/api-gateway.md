@@ -108,47 +108,45 @@ curl -X POST http://localhost:3000/api/v1/register-app \
 
 `modality_ids` are the selected biometric modalities (e.g., 0=Face, 4=Keystroke, 6=Gait). The contract uses hardcoded `PROJ_DIM=128` and `MIN_SCORE=80`.
 
-### POST /api/v1/submit — Submit commitment (working path)
+### POST /api/v1/submit — Verify the proof, then register
 
-Submits a proof-verified commitment. Proof is verified off-chain before submission.
+The gateway checks the Groth16 proof off-chain against the commitment and
+all 128 `v_obf` values (the circuit's public inputs). Only if it verifies
+does the gateway sign `submitVerified` on the app contract with its own key.
+Callers never send keys.
+
+Set-up, once per app: the app operator names the gateway's public key as
+the app's verifier (`HusApp.setVerifier`, signed by the operator key that
+registered the app). The contract refuses registrations from any other key.
 
 ```bash
 curl -X POST http://localhost:3000/api/v1/submit \
   -H 'Content-Type: application/json' \
   -d '{
     "app_address": "dapp_id::account_id",
-    "commitment_hash": "hex-32-bytes",
+    "commitment": "hex-32-bytes",
     "v_obf": [123456, -789012, ...],
-    "modality_id": 0,
-    "signer": {
-      "public_key": "0x...",
-      "secret_key": "0x..."
-    }
+    "proof": "hex",
+    "modality_id": 0
   }'
 ```
 
 ```json
 {
-  "message_hash": "deadbeef..."
+  "message_hash": null,
+  "is_unique": true
 }
 ```
 
-### POST /api/v1/submit-with-proof — Submit with on-chain proof (blocked)
+`v_obf` is the canonical encoding, `hus_sdk::v_obf_to_contract`: each value
+×10⁶ as an integer, padded to 128.
 
-```bash
-curl -X POST http://localhost:3000/api/v1/submit-with-proof \
-  -H 'Content-Type: application/json' \
-  -d '{
-    "app_address": "dapp_id::account_id",
-    "v_obf": [123456, ...],
-    "proof": "base64-encoded-proof",
-    "commitment": "hex-256",
-    "modality_id": 0,
-    "signer": { "public_key": "0x...", "secret_key": "0x..." }
-  }'
-```
-
-**This endpoint is blocked on Shellnet** — the `gosh.vergrth16` opcode uses hardcoded ZkLogin proving keys, not custom circuit VKs. Use `/api/v1/submit` (off-chain verify + `submitCommitment`) instead.
+**Why not verify on chain?** On TVM, `gosh.vergrth16` accepts only the
+network's built-in (ZkLogin) verifying keys, not HUS's. The proof is stored
+with the registration so anyone can re-check it against the stored vector.
+On-chain verification is the AVM verifier (`avm/groth16-avm`), for networks
+that can run it. The old `submit-with-proof` route, and the contract's
+`submitWithProof` and proofless `submitCommitment`, are removed.
 
 ### POST /api/v1/check — Check duplicate commitment
 
@@ -242,11 +240,11 @@ const { proof, commitment } = await (await fetch(`${HUS}/api/v1/prove`, {
 | Project | User device or gateway | Embedding → V_obf | ~15 µs |
 | **Prove** | Gateway or device | V_obf → Groth16 proof | 1–5s |
 | **Verify** | Gateway (off-chain) | Check proof | ~2 ms |
-| Submit | Gateway → blockchain | `submitCommitment()` | ~30s |
+| Submit | Gateway → blockchain | `submitVerified()`, signed by the gateway | ~30s |
 
 ## Notes
 
 - **Auth**: If `--api-key` is set, all endpoints except status require `Authorization: Bearer <api-key>`
-- **V_obf format**: `/api/v1/project` returns `float32[]`; `/api/v1/submit` requires `int64[]` (IEEE 754 bit pattern sign-extended)
+- **V_obf format**: `/api/v1/project` returns `float32[]`; `/api/v1/submit` requires `int64[]` in the canonical encoding (`v_obf_to_contract`: ×10⁶, padded to 128)
 - **CORS**: Permissive (any origin, any method, any header) for browser apps
 - **No `--vk-hex`**: VK and PK are fetched from the registry contract automatically

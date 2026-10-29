@@ -6,7 +6,7 @@ fn main() {
     let pk = std::fs::read("../../../../keep/pk.bin").expect("pk.bin");
     let vk = std::fs::read("../../../../keep/vk.bin").expect("vk.bin");
     let v: Vec<f32> = (0..128).map(|i| (i as f32) / 100.0).collect();
-    let (proof, commitment) = prove_projected(&pk, &v).expect("prove");
+    let (proof, commitment) = prove_projected(&pk, &v, &hus_sdk::proof_binding(b"husfix-owner", b"husfix-challenge")).expect("prove");
     let v_obf = v_obf_to_contract(&v);
     let mut bad_v = v_obf.clone();
     bad_v[0] += 1;
@@ -21,6 +21,6 @@ fn main() {
     std::fs::write("good.bin", enc(&v_obf)).unwrap();
     std::fs::write("bad.bin", enc(&bad_v)).unwrap();
     println!("proof {} B, args {} B", proof.len(), enc(&v_obf).len());
-    println!("native verify good: {:?}", verify_projected(&vk, &proof, &commitment, &v_obf));
-    println!("native verify bad:  {:?}", verify_projected(&vk, &proof, &commitment, &bad_v));
+    println!("native verify good: {:?}", verify_projected(&vk, &proof, &commitment, &v_obf, &hus_sdk::proof_binding(b"husfix-owner", b"husfix-challenge")));
+    println!("native verify bad:  {:?}", verify_projected(&vk, &proof, &commitment, &bad_v, &hus_sdk::proof_binding(b"husfix-owner", b"husfix-challenge")));
 }

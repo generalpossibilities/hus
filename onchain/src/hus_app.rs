@@ -169,43 +169,44 @@ impl HusApp {
 
     // ── Write methods ──────────────────────────────────────────
 
-    pub async fn submit_commitment(
+    /// Register a vector whose proof the verifier has already checked
+    /// off-chain. Only the key set with `set_verifier` may sign this; the
+    /// proof is stored so anyone can re-check it.
+    pub async fn submit_verified(
         &self,
         commitment_hash: &str,
         v_obf: &[i64],
+        proof: &str,
+        binding: &str,
         modality_id: u8,
         signer: Signer,
     ) -> Result<Value, String> {
         let v_obf_json: Vec<serde_json::Value> = v_obf.iter().map(|v| json!(v)).collect();
         let call_set = CallSet {
-            function_name: "submitCommitment".to_string(),
+            function_name: "submitVerified".to_string(),
             header: None,
             input: Some(json!({
                 "commitmentHash": commitment_hash,
                 "vObf": v_obf_json,
+                "proof": proof,
+                "binding": binding,
                 "modalityId": modality_id,
             })),
         };
         self.send_process_message(call_set, signer).await
     }
 
-    pub async fn submit_with_proof(
+    /// Name the verifier key (signed by the app operator's key).
+    pub async fn set_verifier(
         &self,
-        v_obf: &[i64],
-        proof: &str,
-        commitment: &str,
-        modality_id: u8,
+        verifier_pubkey: &str,
         signer: Signer,
     ) -> Result<ResultOfSendMessage, String> {
-        let v_obf_json: Vec<serde_json::Value> = v_obf.iter().map(|v| json!(v)).collect();
         let call_set = CallSet {
-            function_name: "submitWithProof".to_string(),
+            function_name: "setVerifier".to_string(),
             header: None,
             input: Some(json!({
-                "vObf": v_obf_json,
-                "proof": proof,
-                "commitment": commitment,
-                "modalityId": modality_id,
+                "verifierPubkey": verifier_pubkey,
             })),
         };
         self.send_message(call_set, signer).await
@@ -274,6 +275,7 @@ impl HusApp {
                 .parse()
                 .map_err(|_| "invalid timestamp")?,
             proof: output["proof"].as_str().unwrap_or("").to_string(),
+            binding: output["binding"].as_str().unwrap_or("").to_string(),
         })
     }
 
@@ -393,4 +395,6 @@ pub struct RegistrationInfo {
     pub modality_id: u8,
     pub timestamp: u32,
     pub proof: String,
+    /// proof_binding(owner key, challenge) as a uint256 string.
+    pub binding: String,
 }

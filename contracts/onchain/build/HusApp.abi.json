@@ -8,7 +8,8 @@
 			"inputs": [
 				{"name":"vk","type":"bytes"},
 				{"name":"seedHash","type":"uint256"},
-				{"name":"modalityIds","type":"uint8[]"}
+				{"name":"modalityIds","type":"uint8[]"},
+				{"name":"ownerPubkey","type":"uint256"}
 			],
 			"outputs": [
 			]
@@ -31,6 +32,14 @@
 			]
 		},
 		{
+			"name": "setVerifier",
+			"inputs": [
+				{"name":"verifierPubkey","type":"uint256"}
+			],
+			"outputs": [
+			]
+		},
+		{
 			"name": "deposit",
 			"inputs": [
 				{"name":"paymentId","type":"uint256"}
@@ -39,23 +48,12 @@
 			]
 		},
 		{
-			"name": "submitWithProof",
-			"inputs": [
-				{"name":"vObf","type":"int64[]"},
-				{"name":"proof","type":"bytes"},
-				{"name":"commitment","type":"bytes"},
-				{"name":"modalityId","type":"uint8"}
-			],
-			"outputs": [
-				{"name":"isUnique","type":"bool"},
-				{"name":"score","type":"uint8"}
-			]
-		},
-		{
-			"name": "submitCommitment",
+			"name": "submitVerified",
 			"inputs": [
 				{"name":"commitmentHash","type":"fixedbytes32"},
 				{"name":"vObf","type":"int64[]"},
+				{"name":"proof","type":"bytes"},
+				{"name":"binding","type":"uint256"},
 				{"name":"modalityId","type":"uint8"}
 			],
 			"outputs": [
@@ -82,7 +80,8 @@
 				{"name":"vObf","type":"int64[]"},
 				{"name":"modalityId","type":"uint8"},
 				{"name":"timestamp","type":"uint32"},
-				{"name":"proof","type":"bytes"}
+				{"name":"proof","type":"bytes"},
+				{"name":"binding","type":"uint256"}
 			]
 		},
 		{
@@ -91,6 +90,14 @@
 			],
 			"outputs": [
 				{"name":"value0","type":"uint32"}
+			]
+		},
+		{
+			"name": "getVerifier",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"value0","type":"uint256"}
 			]
 		},
 		{
@@ -197,6 +204,14 @@
 			],
 			"outputs": [
 			]
+		},
+		{
+			"name": "VerifierUpdated",
+			"inputs": [
+				{"name":"verifierPubkey","type":"uint256"}
+			],
+			"outputs": [
+			]
 		}
 	],
 	"fields": [
@@ -207,10 +222,12 @@
 		{"init":true,"name":"appId","type":"uint256"},
 		{"init":false,"name":"_vk","type":"bytes"},
 		{"init":false,"name":"_seedHash","type":"uint256"},
+		{"init":false,"name":"_ownerPubkey","type":"uint256"},
+		{"init":false,"name":"_verifierPubkey","type":"uint256"},
 		{"init":false,"name":"_appVersion","type":"uint32"},
 		{"init":false,"name":"_registrationCount","type":"uint32"},
 		{"init":false,"name":"_seenCommitments","type":"map(uint256,bool)"},
-		{"components":[{"name":"commitmentHash","type":"fixedbytes32"},{"name":"vObf","type":"int64[]"},{"name":"modalityId","type":"uint8"},{"name":"timestamp","type":"uint32"},{"name":"proof","type":"bytes"}],"init":false,"name":"_registrations","type":"tuple[]"},
+		{"components":[{"name":"commitmentHash","type":"fixedbytes32"},{"name":"vObf","type":"int64[]"},{"name":"modalityId","type":"uint8"},{"name":"timestamp","type":"uint32"},{"name":"proof","type":"bytes"},{"name":"binding","type":"uint256"}],"init":false,"name":"_registrations","type":"tuple[]"},
 		{"components":[{"name":"modalityId","type":"uint8"},{"name":"projDim","type":"uint8"},{"name":"minScore","type":"uint8"}],"init":false,"name":"_modalityConfigList","type":"tuple[]"},
 		{"components":[{"name":"modalityId","type":"uint8"},{"name":"projDim","type":"uint8"},{"name":"minScore","type":"uint8"}],"init":false,"name":"_modalityConfigMap","type":"map(uint8,tuple)"}
 	]

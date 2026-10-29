@@ -3,7 +3,7 @@ pragma AbiHeader expire;
 pragma AbiHeader pubkey;
 
 contract HusApp {
-    string constant version = "2.5.0";
+    string constant version = "2.6.0";
 
     int256 constant THRESHOLD_SCALED = 5000000;
     uint8 constant MIN_MODALITIES = 2;
@@ -16,6 +16,9 @@ contract HusApp {
         uint8 modalityId;
         uint32 timestamp;
         bytes proof;
+        // Who the proof was made for: proof_binding(owner key, challenge),
+        // the circuit's last public input. Needed to re-check the proof.
+        uint256 binding;
     }
 
     struct ModalityConfig {
@@ -29,6 +32,10 @@ contract HusApp {
 
     bytes private _vk;
     uint256 private _seedHash;
+    // The app operator's key, and the key of the verifier that checks proofs
+    // off-chain and is the only one allowed to register (see submitVerified).
+    uint256 private _ownerPubkey;
+    uint256 private _verifierPubkey;
     uint32 private _appVersion;
     uint32 private _registrationCount;
     mapping(uint256 => bool) private _seenCommitments;
@@ -51,18 +58,23 @@ contract HusApp {
 
     event UpgradeExecuted(uint32 newVersion);
     event VkUpdated();
+    event VerifierUpdated(uint256 verifierPubkey);
 
     // ── Constructor ─────────────────────────────────────────────
 
     constructor(
         bytes vk,
         uint256 seedHash,
-        uint8[] modalityIds
+        uint8[] modalityIds,
+        uint256 ownerPubkey
     ) {
-        tvm.accept();
+        require(msg.sender == husRegistry, 200);
+        require(ownerPubkey != 0, 108);
         require(modalityIds.length >= MIN_MODALITIES, 104);
+        tvm.accept();
         _vk = vk;
         _seedHash = seedHash;
+        _ownerPubkey = ownerPubkey;
         _appVersion = 1;
         _registrationCount = 0;
         for (uint8 i = 0; i < modalityIds.length; i++) {
@@ -75,10 +87,12 @@ contract HusApp {
 
     // ── Registry-controlled upgrade ─────────────────────────────
 
+    // Checks come before tvm.accept(): an external message that fails a check
+    // must not be paid for by the contract.
     function upgradeCode(TvmCell newCode, bytes newVk) external {
-        tvm.accept();
         require(msg.sender == husRegistry, 200);
         require(newCode.toSlice().bits() != 0, 201);
+        tvm.accept();
 
         _vk = newVk;
         _appVersion++;
@@ -90,10 +104,18 @@ contract HusApp {
     }
 
     function setVk(bytes newVk) external {
-        tvm.accept();
         require(msg.sender == husRegistry, 200);
+        tvm.accept();
         _vk = newVk;
         emit VkUpdated();
+    }
+
+    /// The operator names the verifier key. Zero turns registration off.
+    function setVerifier(uint256 verifierPubkey) external {
+        require(msg.pubkey() == _ownerPubkey, 101);
+        tvm.accept();
+        _verifierPubkey = verifierPubkey;
+        emit VerifierUpdated(verifierPubkey);
     }
 
     // ── Deposit ─────────────────────────────────────────────────
@@ -107,35 +129,30 @@ contract HusApp {
 
     // ── Submission methods ─────────────────────────────────────
 
-    function submitWithProof(
-        int64[] vObf,
-        bytes proof,
-        bytes commitment,
-        uint8 modalityId
-    ) external returns (bool isUnique, uint8 score) {
-        tvm.accept();
-
-        _assertModalityConfig(modalityId, uint32(vObf.length));
-
-        bool proofOk = gosh.vergrth16(commitment, proof);
-        require(proofOk, 130);
-
-        (isUnique, score) = _register(tvm.hash(commitment), vObf, proof, modalityId);
-    }
-
-    function submitCommitment(
+    // Hybrid verification. TVM's gosh.vergrth16 only accepts the network's
+    // built-in (ZkLogin) verifying keys, not this circuit's, so the proof can't
+    // be checked here. The app's verifier checks it off-chain against all the
+    // public inputs (commitment and every vObf element) and signs this call;
+    // nobody else can register. The proof is stored so anyone can re-check it
+    // against the stored vObf. On-chain verification lives in the AVM
+    // verifier (avm/groth16-avm) for networks that can run it.
+    //
+    // The old submitWithProof (claimed an on-chain check it couldn't make) and
+    // submitCommitment (no proof, anyone) are gone.
+    function submitVerified(
         bytes32 commitmentHash,
         int64[] vObf,
+        bytes proof,
+        uint256 binding,
         uint8 modalityId
     ) external returns (bool isUnique, uint8 score) {
+        require(_verifierPubkey != 0 && msg.pubkey() == _verifierPubkey, 109);
+        require(proof.length > 0, 133);
+        _assertModalityConfig(modalityId, uint32(vObf.length));
+        require(!_seenCommitments[uint256(commitmentHash)], 114);
         tvm.accept();
 
-        _assertModalityConfig(modalityId, uint32(vObf.length));
-
-        uint256 commKey = uint256(commitmentHash);
-        require(!_seenCommitments[commKey], 114);
-
-        (isUnique, score) = _registerInternal(uint256(commitmentHash), vObf, modalityId);
+        (isUnique, score) = _register(uint256(commitmentHash), vObf, proof, binding, modalityId);
     }
 
     // ── Internal ──────────────────────────────────────────────
@@ -144,6 +161,7 @@ contract HusApp {
         uint256 commKey,
         int64[] vObf,
         bytes proof,
+        uint256 binding,
         uint8 modalityId
     ) internal returns (bool isUnique, uint8 score) {
         require(!_seenCommitments[commKey], 114);
@@ -174,6 +192,7 @@ contract HusApp {
             r.modalityId = modalityId;
             r.timestamp = uint32(block.timestamp);
             r.proof = proof;
+            r.binding = binding;
             uint32 vlen = uint32(vObf.length);
             for (uint32 j = 0; j < vlen; j++) {
                 r.vObf.push(vObf[j]);
@@ -185,14 +204,6 @@ contract HusApp {
 
         emit UniquenessResult(appId, isUnique, score, modalityId);
         return (isUnique, score);
-    }
-
-    function _registerInternal(
-        uint256 commKey,
-        int64[] vObf,
-        uint8 modalityId
-    ) internal returns (bool isUnique, uint8 score) {
-        return _register(commKey, vObf, "", modalityId);
     }
 
     function _assertModalityConfig(uint8 modalityId, uint32 vObfLen) internal view {
@@ -246,15 +257,20 @@ contract HusApp {
         int64[] vObf,
         uint8 modalityId,
         uint32 timestamp,
-        bytes proof
+        bytes proof,
+        uint256 binding
     ) {
         require(index < _registrationCount, 120);
         Registration r = _registrations[index];
-        return (r.commitmentHash, r.vObf, r.modalityId, r.timestamp, r.proof);
+        return (r.commitmentHash, r.vObf, r.modalityId, r.timestamp, r.proof, r.binding);
     }
 
     function getRegistrationCount() external view returns (uint32) {
         return _registrationCount;
+    }
+
+    function getVerifier() external view returns (uint256) {
+        return _verifierPubkey;
     }
 
     function getAppInfo() external view returns (

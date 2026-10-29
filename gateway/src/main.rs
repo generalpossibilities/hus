@@ -73,9 +73,37 @@ struct ProjectResponse {
     v_obf: Vec<f32>,
 }
 
+/// Who a proof is for (HUS S3): the key that will control the account and
+/// the challenge the integrating app issued for this attempt, both hex. The
+/// proof is bound to `hus_sdk::proof_binding(owner_pubkey, challenge)`, so
+/// it can't be replayed with another challenge or used for another key.
+#[derive(Deserialize)]
+struct ProofFor {
+    owner_pubkey: String,
+    challenge: String,
+}
+
+impl ProofFor {
+    fn binding(&self) -> Result<[u8; 32], AppError> {
+        let key = hex::decode(self.owner_pubkey.trim_start_matches("0x"))
+            .map_err(|e| AppError(format!("owner_pubkey hex: {e}")))?;
+        let challenge = hex::decode(self.challenge.trim_start_matches("0x"))
+            .map_err(|e| AppError(format!("challenge hex: {e}")))?;
+        if key.is_empty() || key.len() > 128 {
+            return Err(AppError("owner_pubkey must be 1..=128 bytes".into()));
+        }
+        if challenge.len() < 16 || challenge.len() > 64 {
+            return Err(AppError("challenge must be 16..=64 bytes".into()));
+        }
+        Ok(hus_sdk::proof_binding(&key, &challenge))
+    }
+}
+
 #[derive(Deserialize)]
 struct ProveRequest {
     v_obf: Vec<f32>,
+    #[serde(flatten)]
+    proof_for: ProofFor,
 }
 
 #[derive(Serialize)]
@@ -89,6 +117,8 @@ struct VerifyRequest {
     proof: String,
     commitment: String,
     v_obf: Vec<f32>,
+    #[serde(flatten)]
+    proof_for: ProofFor,
 }
 
 #[derive(Serialize)]
@@ -119,20 +149,23 @@ struct MessageResponse {
 #[derive(Deserialize)]
 struct SubmitRequest {
     app_address: String,
-    commitment_hash: String,
+    /// Poseidon commitment, 32 bytes hex.
+    commitment: String,
+    /// Canonical fixed-point vector (`hus_sdk::v_obf_to_contract`), 128 values.
     v_obf: Vec<i64>,
+    /// Groth16 proof, hex.
+    proof: String,
     modality_id: u8,
-    wallet_keys: WalletKeys,
+    #[serde(flatten)]
+    proof_for: ProofFor,
 }
 
-#[derive(Deserialize)]
-struct SubmitWithProofRequest {
-    app_address: String,
-    v_obf: Vec<i64>,
-    proof: String,
-    commitment: String,
-    modality_id: u8,
-    wallet_keys: WalletKeys,
+/// The binding as a big-endian 256-bit number (the contract's uint256), from
+/// the field element's little-endian encoding.
+fn binding_be(binding: &[u8; 32]) -> [u8; 32] {
+    let mut be = *binding;
+    be.reverse();
+    be
 }
 
 #[derive(Deserialize)]
@@ -291,7 +324,7 @@ async fn prove_handler(
         )));
     }
     let (proof_bytes, commitment) =
-        hus_sdk::prover::prove_projected(&state.pk, &req.v_obf)
+        hus_sdk::prover::prove_projected(&state.pk, &req.v_obf, &req.proof_for.binding()?)
             .map_err(|e| AppError(e.to_string()))?;
     Ok(Json(ProveResponse {
         proof: hex::encode(&proof_bytes),
@@ -311,6 +344,7 @@ async fn verify_handler(
         &proof_bytes,
         &commitment,
         &hus_sdk::v_obf_to_contract(&req.v_obf),
+        &req.proof_for.binding()?,
     )
     .map_err(|e| AppError(e.to_string()))?;
     Ok(Json(VerifyResponse { valid }))
@@ -332,15 +366,19 @@ async fn register_app_handler(
     }))
 }
 
-async fn submit_with_proof_handler(
+/// Off-chain verification, then registration. The proof must verify against
+/// the commitment and every v_obf element (the circuit's public inputs);
+/// only then does the gateway sign `submitVerified` with its own key, which
+/// the app operator has named as the app's verifier. Callers never send keys.
+async fn submit_handler(
     State(state): State<Arc<AppState>>,
-    Json(req): Json<SubmitWithProofRequest>,
+    Json(req): Json<SubmitRequest>,
 ) -> Result<Json<MessageResponse>, AppError> {
-    // C1: the proof binds the v_obf vector (public inputs). Verify off-chain
-    // before relaying — because `gosh.vergrth16` is blocked on Shellnet, the
-    // contract itself cannot check the proof, so this is the purchase point:
-    // a proof made for one v_obf cannot be used with a different one.
+    if req.v_obf.len() != MAX_PROJ_DIM {
+        return Err(AppError(format!("v_obf must have {MAX_PROJ_DIM} elements")));
+    }
     let commitment = parse_hex_32(&req.commitment)?;
+    let binding = req.proof_for.binding()?;
     let proof_bytes = hex::decode(&req.proof)
         .map_err(|e| AppError(format!("hex decode: {e}")))?;
     let valid = hus_sdk::prover::verify_projected(
@@ -348,38 +386,28 @@ async fn submit_with_proof_handler(
         &proof_bytes,
         &commitment,
         &req.v_obf,
+        &binding,
     )
     .map_err(|e| AppError(e.to_string()))?;
     if !valid {
         return Err(AppError("proof does not match the submitted v_obf".into()));
     }
 
-    let signer = make_signer(req.wallet_keys);
-    let app = hus_onchain::HusApp::new(Arc::clone(&state.client_context), &req.app_address);
-    let result = app
-        .submit_with_proof(&req.v_obf, &req.proof, &req.commitment, req.modality_id, signer)
-        .await
-        .map_err(|e| AppError(e))?;
-    Ok(Json(MessageResponse {
-        message_hash: result.message_hash,
-        is_unique: None,
-    }))
-}
-
-async fn submit_handler(
-    State(state): State<Arc<AppState>>,
-    Json(req): Json<SubmitRequest>,
-) -> Result<Json<MessageResponse>, AppError> {
-    let signer = make_signer(req.wallet_keys);
     let app = hus_onchain::HusApp::new(Arc::clone(&state.client_context), &req.app_address);
     let output = app
-        .submit_commitment(&req.commitment_hash, &req.v_obf, req.modality_id, signer)
+        .submit_verified(
+            &format!("0x{}", hex::encode(commitment)),
+            &req.v_obf,
+            &hex::encode(&proof_bytes),
+            &format!("0x{}", hex::encode(binding_be(&binding))),
+            req.modality_id,
+            state.protocol_signer.clone(),
+        )
         .await
         .map_err(|e| AppError(e))?;
-    let is_unique = output["isUnique"].as_bool();
     Ok(Json(MessageResponse {
         message_hash: None,
-        is_unique,
+        is_unique: output["isUnique"].as_bool(),
     }))
 }
 
@@ -498,7 +526,6 @@ async fn main() {
         .route("/api/v1/verify", post(verify_handler))
         .route("/api/v1/register-app", post(register_app_handler))
         .route("/api/v1/submit", post(submit_handler))
-        .route("/api/v1/submit-with-proof", post(submit_with_proof_handler))
         .route("/api/v1/check", post(check_handler))
         .route("/api/v1/deposit", post(deposit_handler))
         .route("/api/v1/app-info", post(app_info_handler))

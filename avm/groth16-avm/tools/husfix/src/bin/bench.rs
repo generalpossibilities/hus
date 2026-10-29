@@ -11,10 +11,10 @@ fn main() {
     let mut verify_ms = Vec::new();
     for _ in 0..5 {
         let t = Instant::now();
-        let (proof, comm) = prove_projected(&pk, &v).unwrap();
+        let (proof, comm) = prove_projected(&pk, &v, &hus_sdk::proof_binding(b"husfix-owner", b"husfix-challenge")).unwrap();
         prove_ms.push(t.elapsed().as_secs_f64() * 1000.0);
         let t = Instant::now();
-        assert!(verify_projected(&vk, &proof, &comm, &v_obf).unwrap());
+        assert!(verify_projected(&vk, &proof, &comm, &v_obf, &hus_sdk::proof_binding(b"husfix-owner", b"husfix-challenge")).unwrap());
         verify_ms.push(t.elapsed().as_secs_f64() * 1000.0);
     }
     let s = |x: &Vec<f64>| { let mut y = x.clone(); y.sort_by(|a, b| a.partial_cmp(b).unwrap()); (y[0], y[y.len() / 2], y[y.len() - 1]) };

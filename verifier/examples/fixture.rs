@@ -9,12 +9,18 @@ use hus_sdk::prover::prove_projected;
 fn main() {
     let pk_bytes = std::fs::read("../keep/pk.bin").expect("keep/pk.bin");
     let v_obf: Vec<f32> = (0..MAX_PROJ_DIM).map(|i| (i as f32) / 100.0).collect();
-    let (proof, commitment) = prove_projected(&pk_bytes, &v_obf).expect("prove failed");
+    let binding = hus_sdk::proof_binding(b"fixture-owner-key", b"fixture-challenge");
+    let (proof, commitment) = prove_projected(&pk_bytes, &v_obf, &binding).expect("prove failed");
 
-    let mut args = Vec::with_capacity(4 + proof.len() + 32);
+    // Same layout as verify(): proof, commitment, v_obf, binding.
+    let mut args = Vec::with_capacity(4 + proof.len() + 32 + MAX_PROJ_DIM * 8 + 32);
     args.extend_from_slice(&(proof.len() as u32).to_le_bytes());
     args.extend_from_slice(&proof);
     args.extend_from_slice(&commitment);
+    for v in hus_sdk::v_obf_to_contract(&v_obf) {
+        args.extend_from_slice(&v.to_le_bytes());
+    }
+    args.extend_from_slice(&binding);
 
     std::fs::write("assets/fixtures.bin", &args).expect("write bin fixture");
 

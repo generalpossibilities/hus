@@ -1,7 +1,7 @@
 .fragment _assertModalityConfig_f6a73683_internal, {
-	.loc contracts/onchain/HusApp.sol, 170
+	.loc contracts/onchain/HusApp.sol, 210
 	SWAP
-	GETGLOB 19
+	GETGLOB 21
 	PUSHINT 8
 	DICTUGET
 	IFREFELSEREF
@@ -17,12 +17,12 @@
 		BLKPUSH 2, 0
 		TRIPLE
 	}
-	.loc contracts/onchain/HusApp.sol, 171
+	.loc contracts/onchain/HusApp.sol, 211
 	DUP
 	SECOND
 	GTINT 0
 	THROWIFNOT 131
-	.loc contracts/onchain/HusApp.sol, 172
+	.loc contracts/onchain/HusApp.sol, 212
 	SECOND
 	EQUAL
 	THROWIFNOT 132
@@ -30,14 +30,14 @@
 }
 
 .fragment _calculateScore_d2e00d3b_internal, {
-	.loc contracts/onchain/HusApp.sol, 201
+	.loc contracts/onchain/HusApp.sol, 241
 	PUSHREF {
 		.blob x64697374616e6365206d757374206265206e6f6e2d6e65676174697665
 	}
 	OVER
 	GTINT -1
 	THROWARGIFNOT 100
-	.loc contracts/onchain/HusApp.sol, 202
+	.loc contracts/onchain/HusApp.sol, 242
 	DUP
 	PUSHINT 5000000
 	GEQ
@@ -46,16 +46,16 @@
 		PUSHINT 0
 	}
 	IFJMP
-	.loc contracts/onchain/HusApp.sol, 203
+	.loc contracts/onchain/HusApp.sol, 243
 	PUSHINT 5000000
 	SUBR
 	FITS 256
 	UFITS 256
 	MULCONST 100
-	.loc contracts/onchain/HusApp.sol, 204
+	.loc contracts/onchain/HusApp.sol, 244
 	PUSHINT 5000000
 	DIV
-	.loc contracts/onchain/HusApp.sol, 205
+	.loc contracts/onchain/HusApp.sol, 245
 	DUP
 	GTINT 100
 	PUSHCONT {
@@ -63,13 +63,13 @@
 		PUSHINT 100
 	}
 	IFJMP
-	.loc contracts/onchain/HusApp.sol, 206
+	.loc contracts/onchain/HusApp.sol, 246
 	UFITS 8
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
 .fragment _isqrt_cf51539c_internal, {
-	.loc contracts/onchain/HusApp.sol, 188
+	.loc contracts/onchain/HusApp.sol, 228
 	DUP
 	LESSINT 1
 	PUSHCONT {
@@ -77,31 +77,31 @@
 		PUSHINT 0
 	}
 	IFJMP
-	.loc contracts/onchain/HusApp.sol, 189
+	.loc contracts/onchain/HusApp.sol, 229
 	UFITS 256
-	.loc contracts/onchain/HusApp.sol, 190
+	.loc contracts/onchain/HusApp.sol, 230
 	DUP
 	LESSINT 2
 	PUSHCONT {
 		FITS 256
 	}
 	IFJMP
-	.loc contracts/onchain/HusApp.sol, 191
+	.loc contracts/onchain/HusApp.sol, 231
 	DUP
 	INC
 	RSHIFT 1
-	.loc contracts/onchain/HusApp.sol, 192
+	.loc contracts/onchain/HusApp.sol, 232
 	OVER
-	.loc contracts/onchain/HusApp.sol, 193
+	.loc contracts/onchain/HusApp.sol, 233
 	PUSHCONT {
 		DUP2
 		LESS
 	}
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 194
+		.loc contracts/onchain/HusApp.sol, 234
 		DROP
 		PUSH3 S0, S1, S0
-		.loc contracts/onchain/HusApp.sol, 195
+		.loc contracts/onchain/HusApp.sol, 235
 		DIV
 		PUSH S2
 		ADD
@@ -110,31 +110,31 @@
 		.loc contracts/onchain/HusApp.sol, 0
 	}
 	WHILE
-	.loc contracts/onchain/HusApp.sol, 197
+	.loc contracts/onchain/HusApp.sol, 237
 	FITS 256
 	BLKDROP2 2, 1
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
 .fragment _l2Distance_f49ad275_internal, {
-	.loc contracts/onchain/HusApp.sol, 178
+	.loc contracts/onchain/HusApp.sol, 218
 	OVER
 	FIRST
 	OVER
 	FIRST
 	EQUAL
 	THROWIFNOT 150
-	.loc contracts/onchain/HusApp.sol, 179
+	.loc contracts/onchain/HusApp.sol, 219
 	PUSHINT 0
 	DUP
-	.loc contracts/onchain/HusApp.sol, 180
+	.loc contracts/onchain/HusApp.sol, 220
 	PUSHCONT {
 		PUSH2 S0, S3
 		FIRST
 		LESS
 	}
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 181
+		.loc contracts/onchain/HusApp.sol, 221
 		PUSH2 S0, S3
 		SECOND
 		PUSHINT 32
@@ -149,7 +149,7 @@
 		PLDI 64
 		SUB
 		FITS 256
-		.loc contracts/onchain/HusApp.sol, 182
+		.loc contracts/onchain/HusApp.sol, 222
 		DUP
 		MUL
 		FITS 256
@@ -157,14 +157,14 @@
 		ADD
 		FITS 256
 		POP S2
-		.loc contracts/onchain/HusApp.sol, 180
+		.loc contracts/onchain/HusApp.sol, 220
 		INC
 		UFITS 32
 		.loc contracts/onchain/HusApp.sol, 0
 	}
 	WHILE
 	DROP
-	.loc contracts/onchain/HusApp.sol, 184
+	.loc contracts/onchain/HusApp.sol, 224
 	CALLREF {
 		.inline _isqrt_cf51539c_internal
 	}
@@ -172,12 +172,12 @@
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
-.fragment _register_c18385af_internal, {
-	.loc contracts/onchain/HusApp.sol, 114
+.fragment _register_2606f3d2_internal, {
+	.loc contracts/onchain/HusApp.sol, 160
 	PUSHINT 0
-	.loc contracts/onchain/HusApp.sol, 120
-	PUSH S4
-	GETGLOB 16
+	.loc contracts/onchain/HusApp.sol, 167
+	PUSH S5
+	GETGLOB 18
 	PUSHPOW2 8
 	DICTUGET
 	ZEROSWAPIFNOT
@@ -185,21 +185,21 @@
 		PLDI 1
 	}
 	IF
-	THROWIF 113
-	.loc contracts/onchain/HusApp.sol, 122
+	THROWIF 114
+	.loc contracts/onchain/HusApp.sol, 169
 	PUSHPOW2DEC 255
-	.loc contracts/onchain/HusApp.sol, 123
-	GETGLOB 15
-	.loc contracts/onchain/HusApp.sol, 124
+	.loc contracts/onchain/HusApp.sol, 170
+	GETGLOB 17
+	.loc contracts/onchain/HusApp.sol, 171
 	PUSHINT 0
 	PUSHCONT {
 		PUSH2 S0, S1
 		LESS
 	}
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 125
+		.loc contracts/onchain/HusApp.sol, 172
 		DUP
-		GETGLOB 17
+		GETGLOB 19
 		SECOND
 		PUSHINT 32
 		DICTUGET
@@ -214,16 +214,17 @@
 			LDU 8
 			LDU 32
 			LDREF
+			LDU 256
 			ENDS
-			TUPLE 5
+			TUPLE 6
 		}
 		THIRD
 		PUSH S5
 		EQUAL
 		PUSHCONT {
-			.loc contracts/onchain/HusApp.sol, 126
-			PUSH2 S6, S0
-			GETGLOB 17
+			.loc contracts/onchain/HusApp.sol, 173
+			PUSH2 S7, S0
+			GETGLOB 19
 			SECOND
 			PUSHINT 32
 			DICTUGET
@@ -238,18 +239,19 @@
 				LDU 8
 				LDU 32
 				LDREF
+				LDU 256
 				ENDS
-				TUPLE 5
+				TUPLE 6
 			}
 			SECOND
 			CALLREF {
 				.inline _l2Distance_f49ad275_internal
 			}
-			.loc contracts/onchain/HusApp.sol, 127
+			.loc contracts/onchain/HusApp.sol, 174
 			PUSH2 S0, S3
 			LESS
 			PUSHCONT {
-				.loc contracts/onchain/HusApp.sol, 128
+				.loc contracts/onchain/HusApp.sol, 175
 				DUP
 				POP S4
 				.loc contracts/onchain/HusApp.sol, 0
@@ -259,23 +261,23 @@
 			DROP
 		}
 		IF
-		.loc contracts/onchain/HusApp.sol, 124
+		.loc contracts/onchain/HusApp.sol, 171
 		INC
 		UFITS 32
 		.loc contracts/onchain/HusApp.sol, 0
 	}
 	WHILE
 	DROP
-	.loc contracts/onchain/HusApp.sol, 133
+	.loc contracts/onchain/HusApp.sol, 180
 	OVER
 	PUSHPOW2DEC 255
 	EQUAL
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 134
+		.loc contracts/onchain/HusApp.sol, 181
 		PUSHINT 100
 	}
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 136
+		.loc contracts/onchain/HusApp.sol, 183
 		OVER
 		CALLREF {
 			.inline _calculateScore_d2e00d3b_internal
@@ -283,9 +285,9 @@
 	}
 	IFELSE
 	POP S3
-	.loc contracts/onchain/HusApp.sol, 139
+	.loc contracts/onchain/HusApp.sol, 186
 	PUSH S3
-	GETGLOB 19
+	GETGLOB 21
 	PUSHINT 8
 	DICTUGET
 	IFREFELSEREF
@@ -301,7 +303,7 @@
 		BLKPUSH 2, 0
 		TRIPLE
 	}
-	.loc contracts/onchain/HusApp.sol, 140
+	.loc contracts/onchain/HusApp.sol, 187
 	ROT
 	PUSHPOW2DEC 255
 	EQUAL
@@ -310,9 +312,9 @@
 	LESS
 	OR
 	XC2PU S2, S2, S2
-	.loc contracts/onchain/HusApp.sol, 142
+	.loc contracts/onchain/HusApp.sol, 189
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 144
+		.loc contracts/onchain/HusApp.sol, 191
 		PUSHINT 0
 		DUP
 		NULL
@@ -321,33 +323,37 @@
 		DUP
 		PUSHREF {
 		}
-		TUPLE 5
-		PUSH S7
+		PUSHINT 0
+		TUPLE 6
+		PUSH S8
 		SETINDEX 0
-		.loc contracts/onchain/HusApp.sol, 145
+		.loc contracts/onchain/HusApp.sol, 192
 		PUSH S4
 		SETINDEX 2
-		.loc contracts/onchain/HusApp.sol, 146
+		.loc contracts/onchain/HusApp.sol, 193
 		NOW
 		SETINDEX 3
-		.loc contracts/onchain/HusApp.sol, 147
-		PUSH S5
-		SETINDEX 4
-		.loc contracts/onchain/HusApp.sol, 148
+		.loc contracts/onchain/HusApp.sol, 194
 		PUSH S6
+		SETINDEX 4
+		.loc contracts/onchain/HusApp.sol, 195
+		PUSH S5
+		SETINDEX 5
+		.loc contracts/onchain/HusApp.sol, 196
+		PUSH S7
 		FIRST
 		UFITS 32
-		.loc contracts/onchain/HusApp.sol, 149
+		.loc contracts/onchain/HusApp.sol, 197
 		PUSHINT 0
 		PUSHCONT {
 			PUSH2 S0, S1
 			LESS
 		}
 		PUSHCONT {
-			.loc contracts/onchain/HusApp.sol, 150
+			.loc contracts/onchain/HusApp.sol, 198
 			PUSH2 S2, S2
 			SECOND
-			PUSH2 S2, S10
+			PUSH2 S2, S11
 			SECOND
 			PUSHINT 32
 			DICTUGET
@@ -365,28 +371,28 @@
 			PAIR
 			SETINDEX 1
 			POP S3
-			.loc contracts/onchain/HusApp.sol, 149
+			.loc contracts/onchain/HusApp.sol, 197
 			INC
 			UFITS 32
 			.loc contracts/onchain/HusApp.sol, 0
 		}
 		WHILE
 		DROP2
-		.loc contracts/onchain/HusApp.sol, 152
-		PUSH S7
-		GETGLOB 16
+		.loc contracts/onchain/HusApp.sol, 200
+		PUSH S8
+		GETGLOB 18
 		NEWC
 		STONE
 		ROTREV
 		PUSHPOW2 8
 		DICTUSETB
-		SETGLOB 16
-		.loc contracts/onchain/HusApp.sol, 153
-		GETGLOB 17
+		SETGLOB 18
+		.loc contracts/onchain/HusApp.sol, 201
+		GETGLOB 19
 		SWAP
 		CALLREF {
-			UNTUPLE 5
-			REVERSE 5, 0
+			UNTUPLE 6
+			REVERSE 6, 0
 			NEWC
 			STU 256
 			SWAP
@@ -397,6 +403,7 @@
 			STU 8
 			STU 32
 			STREF
+			STU 256
 		}
 		SWAP
 		UNPAIR
@@ -406,16 +413,16 @@
 		PUSHINT 32
 		DICTUSETB
 		PAIR
-		SETGLOB 17
-		.loc contracts/onchain/HusApp.sol, 154
+		SETGLOB 19
+		.loc contracts/onchain/HusApp.sol, 202
 		DUP
 		INC
 		UFITS 32
-		SETGLOB 15
+		SETGLOB 17
 		.loc contracts/onchain/HusApp.sol, 0
 	}
 	IF
-	.loc contracts/onchain/HusApp.sol, 157
+	.loc contracts/onchain/HusApp.sol, 205
 	XCPU2 S3, S1, S2
 	BLKDROP2 1, 5
 	GETGLOB 11
@@ -429,20 +436,8 @@
 	ENDC
 	PUSHINT 0
 	SENDRAWMSG
-	.loc contracts/onchain/HusApp.sol, 158
-	BLKDROP2 3, 2
-	.loc contracts/onchain/HusApp.sol, 0
-}
-
-.fragment _registerInternal_c6f52e3b_internal, {
-	.loc contracts/onchain/HusApp.sol, 166
-	ROTREV
-	PUSHREF {
-	}
-	ROLL 3
-	CALLREF {
-		.inline _register_c18385af_internal
-	}
+	.loc contracts/onchain/HusApp.sol, 206
+	BLKDROP2 4, 2
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
@@ -459,17 +454,19 @@
 	LDU 256
 	LDREF
 	LDU 256
-	LDU 32
-	LDU 32
-	LDDICT
-	LDU 32
-	LDDICT
-	ROTREV
-	PAIR
-	SWAP
+	LDU 256
 	LDREF
 	ENDS
 	CTOS
+	LDU 256
+	LDU 32
+	LDU 32
+	LDDICT
+	LDU 32
+	LDDICT
+	ROTREV
+	PAIR
+	SWAP
 	LDU 32
 	LDDICT
 	ROTREV
@@ -477,6 +474,8 @@
 	SWAP
 	LDDICT
 	ENDS
+	SETGLOB 21
+	SETGLOB 20
 	SETGLOB 19
 	SETGLOB 18
 	SETGLOB 17
@@ -514,6 +513,8 @@
 }
 
 .fragment c7_to_c4, {
+	GETGLOB 21
+	GETGLOB 20
 	GETGLOB 19
 	GETGLOB 18
 	GETGLOB 17
@@ -531,10 +532,14 @@
 	STU 64
 	STONE
 	STSLICE
-	ROLLREV 9
+	ROLLREV 11
 	NEWC
 	STU 256
 	STREF
+	STU 256
+	STU 256
+	ROLLREV 7
+	NEWC
 	STU 256
 	STU 32
 	STU 32
@@ -544,8 +549,6 @@
 	XCHG S2
 	STU 32
 	STDICT
-	ROTREV
-	NEWC
 	SWAP
 	UNPAIR
 	XCHG S2
@@ -559,8 +562,8 @@
 }
 
 .fragment checkDuplicate_92aaf3bf_internal, {
-	.loc contracts/onchain/HusApp.sol, 212
-	GETGLOB 16
+	.loc contracts/onchain/HusApp.sol, 252
+	GETGLOB 18
 	PUSHPOW2 8
 	DICTUGET
 	ZEROSWAPIFNOT
@@ -596,7 +599,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 211
+	.loc contracts/onchain/HusApp.sol, 251
 	OVER
 	PUSHCONT {
 		LDREF
@@ -664,27 +667,38 @@
 	ROTREV
 	PAIR
 	SWAP
+	LDU 256
 	ENDS
-	.loc contracts/onchain/HusApp.sol, 55
-	ACCEPT
-	.loc contracts/onchain/HusApp.sol, 56
+	.loc contracts/onchain/HusApp.sol, 71
+	GETGLOB 9
+	GETGLOB 10
+	SDEQ
+	THROWIFNOT 200
+	.loc contracts/onchain/HusApp.sol, 72
 	DUP
+	THROWIFNOT 108
+	.loc contracts/onchain/HusApp.sol, 73
+	OVER
 	FIRST
 	GTINT 1
 	THROWIFNOT 104
-	.loc contracts/onchain/HusApp.sol, 57
-	ROT
+	.loc contracts/onchain/HusApp.sol, 74
+	ACCEPT
+	.loc contracts/onchain/HusApp.sol, 75
+	ROLL 3
 	SETGLOB 12
-	.loc contracts/onchain/HusApp.sol, 58
-	SWAP
+	.loc contracts/onchain/HusApp.sol, 76
+	ROT
 	SETGLOB 13
-	.loc contracts/onchain/HusApp.sol, 59
-	PUSHINT 1
+	.loc contracts/onchain/HusApp.sol, 77
 	SETGLOB 14
-	.loc contracts/onchain/HusApp.sol, 60
+	.loc contracts/onchain/HusApp.sol, 78
+	PUSHINT 1
+	SETGLOB 16
+	.loc contracts/onchain/HusApp.sol, 79
 	PUSHINT 0
-	SETGLOB 15
-	.loc contracts/onchain/HusApp.sol, 61
+	SETGLOB 17
+	.loc contracts/onchain/HusApp.sol, 80
 	PUSHINT 0
 	PUSHCONT {
 		PUSH2 S0, S1
@@ -692,33 +706,16 @@
 		LESS
 	}
 	PUSHCONT {
-		.loc contracts/onchain/HusApp.sol, 62
+		.loc contracts/onchain/HusApp.sol, 81
 		PUSH2 S0, S1
 		SECOND
 		PUSHINT 32
 		DICTUGET
 		THROWIFNOT 50
-		CALLREF {
-			LDU 8
-			LDU 8
-			LDU 8
-			ENDS
-			TRIPLE
-		}
-		.loc contracts/onchain/HusApp.sol, 63
+		PLDU 8
+		.loc contracts/onchain/HusApp.sol, 82
 		DUP
-		SECOND
-		GTINT 0
-		THROWIFNOT 105
-		.loc contracts/onchain/HusApp.sol, 64
-		DUP
-		THIRD
-		LESSINT 101
-		THROWIFNOT 106
-		.loc contracts/onchain/HusApp.sol, 65
-		DUP
-		FIRST
-		GETGLOB 19
+		GETGLOB 21
 		PUSHINT 8
 		DICTUGET
 		IFREFELSEREF
@@ -736,12 +733,14 @@
 		}
 		SECOND
 		THROWIF 107
-		.loc contracts/onchain/HusApp.sol, 66
+		.loc contracts/onchain/HusApp.sol, 83
 		DUP
-		GETGLOB 19
-		PUSH S2
-		FIRST
-		XCHG S2
+		PUSHPOW2 7
+		PUSHINT 80
+		TRIPLE
+		OVER
+		GETGLOB 21
+		ROT
 		CALLREF {
 			UNTRIPLE
 			XCHG S2
@@ -753,10 +752,13 @@
 		ROTREV
 		PUSHINT 8
 		DICTUSETB
-		SETGLOB 19
-		.loc contracts/onchain/HusApp.sol, 67
-		GETGLOB 18
+		SETGLOB 21
+		.loc contracts/onchain/HusApp.sol, 84
+		GETGLOB 20
 		SWAP
+		PUSHPOW2 7
+		PUSHINT 80
+		TRIPLE
 		CALLREF {
 			UNTRIPLE
 			XCHG S2
@@ -773,8 +775,8 @@
 		PUSHINT 32
 		DICTUSETB
 		PAIR
-		SETGLOB 18
-		.loc contracts/onchain/HusApp.sol, 61
+		SETGLOB 20
+		.loc contracts/onchain/HusApp.sol, 80
 		INC
 		UFITS 8
 		.loc contracts/onchain/HusApp.sol, 0
@@ -789,21 +791,21 @@
 }
 
 .fragment deposit_b6b55f25_internal, {
-	.loc contracts/onchain/HusApp.sol, 72
+	.loc contracts/onchain/HusApp.sol, 124
 	DEPTH
 	ADDCONST -2
 	PICK
 	GTINT 0
-	THROWIFNOT 201
-	.loc contracts/onchain/HusApp.sol, 73
+	THROWIFNOT 202
+	.loc contracts/onchain/HusApp.sol, 125
 	ACCEPT
-	.loc contracts/onchain/HusApp.sol, 74
+	.loc contracts/onchain/HusApp.sol, 126
 	DEPTH
 	ADDCONST -2
 	PICK
 	UFITS 64
 	CNVRTSHELLQ
-	.loc contracts/onchain/HusApp.sol, 75
+	.loc contracts/onchain/HusApp.sol, 127
 	GETPARAM 7
 	FIRST
 	SWAP
@@ -827,7 +829,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 71
+	.loc contracts/onchain/HusApp.sol, 123
 	OVER
 	PUSHCONT {
 		LDREF
@@ -848,11 +850,11 @@
 }
 
 .fragment getAppInfo_e26799ff_internal, {
-	.loc contracts/onchain/HusApp.sol, 237
+	.loc contracts/onchain/HusApp.sol, 282
 	GETGLOB 12
-	GETGLOB 14
+	GETGLOB 16
 	GETGLOB 13
-	GETGLOB 15
+	GETGLOB 17
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
@@ -865,7 +867,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 231
+	.loc contracts/onchain/HusApp.sol, 276
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
@@ -907,7 +909,7 @@
 }
 
 .fragment getBalance_12065fe0_internal, {
-	.loc contracts/onchain/HusApp.sol, 241
+	.loc contracts/onchain/HusApp.sol, 286
 	GETPARAM 7
 	FIRST
 	.loc contracts/onchain/HusApp.sol, 0
@@ -922,7 +924,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 240
+	.loc contracts/onchain/HusApp.sol, 285
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
@@ -957,8 +959,8 @@
 }
 
 .fragment getModalityConfig_2b000e33_internal, {
-	.loc contracts/onchain/HusApp.sol, 249
-	GETGLOB 19
+	.loc contracts/onchain/HusApp.sol, 294
+	GETGLOB 21
 	PUSHINT 8
 	DICTUGET
 	IFREFELSEREF
@@ -974,7 +976,7 @@
 		BLKPUSH 2, 0
 		TRIPLE
 	}
-	.loc contracts/onchain/HusApp.sol, 250
+	.loc contracts/onchain/HusApp.sol, 295
 	DUP
 	SECOND
 	GTINT 0
@@ -991,7 +993,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 248
+	.loc contracts/onchain/HusApp.sol, 293
 	LDU 8
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
@@ -1032,8 +1034,8 @@
 }
 
 .fragment getModalityConfigs_90d93cc1_internal, {
-	.loc contracts/onchain/HusApp.sol, 245
-	GETGLOB 18
+	.loc contracts/onchain/HusApp.sol, 290
+	GETGLOB 20
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
@@ -1046,7 +1048,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 244
+	.loc contracts/onchain/HusApp.sol, 289
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
@@ -1085,13 +1087,13 @@
 }
 
 .fragment getRegistration_b25cd379_internal, {
-	.loc contracts/onchain/HusApp.sol, 222
+	.loc contracts/onchain/HusApp.sol, 263
 	DUP
-	GETGLOB 15
+	GETGLOB 17
 	LESS
 	THROWIFNOT 120
-	.loc contracts/onchain/HusApp.sol, 223
-	GETGLOB 17
+	.loc contracts/onchain/HusApp.sol, 264
+	GETGLOB 19
 	SECOND
 	PUSHINT 32
 	DICTUGET
@@ -1106,10 +1108,11 @@
 		LDU 8
 		LDU 32
 		LDREF
+		LDU 256
 		ENDS
-		TUPLE 5
+		TUPLE 6
 	}
-	.loc contracts/onchain/HusApp.sol, 224
+	.loc contracts/onchain/HusApp.sol, 265
 	DUP
 	FIRST
 	OVER
@@ -1118,8 +1121,10 @@
 	THIRD
 	PUSH S3
 	INDEX 3
-	ROLL 4
+	PUSH S4
 	INDEX 4
+	ROLL 5
+	INDEX 5
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
@@ -1132,16 +1137,16 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 215
+	.loc contracts/onchain/HusApp.sol, 255
 	LDU 32
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
 		.inline getRegistration_b25cd379_internal
 	}
-	PUSH S5
+	PUSH S6
 	PUSHCONT {
-		PUSH S7
+		PUSH S8
 		CTOS
 		LDU 2
 		LDMSGADDR
@@ -1152,9 +1157,9 @@
 		STSLICE
 		PUSHINT 1
 		STUR 98
-		REVERSE 6, 0
+		REVERSE 7, 0
 		NEWC
-		STSLICECONST xd0b84169
+		STSLICECONST xca102a03
 		STU 256
 		SWAP
 		UNPAIR
@@ -1164,13 +1169,14 @@
 		STU 8
 		STU 32
 		STREF
+		STU 256
 		STBREFR
 		ENDC
 		PUSHINT 0
 		SENDRAWMSG
 	}
 	PUSHCONT {
-		BLKDROP 5
+		BLKDROP 6
 	}
 	IFELSE
 	IFREF {
@@ -1180,8 +1186,8 @@
 }
 
 .fragment getRegistrationCount_59bfaee1_internal, {
-	.loc contracts/onchain/HusApp.sol, 228
-	GETGLOB 15
+	.loc contracts/onchain/HusApp.sol, 269
+	GETGLOB 17
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
@@ -1194,7 +1200,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 227
+	.loc contracts/onchain/HusApp.sol, 268
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
@@ -1228,10 +1234,103 @@
 	THROW 0
 }
 
+.fragment getVerificationFee_b9a7eb51_internal, {
+	.loc contracts/onchain/HusApp.sol, 304
+	PUSHINT 300000000
+	.loc contracts/onchain/HusApp.sol, 0
+}
+
+.fragment getVerificationFee, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	.loc contracts/onchain/HusApp.sol, 303
+	ENDS
+	.loc contracts/onchain/HusApp.sol, 0
+	CALLREF {
+		.inline getVerificationFee_b9a7eb51_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 4212646865
+		STUR 130
+		STU 256
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getVerifier_46657fe9_internal, {
+	.loc contracts/onchain/HusApp.sol, 273
+	GETGLOB 15
+	.loc contracts/onchain/HusApp.sol, 0
+}
+
+.fragment getVerifier, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc contracts/onchain/HusApp.sol, 272
+	ENDS
+	.loc contracts/onchain/HusApp.sol, 0
+	CALLREF {
+		.inline getVerifier_46657fe9_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 2280575042
+		STUR 130
+		STU 256
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
 .fragment getVersion_0d8e6e2c_internal, {
-	.loc contracts/onchain/HusApp.sol, 255
+	.loc contracts/onchain/HusApp.sol, 300
 	PUSHREF {
-		.blob x322e332e31
+		.blob x322e362e30
 	}
 	.loc contracts/onchain/HusApp.sol, 0
 }
@@ -1240,7 +1339,7 @@
 	DROP
 	GETGLOB 6
 	THROWIFNOT 76
-	.loc contracts/onchain/HusApp.sol, 254
+	.loc contracts/onchain/HusApp.sol, 299
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
@@ -1295,36 +1394,36 @@
 	THROW 0
 }
 
-.fragment submitCommitment_0b3db83b_internal, {
-	.loc contracts/onchain/HusApp.sol, 102
-	ACCEPT
-	.loc contracts/onchain/HusApp.sol, 104
-	PUSH2 S0, S1
-	FIRST
-	UFITS 32
-	CALLREF {
-		.inline _assertModalityConfig_f6a73683_internal
-	}
-	.loc contracts/onchain/HusApp.sol, 106
-	PUSH S2
-	.loc contracts/onchain/HusApp.sol, 107
-	GETGLOB 16
-	PUSHPOW2 8
-	DICTUGET
-	ZEROSWAPIFNOT
+.fragment setVerifier_4d7547b8_internal, {
+	.loc contracts/onchain/HusApp.sol, 115
+	GETGLOB 5
+	DUP
+	ISNULL
 	PUSHCONT {
-		PLDI 1
+		DROP
+		PUSHINT 0
 	}
 	IF
-	THROWIF 113
-	.loc contracts/onchain/HusApp.sol, 109
-	CALLREF {
-		.inline _registerInternal_c6f52e3b_internal
-	}
+	GETGLOB 14
+	EQUAL
+	THROWIFNOT 101
+	.loc contracts/onchain/HusApp.sol, 116
+	ACCEPT
+	.loc contracts/onchain/HusApp.sol, 117
+	DUP
+	SETGLOB 15
+	.loc contracts/onchain/HusApp.sol, 118
+	PUSHSLICE xc00000000000000000000000003d9da676
+	NEWC
+	STSLICE
+	STU 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
-.fragment submitCommitment, {
+.fragment setVerifier, {
 	DROP
 	GETGLOB 6
 	THROWIFNOT 76
@@ -1333,7 +1432,129 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 97
+	.loc contracts/onchain/HusApp.sol, 114
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc contracts/onchain/HusApp.sol, 0
+	CALLREF {
+		.inline setVerifier_4d7547b8_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment setVk_b4622e6d_internal, {
+	.loc contracts/onchain/HusApp.sol, 107
+	GETGLOB 9
+	GETGLOB 10
+	SDEQ
+	THROWIFNOT 200
+	.loc contracts/onchain/HusApp.sol, 108
+	ACCEPT
+	.loc contracts/onchain/HusApp.sol, 109
+	SETGLOB 12
+	.loc contracts/onchain/HusApp.sol, 110
+	PUSHREF {
+		.blob xc00000000000000000000000003ac7580e
+	}
+	PUSHINT 0
+	SENDRAWMSG
+	.loc contracts/onchain/HusApp.sol, 0
+}
+
+.fragment setVk, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc contracts/onchain/HusApp.sol, 106
+	LDREF
+	ENDS
+	.loc contracts/onchain/HusApp.sol, 0
+	CALLREF {
+		.inline setVk_b4622e6d_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment submitVerified_49b8e165_internal, {
+	.loc contracts/onchain/HusApp.sol, 149
+	GETGLOB 15
+	NEQINT 0
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 15
+	EQUAL
+	AND
+	THROWIFNOT 109
+	.loc contracts/onchain/HusApp.sol, 150
+	PUSH S2
+	PUSHPOW2DEC 32
+	CDATASIZE
+	DROP
+	NIP
+	RSHIFT 3
+	GTINT 0
+	THROWIFNOT 133
+	.loc contracts/onchain/HusApp.sol, 151
+	PUSH2 S0, S3
+	FIRST
+	UFITS 32
+	CALLREF {
+		.inline _assertModalityConfig_f6a73683_internal
+	}
+	.loc contracts/onchain/HusApp.sol, 152
+	PUSH S4
+	GETGLOB 18
+	PUSHPOW2 8
+	DICTUGET
+	ZEROSWAPIFNOT
+	PUSHCONT {
+		PLDI 1
+	}
+	IF
+	THROWIF 114
+	.loc contracts/onchain/HusApp.sol, 153
+	ACCEPT
+	.loc contracts/onchain/HusApp.sol, 155
+	CALLREF {
+		.inline _register_2606f3d2_internal
+	}
+	.loc contracts/onchain/HusApp.sol, 0
+}
+
+.fragment submitVerified, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc contracts/onchain/HusApp.sol, 142
 	OVER
 	PUSHCONT {
 		LDREF
@@ -1347,11 +1568,13 @@
 	ROTREV
 	PAIR
 	SWAP
+	LDREF
+	LDU 256
 	LDU 8
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
-		.inline submitCommitment_0b3db83b_internal
+		.inline submitVerified_49b8e165_internal
 	}
 	PUSH S2
 	PUSHCONT {
@@ -1367,7 +1590,7 @@
 		PUSHINT 98
 		STZEROES
 		XCHG S1, S2
-		STSLICECONST xb32b64bf
+		STSLICECONST x851e32c8
 		STI 1
 		STU 8
 		ENDC
@@ -1384,32 +1607,56 @@
 	THROW 0
 }
 
-.fragment submitWithProof_cbd99fee_internal, {
-	.loc contracts/onchain/HusApp.sol, 86
-	ACCEPT
-	.loc contracts/onchain/HusApp.sol, 88
-	PUSH2 S0, S3
-	FIRST
-	UFITS 32
-	CALLREF {
-		.inline _assertModalityConfig_f6a73683_internal
-	}
-	.loc contracts/onchain/HusApp.sol, 90
-	PUSH2 S1, S2
-	VERGRTH16
-	.loc contracts/onchain/HusApp.sol, 91
-	THROWIFNOT 130
+.fragment upgradeCode_da948edb_internal, {
 	.loc contracts/onchain/HusApp.sol, 93
-	SWAP
-	HASHCU
-	ROLLREV 3
-	CALLREF {
-		.inline _register_c18385af_internal
+	GETGLOB 9
+	GETGLOB 10
+	SDEQ
+	THROWIFNOT 200
+	.loc contracts/onchain/HusApp.sol, 94
+	OVER
+	CTOS
+	SBITS
+	THROWIFNOT 201
+	.loc contracts/onchain/HusApp.sol, 95
+	ACCEPT
+	.loc contracts/onchain/HusApp.sol, 97
+	SETGLOB 12
+	.loc contracts/onchain/HusApp.sol, 98
+	GETGLOB 16
+	INC
+	UFITS 32
+	SETGLOB 16
+	.loc contracts/onchain/HusApp.sol, 100
+	DUP
+	SETCODE
+	.loc contracts/onchain/HusApp.sol, 101
+	CTOS
+	DUP
+	PUSHSLICE x8adb35
+	SDEQ
+	PUSHCONT {
+		PLDREFIDX 1
+		CTOS
 	}
+	IF
+	LDREFRTOS
+	NIP
+	BLESS
+	POP C3
+	.loc contracts/onchain/HusApp.sol, 103
+	GETGLOB 16
+	PUSHSLICE xc000000000000000000000000023f92b29
+	NEWC
+	STSLICE
+	STU 32
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
 	.loc contracts/onchain/HusApp.sol, 0
 }
 
-.fragment submitWithProof, {
+.fragment upgradeCode, {
 	DROP
 	GETGLOB 6
 	THROWIFNOT 76
@@ -1418,45 +1665,14 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc contracts/onchain/HusApp.sol, 80
-	LDU 32
-	LDDICT
-	ROTREV
-	PAIR
-	SWAP
+	.loc contracts/onchain/HusApp.sol, 92
 	LDREF
 	LDREF
-	LDU 8
 	ENDS
 	.loc contracts/onchain/HusApp.sol, 0
 	CALLREF {
-		.inline submitWithProof_cbd99fee_internal
+		.inline upgradeCode_da948edb_internal
 	}
-	PUSH S2
-	PUSHCONT {
-		PUSH S4
-		CTOS
-		LDU 2
-		LDMSGADDR
-		DROP
-		NIP
-		NEWC
-		STSLICECONST xc
-		STSLICE
-		PUSHINT 98
-		STZEROES
-		XCHG S1, S2
-		STSLICECONST xbf194a95
-		STI 1
-		STU 8
-		ENDC
-		PUSHINT 0
-		SENDRAWMSG
-	}
-	PUSHCONT {
-		DROP2
-	}
-	IFELSE
 	CALLREF {
 		.inline c7_to_c4
 	}
@@ -1465,11 +1681,11 @@
 
 .fragment public_function_selector, {
 	DUP
-	PUSHINT 858481855
+	PUSHINT 594558783
 	LEQ
 	IFJMPREF {
 		DUP
-		PUSHINT 229996861
+		PUSHINT 133091394
 		LEQ
 		IFJMPREF {
 			DUP
@@ -1478,10 +1694,33 @@
 				.inline constructor
 			}
 			DUP
+			PUSHINT 85865160
+			EQUAL
+			IFJMPREF {
+				.inline submitVerified
+			}
+			DUP
+			PUSHINT 133091394
+			EQUAL
+			IFJMPREF {
+				.inline getVerifier
+			}
+		}
+		DUP
+		PUSHINT 246952415
+		LEQ
+		IFJMPREF {
+			DUP
 			PUSHINT 229996861
 			EQUAL
 			IFJMPREF {
 				.inline getModalityConfigs
+			}
+			DUP
+			PUSHINT 246952415
+			EQUAL
+			IFJMPREF {
+				.inline upgradeCode
 			}
 		}
 		DUP
@@ -1491,22 +1730,28 @@
 			.inline deposit
 		}
 		DUP
+		PUSHINT 594558783
+		EQUAL
+		IFJMPREF {
+			.inline setVerifier
+		}
+	}
+	DUP
+	PUSHINT 1040957570
+	LEQ
+	IFJMPREF {
+		DUP
+		PUSHINT 775502033
+		EQUAL
+		IFJMPREF {
+			.inline setVk
+		}
+		DUP
 		PUSHINT 799229640
 		EQUAL
 		IFJMPREF {
 			.inline checkDuplicate
 		}
-		DUP
-		PUSHINT 858481855
-		EQUAL
-		IFJMPREF {
-			.inline submitCommitment
-		}
-	}
-	DUP
-	PUSHINT 1078511090
-	LEQ
-	IFJMPREF {
 		DUP
 		PUSHINT 868555124
 		EQUAL
@@ -1519,34 +1764,28 @@
 		IFJMPREF {
 			.inline appId
 		}
-		DUP
-		PUSHINT 1058622101
-		EQUAL
-		IFJMPREF {
-			.inline submitWithProof
-		}
-		DUP
-		PUSHINT 1078511090
-		EQUAL
-		IFJMPREF {
-			.inline getVersion
-		}
 	}
 	DUP
 	PUSHINT 1585989789
 	LEQ
 	IFJMPREF {
 		DUP
+		PUSHINT 1078511090
+		EQUAL
+		IFJMPREF {
+			.inline getVersion
+		}
+		DUP
+		PUSHINT 1242573315
+		EQUAL
+		IFJMPREF {
+			.inline getRegistration
+		}
+		DUP
 		PUSHINT 1258411980
 		EQUAL
 		IFJMPREF {
 			.inline getRegistrationCount
-		}
-		DUP
-		PUSHINT 1354252649
-		EQUAL
-		IFJMPREF {
-			.inline getRegistration
 		}
 		DUP
 		PUSHINT 1585989789
@@ -1556,7 +1795,7 @@
 		}
 	}
 	DUP
-	PUSHINT 1753820797
+	PUSHINT 2065163217
 	LEQ
 	IFJMPREF {
 		DUP
@@ -1571,10 +1810,18 @@
 		IFJMPREF {
 			.inline getBalance
 		}
+		DUP
+		PUSHINT 2065163217
+		EQUAL
+		IFJMPREF {
+			.inline getVerificationFee
+		}
 	}
 }
 
 .fragment main_external, {
+	PUSHSLICE x8000000000000000000000000000000000000000000000000000000000000000001_
+	SETGLOB 9
 	OVER
 	CALLREF {
 		.inline c4_to_c7
@@ -1603,6 +1850,8 @@
 			GETGLOB 2
 		}
 		IFELSE
+		DUP
+		SETGLOB 5
 		CHKSIGNU
 		THROWIFNOT 40
 	}
@@ -1637,7 +1886,10 @@
 	SETGLOB 6
 	PUSH S2
 	CTOS
-	PLDU 4
+	LDU 4 ; bounced tail
+	LDMSGADDR ; bounced src tail
+	DROP
+	SETGLOB 9
 	MODPOW2 1
 	IFRET
 	OVER
@@ -1671,17 +1923,21 @@
 	PAIR
 	NULL
 	PUSHINT 0
-	BLKPUSH 2, 0
+	BLKPUSH 4, 0
 	PUSHREF {
 	}
 	PUSHINT 0
 	NEWC
 	PUSHINT 323
 	STZEROES
-	ROLLREV 9
+	ROLLREV 11
 	NEWC
 	STU 256
 	STREF
+	STU 256
+	STU 256
+	ROLLREV 7
+	NEWC
 	STU 256
 	STU 32
 	STU 32
@@ -1691,8 +1947,6 @@
 	XCHG S2
 	STU 32
 	STDICT
-	ROTREV
-	NEWC
 	SWAP
 	UNPAIR
 	XCHG S2

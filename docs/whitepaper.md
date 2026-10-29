@@ -14,7 +14,7 @@ The Human Uniqueness System (HUS) is a decentralized biometric middleware that s
 
 HUS follows the **ISO/IEC 24745** standard for cancelable biometrics: templates must be irreversible, unlinkable, and renewable. It achieves this through BioHashing (per-app matrix projection), Poseidon commitments, Groth16 zero-knowledge proofs on BN254, and on-chain L₂ distance computation on projected vectors.
 
-**Key architecture note:** The `gosh.vergrth16` opcode on Acki Nacki v3.0.2 uses hardcoded ZkLogin proving keys — it cannot verify custom circuit proofs. HUS instead verifies Groth16 proofs **off-chain** and submits only the commitment hash + obfuscated vector on-chain via `submitCommitment()`. This is the production working path.
+**Key architecture note:** The `gosh.vergrth16` opcode on Acki Nacki v3.0.2 uses hardcoded ZkLogin proving keys — it cannot verify custom circuit proofs. HUS instead verifies Groth16 proofs **off-chain**: the app's verifier (for example the gateway) checks each proof and signs `submitVerified()`, which stores the commitment, the obfuscated vector and the proof. The contract accepts registrations only from the verifier key the app operator named.
 
 ---
 
@@ -81,7 +81,7 @@ User Device                        Off-chain Verifier          Acki Nacki Chain
    │  Verify π via verify_projected()                │                  
    │  (BN254 pairing, ~2ms)                          │                  
    │  If invalid → reject                             │                  
-   │                              submitCommitment(C_hash, V_obf, mod) │
+   │               submitVerified(C, V_obf, proof, mod) │
    │                              ──────────────────────────────────►  │
    │                                                                    ├─ Check duplicate commitment
    │                                                                    ├─ L₂ distance vs stored V_obf
@@ -93,7 +93,7 @@ User Device                        Off-chain Verifier          Acki Nacki Chain
    │  ◄──────────────────────────────────────────────│── result         
 ```
 
-**The working path does not submit the Groth16 proof on-chain.** The `submitWithProof()` method exists but cannot verify custom circuits via `gosh.vergrth16` because the opcode uses built-in ZkLogin proving keys, not the contract's stored VK. Proof verification happens off-chain; the chain stores only the commitment hash and obfuscated vector.
+**The chain does not verify the Groth16 proof on TVM.** `gosh.vergrth16` uses built-in ZkLogin proving keys, not the contract's VK, so the earlier `submitWithProof()` could not check anything and was removed, as was the proofless `submitCommitment()`. Proof verification happens off-chain in the app's verifier. The chain stores the proof with the vector, so anyone can re-check it.
 
 ### 3.4 On-Chain Proof Verification (Future)
 
@@ -237,8 +237,8 @@ Stored `vObf` is already obfuscated and application-specific — it leaks no cro
 | Method | Access | Description |
 |--------|--------|-------------|
 | `constructor(vk, seedHash, modalityIds)` | Registry only | Deploy with VK, seed, and modality list |
-| `submitCommitment(commitmentHash, vObf, modalityId)` | Anyone | Submit proof-verified registration (working path) |
-| `submitWithProof(vObf, proof, commitment, modalityId)` | Anyone | Submit with on-chain proof (blocked) |
+| `submitVerified(commitmentHash, vObf, proof, modalityId)` | The app's verifier key only | Register after the verifier has checked the proof off-chain |
+| `setVerifier(verifierPubkey)` | The app operator's key | Name the verifier key (zero turns registration off) |
 | `checkDuplicate(commitmentHash)` | Anyone | Quick lookup (view) |
 | `deposit(paymentId)` | Anyone | Convert SHELL → VMSHELL for gas |
 | `upgradeCode(newCode, newVk)` | Registry only | Timelocked upgrade |
@@ -251,7 +251,7 @@ Stored `vObf` is already obfuscated and application-specific — it leaks no cro
 ### 6.3 State Transition Rules
 
 1. **App onboarding:** Anyone calls `registerApp(appName, modalityIds)` on the registry. The registry derives `appId` deterministically from `appName`, generates a random `seedHash`, and deploys a HusApp with the stored VK and app code.
-2. **Registration:** After off-chain proof verification, the client calls `submitCommitment(commitmentHash, vObf, modalityId)`. The contract checks duplicate commitment, computes L₂ distance, and stores the registration if unique.
+2. **Registration:** After off-chain proof verification, the verifier calls `submitVerified(commitmentHash, vObf, proof, modalityId)`. The contract checks duplicate commitment, computes L₂ distance, and stores the registration if unique.
 3. **Rejection:** Score ≥ 80 or duplicate commitment → transaction fails (exit code).
 4. **Append-only:** Registrations are never deleted.
 5. **Timelocked upgrades:** The registry can propose an upgrade via `proposeAppUpgrade()`. After 7 days (`UPGRADE_DELAY = 604800` seconds), anyone can call `executeAppUpgrade()`. Pending upgrades can be cancelled by the owner.
@@ -331,7 +331,7 @@ The `vObf` is stored as `int64[]` where each element is the IEEE 754 bit pattern
 
 | Message | Size | Gas (VMSHELL) |
 |---------|------|---------------|
-| `submitCommitment` | ~1.2 KB | ~0.3 |
+| `submitVerified` | ~1.3 KB | ~0.3 |
 | `registerApp` | ~0.5 KB | ~3.0 (deploy) |
 | `setProvingKeyChunk` | ~32 KB | ~0.1 |
 | `checkDuplicate` (view) | ~0.1 KB | 0 |
@@ -423,7 +423,7 @@ cargo run --example verify_and_submit -- \
   --input-path /path/to/capture
 ```
 
-The example: captures biometrics → project → generate Groth16 proof → verify off-chain → submit `submitCommitment` → check result.
+The example: captures biometrics → project → generate Groth16 proof → verify off-chain → verifier signs `submitVerified` → check result.
 
 ### 9.5 Known Limitations
 
@@ -440,7 +440,7 @@ The example: captures biometrics → project → generate Groth16 proof → veri
 | Core SDK | Capture, extract, project, prove, verify | ✅ Complete |
 | Groth16 circuit | Poseidon + R1CS (~2k constraints) | ✅ Complete |
 | Smart contracts v2.5.0 | HusRegistry + HusApp (timelocked upgrades) | ✅ Deployed on Shellnet |
-| Off-chain E2E | verify_projected + submitCommitment | ✅ Verified |
+| Off-chain E2E | verify_projected + submitVerified | Not re-run after the change |
 | REST gateway | 11 endpoints, auth, CORS | ✅ Complete |
 | JS SDK | npm package (@hus-js-sdk/sdk) | ✅ Complete |
 | C FFI | Python, Go, Java, iOS bindings | ✅ Complete |

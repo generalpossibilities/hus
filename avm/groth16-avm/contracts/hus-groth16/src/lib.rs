@@ -12,12 +12,16 @@ const MAX_PROJ_DIM: usize = 128;
 const V_OBF_BYTES: usize = MAX_PROJ_DIM * 8;
 const STATE_BYTES: usize = 16;
 
+// Args: [plen u32 LE][proof][commitment 32B][v_obf 128 × i64 LE][binding 32B].
+// Public inputs: commitment ++ v_obf ++ binding (hus_sdk::proof_binding of the
+// owner key and the verifier's challenge). A caller that registers accounts
+// must compute the binding itself, not take it from the prover.
 fn verify(args: &[u8]) -> bool {
-    if args.len() < 4 + 32 + V_OBF_BYTES {
+    if args.len() < 4 + 32 + V_OBF_BYTES + 32 {
         return false;
     }
     let plen = u32::from_le_bytes([args[0], args[1], args[2], args[3]]) as usize;
-    if args.len() != 4 + plen + 32 + V_OBF_BYTES {
+    if args.len() != 4 + plen + 32 + V_OBF_BYTES + 32 {
         return false;
     }
     let Ok(vk) = VerifyingKey::<Bn254>::deserialize_uncompressed(VK_BYTES) else { return false };
@@ -25,12 +29,14 @@ fn verify(args: &[u8]) -> bool {
     let Ok(proof) = Proof::<Bn254>::deserialize_compressed(&args[4..4 + plen]) else { return false };
     let Ok(comm) = Fr::deserialize_uncompressed(&args[4 + plen..4 + plen + 32]) else { return false };
     let start = 4 + plen + 32;
+    let Ok(binding) = Fr::deserialize_uncompressed(&args[start + V_OBF_BYTES..]) else { return false };
     let inputs: Vec<Fr> = core::iter::once(comm)
         .chain(args[start..start + V_OBF_BYTES].chunks_exact(8).map(|c| {
             Fr::from(i64::from_le_bytes([c[0], c[1], c[2], c[3], c[4], c[5], c[6], c[7]]))
         }))
+        .chain(core::iter::once(binding))
         .collect();
-    inputs.len() == 1 + MAX_PROJ_DIM && matches!(Groth16::<Bn254>::verify_proof(&pvk, &proof, &inputs), Ok(true))
+    inputs.len() == 1 + MAX_PROJ_DIM + 1 && matches!(Groth16::<Bn254>::verify_proof(&pvk, &proof, &inputs), Ok(true))
 }
 
 struct HusGroth16;

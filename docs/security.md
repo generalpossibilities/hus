@@ -102,7 +102,7 @@ With Groth16 on BN254 (Powers of Tau trusted setup), a malicious prover cannot f
 
 | Item | Priority | Status |
 |------|----------|--------|
-| Groth16 off-chain verify + submitCommitment E2E | Critical | ✅ Done |
+| Groth16 off-chain verify + verifier-signed submitVerified E2E | Critical | Not re-run after the change |
 | Chunked proving key upload (17MB) | High | ✅ Done |
 | Timelocked upgrade mechanism | High | ✅ Implemented |
 | Third-party security audit | Critical | 📅 |

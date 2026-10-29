@@ -32,6 +32,7 @@ fn gen_keys() -> (ProvingKey<Bn254>, VerifyingKey<Bn254>) {
             v_obf: vec![Fr::ZERO; 2],
             nonce: Fr::ZERO,
             commitment: Fr::ZERO,
+            binding: Fr::ZERO,
         },
         alpha,
         beta,
@@ -76,10 +77,12 @@ fn full_pipeline_small_circuit() {
     let config = PoseidonConfig::new();
     let commitment = config.hash_native(&[v_obf_frs.clone(), vec![nonce]].concat());
 
+    let binding = Fr::from(42u64);
     let prover_circuit = HusCircuit {
         v_obf: v_obf_frs.clone(),
         nonce,
         commitment,
+        binding,
     };
     let proof = Groth16::<Bn254, LibsnarkReduction>::create_random_proof_with_reduction(
         prover_circuit,
@@ -88,11 +91,19 @@ fn full_pipeline_small_circuit() {
     )
     .unwrap();
 
+    // Public inputs: commitment, every v_obf element, then the binding.
     let pvk = prepare_verifying_key(&vk);
-    let pub_inputs = vec![commitment];
-    let valid =
-        Groth16::<Bn254, LibsnarkReduction>::verify_proof(&pvk, &proof, &pub_inputs).unwrap();
-    assert!(valid, "proof must verify");
+    let inputs = |b: Fr| {
+        let mut v = vec![commitment];
+        v.extend(v_obf_frs.iter().copied());
+        v.push(b);
+        v
+    };
+    let verify = |inputs: &[Fr]| {
+        Groth16::<Bn254, LibsnarkReduction>::verify_proof(&pvk, &proof, inputs).unwrap()
+    };
+    assert!(verify(&inputs(binding)), "proof must verify");
+    assert!(!verify(&inputs(Fr::from(43u64))), "another binding must not verify");
 }
 
 /// Test using the SDK's prove_projected / verify_projected with a
@@ -111,10 +122,11 @@ fn full_pipeline_keystroke() {
     let v_obf = derive_and_project(&seed, &embedding.vector, proj_dim).unwrap();
 
     let (pk, vk) = generate_full_test_keys();
-    let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
+    let binding = hus_sdk::proof_binding(b"owner", b"challenge-e2e-0001");
+    let (proof_bytes, commitment) = prove_projected(&pk, &v_obf, &binding).unwrap();
     assert!(!proof_bytes.is_empty());
 
-    let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
+    let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf), &binding).unwrap();
     assert!(valid, "proof must verify");
 
     // v_obf_to_contract uses fixed-point ×10⁶, zero-padded to MAX_PROJ_DIM=128
@@ -144,8 +156,9 @@ fn full_pipeline_multimodal() {
         let cfg = hus_sdk::config::ModalityConfig::for_modality(*modality);
         let v_obf = derive_and_project(&seed, &embedding.vector, cfg.proj_dim).unwrap();
 
-        let (proof_bytes, commitment) = prove_projected(&pk, &v_obf).unwrap();
-        let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf)).unwrap();
+        let binding = hus_sdk::proof_binding(b"owner", b"challenge-e2e-0001");
+    let (proof_bytes, commitment) = prove_projected(&pk, &v_obf, &binding).unwrap();
+        let valid = verify_projected(&vk, &proof_bytes, &commitment, &hus_sdk::v_obf_to_contract(&v_obf), &binding).unwrap();
         assert!(valid, "proof must verify for {:?}", modality);
     }
 }
@@ -177,6 +190,7 @@ fn generate_full_test_keys() -> (Vec<u8>, Vec<u8>) {
             v_obf: vec![Fr::ZERO; 128],
             nonce: Fr::ZERO,
             commitment: Fr::ZERO,
+            binding: Fr::ZERO,
         },
         alpha,
         beta,

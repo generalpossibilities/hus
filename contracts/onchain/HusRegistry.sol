@@ -128,7 +128,7 @@ contract HusRegistry {
             value: 0.3 vmshell,
             flag: 1,
             wid: 0
-        }(_vk, seedHash, modalityIds);
+        }(_vk, seedHash, modalityIds, callerPubkey);
 
         _appRegistry[appId] = appAddr;
 

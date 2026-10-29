@@ -45,7 +45,7 @@ pub use extract::{Embedding, Extractor};
 pub use key::SessionKeys;
 pub use liveness::{require_liveness, LivenessResult, LivenessSession};
 pub use projection::{derive_and_project, derive_matrix, project};
-pub use prover::{prove_projected, verify_projected};
+pub use prover::{proof_binding, prove_projected, verify_projected};
 pub use quality_gate::{QualityGate, QualityReport};
 
 pub(crate) use circuit::r1cs::MAX_PROJ_DIM;
@@ -193,10 +193,13 @@ impl HusClient {
     ///
     /// Requires liveness results for ALL modalities — returns error if any failed.
     /// `pk`: serialized Groth16 proving key (fetched from HUS Registry).
+    /// `binding`: [`proof_binding`] of the owner key and the verifier's
+    /// challenge; every proof is made for it.
     /// Returns per-modality proof results for on-chain submission.
     pub fn project_and_prove(
         &self,
         pk: &[u8],
+        binding: &[u8; 32],
         embeddings: &BTreeMap<Modality, Vec<f32>>,
         seed_fn: fn(Modality) -> [u8; 32],
         liveness_results: &[LivenessResult],
@@ -208,7 +211,7 @@ impl HusClient {
             if let Some(embedding) = embeddings.get(&cfg.modality) {
                 let seed = seed_fn(cfg.modality);
                 let v_obf = crate::projection::derive_and_project(&seed, embedding, cfg.proj_dim)?;
-                let (proof_bytes, commitment_hash) = crate::prover::prove_projected(pk, &v_obf)?;
+                let (proof_bytes, commitment_hash) = crate::prover::prove_projected(pk, &v_obf, binding)?;
                 results.push(ModalityProof {
                     modality: cfg.modality,
                     proof_bytes,
@@ -228,6 +231,7 @@ impl HusClient {
     pub fn project_and_prove_from_captures(
         &self,
         pk: &[u8],
+        binding: &[u8; 32],
         captures: &BTreeMap<Modality, crate::capture::RawCapture>,
         seed_fn: fn(Modality) -> [u8; 32],
     ) -> Result<Vec<ModalityProof>, SdkError> {
@@ -258,7 +262,7 @@ impl HusClient {
                 let seed = seed_fn(cfg.modality);
                 let v_obf =
                     crate::projection::derive_and_project(&seed, &embedding.vector, cfg.proj_dim)?;
-                let (proof_bytes, commitment_hash) = crate::prover::prove_projected(pk, &v_obf)?;
+                let (proof_bytes, commitment_hash) = crate::prover::prove_projected(pk, &v_obf, binding)?;
                 results.push(ModalityProof {
                     modality: cfg.modality,
                     proof_bytes,
@@ -271,7 +275,7 @@ impl HusClient {
     }
 
     /// Project each modality's embedding to V_obf without generating a proof.
-    /// Use with `submitWithProof` to generate proofs off-chain.
+    /// Use to generate proofs elsewhere (for example the gateway).
     pub fn project_only(
         &self,
         embeddings: &BTreeMap<Modality, Vec<f32>>,

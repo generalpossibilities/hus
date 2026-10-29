@@ -1,73 +1,98 @@
 use alloc::vec::Vec;
 use ark_bn254::Fr;
+use ark_crypto_primitives::sponge::poseidon::find_poseidon_ark_and_mds;
 use ark_ff::{Field, PrimeField};
 use ark_relations::r1cs::{ConstraintSystemRef, LinearCombination, SynthesisError, Variable};
 
+// Standard Poseidon over BN254's scalar field: width 3 (rate 2, capacity 1),
+// x^5 S-box, 8 full and 57 partial rounds, the parameters recommended in the
+// Poseidon paper for 128-bit security at this width. Round constants and the
+// MDS matrix come from the paper's Grain LFSR (arkworks'
+// `find_poseidon_ark_and_mds`), not from anything made up here.
+//
+// The sponge matches arkworks' `PoseidonSponge` exactly: capacity element at
+// index 0, inputs added to indices 1..=2, one permutation per (possibly
+// partial) chunk of two, output = state[1]. A test checks this against
+// arkworks' own implementation.
 const T: usize = 3;
 const RATE: usize = 2;
+const CAPACITY: usize = T - RATE;
 const FULL_ROUNDS: usize = 8;
 const PARTIAL_ROUNDS: usize = 57;
 const TOTAL_ROUNDS: usize = FULL_ROUNDS + PARTIAL_ROUNDS;
+pub(crate) const ALPHA: u64 = 5;
 
-// MDS matrix for Poseidon with t=3 (Cauchy matrix)
-// [[2, 1, 1], [1, 1, 2], [1, 2, 1]]
-const MDS: [[u64; 3]; 3] = [[2, 1, 1], [1, 1, 2], [1, 2, 1]];
-
-/// Generate round constants deterministically.
-/// Uses the standard Grain LFSR-based PRNG: since arkworks Poseidon params
-/// aren't conveniently available, we derive a minimal set.
 pub struct PoseidonConfig {
-    round_constants: Vec<[Fr; T]>,
+    ark: Vec<[Fr; T]>,
+    mds: [[Fr; T]; T],
 }
 
 impl PoseidonConfig {
     pub fn new() -> Self {
-        let rcs = generate_poseidon_constants();
-        Self {
-            round_constants: rcs,
-        }
+        let (ark, mds) = find_poseidon_ark_and_mds::<Fr>(
+            Fr::MODULUS_BIT_SIZE as u64,
+            RATE,
+            FULL_ROUNDS as u64,
+            PARTIAL_ROUNDS as u64,
+            0,
+        );
+        let ark = ark.iter().map(|r| [r[0], r[1], r[2]]).collect();
+        let mds = [
+            [mds[0][0], mds[0][1], mds[0][2]],
+            [mds[1][0], mds[1][1], mds[1][2]],
+            [mds[2][0], mds[2][1], mds[2][2]],
+        ];
+        Self { ark, mds }
+    }
+
+    /// The arkworks sponge parameters these constants form; used by tests to
+    /// check this implementation against arkworks' own.
+    #[cfg(test)]
+    pub(crate) fn arkworks_config(&self) -> ark_crypto_primitives::sponge::poseidon::PoseidonConfig<Fr> {
+        ark_crypto_primitives::sponge::poseidon::PoseidonConfig::new(
+            FULL_ROUNDS,
+            PARTIAL_ROUNDS,
+            ALPHA,
+            self.mds.iter().map(|r| r.to_vec()).collect(),
+            self.ark.iter().map(|r| r.to_vec()).collect(),
+            RATE,
+            CAPACITY,
+        )
+    }
+
+    fn is_full(r: usize) -> bool {
+        r < FULL_ROUNDS / 2 || r >= FULL_ROUNDS / 2 + PARTIAL_ROUNDS
     }
 
     /// Native Poseidon hash (non-circuit)
     pub fn hash_native(&self, inputs: &[Fr]) -> Fr {
         let mut state = [Fr::ZERO; T];
-        let mut idx = 0;
-        while idx < inputs.len() {
-            for i in 0..RATE {
-                if idx < inputs.len() {
-                    state[i] += inputs[idx];
-                    idx += 1;
-                }
+        for chunk in inputs.chunks(RATE) {
+            for (i, x) in chunk.iter().enumerate() {
+                state[CAPACITY + i] += x;
             }
-            Self::permute(&mut state, &self.round_constants);
+            self.permute(&mut state);
         }
-        state[0]
+        if inputs.is_empty() {
+            self.permute(&mut state);
+        }
+        state[CAPACITY]
     }
 
-    fn permute(state: &mut [Fr; T], rcs: &[[Fr; T]]) {
+    fn permute(&self, state: &mut [Fr; T]) {
         for r in 0..TOTAL_ROUNDS {
-            let is_full = r < FULL_ROUNDS / 2 || r >= FULL_ROUNDS / 2 + PARTIAL_ROUNDS;
             for i in 0..T {
-                if is_full || i == 0 {
-                    let v = state[i];
-                    let v2 = v * v;
-                    let v4 = v2 * v2;
-                    state[i] = v4 * v;
+                state[i] += self.ark[r][i];
+            }
+            for i in 0..T {
+                if Self::is_full(r) || i == 0 {
+                    state[i] = state[i].pow([ALPHA]);
                 }
             }
-            let m = MDS;
-            let s0 = state[0] * Fr::from(m[0][0])
-                + state[1] * Fr::from(m[0][1])
-                + state[2] * Fr::from(m[0][2]);
-            let s1 = state[0] * Fr::from(m[1][0])
-                + state[1] * Fr::from(m[1][1])
-                + state[2] * Fr::from(m[1][2]);
-            let s2 = state[0] * Fr::from(m[2][0])
-                + state[1] * Fr::from(m[2][1])
-                + state[2] * Fr::from(m[2][2]);
-            state[0] = s0 + rcs[r][0];
-            state[1] = s1 + rcs[r][1];
-            state[2] = s2 + rcs[r][2];
+            let old = *state;
+            for i in 0..T {
+                state[i] = (0..T).map(|j| old[j] * self.mds[i][j]).sum();
+            }
         }
     }
 
@@ -79,44 +104,35 @@ impl PoseidonConfig {
         inputs: &[Variable],
         input_values: &[Fr],
     ) -> Result<Variable, SynthesisError> {
+        assert_eq!(inputs.len(), input_values.len());
+        // The all-zero initial state is the constant 0: no variable needed.
         let mut state_vars = [Variable::Zero; T];
         let mut state_vals = [Fr::ZERO; T];
 
-        // Capacity element: witness variable with value Fr::ZERO
-        let capacity = cs.new_witness_variable(|| Ok(Fr::ZERO))?;
-        for c in RATE..T {
-            state_vars[c] = capacity;
-        }
-
-        let mut idx = 0;
-        let mut input_val_idx = 0;
-        while idx < inputs.len() {
-            for i in 0..RATE {
-                if idx < inputs.len() {
-                    let var = inputs[idx];
-                    let val = input_values[input_val_idx];
-                    if state_vars[i].is_zero() {
-                        state_vars[i] = var;
-                        state_vals[i] = val;
-                    } else {
-                        state_vars[i] = sum_var_var_with_val(
-                            cs.clone(),
-                            state_vars[i],
-                            var,
-                            state_vals[i],
-                            val,
-                        )?;
-                        state_vals[i] = state_vals[i] + val;
-                    }
-                    idx += 1;
-                    input_val_idx += 1;
-                }
+        let absorb = |state_vars: &mut [Variable; T], state_vals: &mut [Fr; T], i: usize, var: Variable, val: Fr| -> Result<(), SynthesisError> {
+            if state_vars[i].is_zero() {
+                state_vars[i] = var;
+            } else {
+                state_vars[i] = sum_var_var_with_val(cs.clone(), state_vars[i], var, state_vals[i], val)?;
             }
-            let (new_vars, new_vals) = self.permute_r1cs(cs.clone(), &state_vars, &state_vals)?;
-            state_vars = new_vars;
-            state_vals = new_vals;
+            state_vals[i] += val;
+            Ok(())
+        };
+
+        for (chunk_vars, chunk_vals) in inputs.chunks(RATE).zip(input_values.chunks(RATE)) {
+            for (i, (&var, &val)) in chunk_vars.iter().zip(chunk_vals).enumerate() {
+                absorb(&mut state_vars, &mut state_vals, CAPACITY + i, var, val)?;
+            }
+            let (v, x) = self.permute_r1cs(cs.clone(), &state_vars, &state_vals)?;
+            state_vars = v;
+            state_vals = x;
         }
-        Ok(state_vars[0])
+        if inputs.is_empty() {
+            let (v, x) = self.permute_r1cs(cs.clone(), &state_vars, &state_vals)?;
+            state_vars = v;
+            state_vals = x;
+        }
+        Ok(state_vars[CAPACITY])
     }
 
     fn permute_r1cs(
@@ -128,85 +144,29 @@ impl PoseidonConfig {
         let mut s_vars = *state;
         let mut s_vals = *state_vals;
         for r in 0..TOTAL_ROUNDS {
-            let is_full = r < FULL_ROUNDS / 2 || r >= FULL_ROUNDS / 2 + PARTIAL_ROUNDS;
-
-            let mut new_s_vars = [Variable::Zero; T];
-            let mut new_s_vals = [Fr::ZERO; T];
+            // Add round constants, then the S-box.
+            let mut after_sbox_vars = [Variable::Zero; T];
+            let mut after_sbox_vals = [Fr::ZERO; T];
             for i in 0..T {
-                if is_full || i == 0 {
-                    let (v, val) = sbox_pow5_with_val(cs.clone(), s_vars[i], s_vals[i])?;
-                    new_s_vars[i] = v;
-                    new_s_vals[i] = val;
+                let val = s_vals[i] + self.ark[r][i];
+                let var = sum_scalar_with_val(cs.clone(), s_vars[i], self.ark[r][i], val)?;
+                if Self::is_full(r) || i == 0 {
+                    let (v, x) = sbox_pow5_with_val(cs.clone(), var, val)?;
+                    after_sbox_vars[i] = v;
+                    after_sbox_vals[i] = x;
                 } else {
-                    new_s_vars[i] = s_vars[i];
-                    new_s_vals[i] = s_vals[i];
+                    after_sbox_vars[i] = var;
+                    after_sbox_vals[i] = val;
                 }
             }
-
-            let m = MDS;
-            let s0_val = new_s_vals[0] * Fr::from(m[0][0])
-                + new_s_vals[1] * Fr::from(m[0][1])
-                + new_s_vals[2] * Fr::from(m[0][2]);
-            let s1_val = new_s_vals[0] * Fr::from(m[1][0])
-                + new_s_vals[1] * Fr::from(m[1][1])
-                + new_s_vals[2] * Fr::from(m[1][2]);
-            let s2_val = new_s_vals[0] * Fr::from(m[2][0])
-                + new_s_vals[1] * Fr::from(m[2][1])
-                + new_s_vals[2] * Fr::from(m[2][2]);
-
-            let s0_var = linear_comb_with_val(
-                cs.clone(),
-                &[
-                    (new_s_vars[0], Fr::from(m[0][0])),
-                    (new_s_vars[1], Fr::from(m[0][1])),
-                    (new_s_vars[2], Fr::from(m[0][2])),
-                ],
-                s0_val,
-            )?;
-            let s1_var = linear_comb_with_val(
-                cs.clone(),
-                &[
-                    (new_s_vars[0], Fr::from(m[1][0])),
-                    (new_s_vars[1], Fr::from(m[1][1])),
-                    (new_s_vars[2], Fr::from(m[1][2])),
-                ],
-                s1_val,
-            )?;
-            let s2_var = linear_comb_with_val(
-                cs.clone(),
-                &[
-                    (new_s_vars[0], Fr::from(m[2][0])),
-                    (new_s_vars[1], Fr::from(m[2][1])),
-                    (new_s_vars[2], Fr::from(m[2][2])),
-                ],
-                s2_val,
-            )?;
-
-            s_vars = [
-                sum_scalar_with_val(
-                    cs.clone(),
-                    s0_var,
-                    self.round_constants[r][0],
-                    s0_val + self.round_constants[r][0],
-                )?,
-                sum_scalar_with_val(
-                    cs.clone(),
-                    s1_var,
-                    self.round_constants[r][1],
-                    s1_val + self.round_constants[r][1],
-                )?,
-                sum_scalar_with_val(
-                    cs.clone(),
-                    s2_var,
-                    self.round_constants[r][2],
-                    s2_val + self.round_constants[r][2],
-                )?,
-            ];
-            s_vals = [
-                s0_val + self.round_constants[r][0],
-                s1_val + self.round_constants[r][1],
-                s2_val + self.round_constants[r][2],
-            ];
+            // MDS mix.
+            for i in 0..T {
+                let val: Fr = (0..T).map(|j| after_sbox_vals[j] * self.mds[i][j]).sum();
+                let terms: Vec<(Variable, Fr)> =
+                    (0..T).map(|j| (after_sbox_vars[j], self.mds[i][j])).collect();
+                s_vars[i] = linear_comb_with_val(cs.clone(), &terms, val)?;
+                s_vals[i] = val;
+            }
         }
         Ok((s_vars, s_vals))
     }
@@ -216,6 +176,20 @@ impl Default for PoseidonConfig {
     fn default() -> Self {
         Self::new()
     }
+}
+
+/// Σ coeff·var, leaving out `Variable::Zero` (the constant 0). arkworks
+/// accepts it when checking constraints but panics ("no symbolic LCs") when
+/// building the proving matrices, and the sponge starts from an all-zero
+/// state.
+fn lc_of(terms: &[(Variable, Fr)]) -> LinearCombination<Fr> {
+    let mut lc = LinearCombination::zero();
+    for &(var, coeff) in terms {
+        if !var.is_zero() {
+            lc = lc + (coeff, var);
+        }
+    }
+    lc
 }
 
 /// x^5 in R1CS: 3 constraints, with known native values
@@ -274,12 +248,8 @@ fn linear_comb_with_val(
     val: Fr,
 ) -> Result<Variable, SynthesisError> {
     let out = cs.new_witness_variable(|| Ok(val))?;
-    let mut lc = LinearCombination::zero();
-    for &(var, coeff) in terms {
-        lc = lc + (coeff, var);
-    }
     cs.enforce_constraint(
-        lc,
+        lc_of(terms),
         LinearCombination::from(Variable::One),
         LinearCombination::from(out),
     )?;
@@ -295,75 +265,76 @@ fn sum_scalar_with_val(
 ) -> Result<Variable, SynthesisError> {
     let out = cs.new_witness_variable(|| Ok(val))?;
     cs.enforce_constraint(
-        LinearCombination::from(var) + (scalar, Variable::One),
+        lc_of(&[(var, Fr::ONE)]) + (scalar, Variable::One),
         LinearCombination::from(Variable::One),
         LinearCombination::from(out),
     )?;
     Ok(out)
 }
 
-fn generate_poseidon_constants() -> Vec<[Fr; T]> {
-    use sha2::{Digest, Sha256};
-
-    let modulus_bytes = Fr::MODULUS_BIT_SIZE.to_le_bytes();
-    let mut rcs = Vec::with_capacity(TOTAL_ROUNDS);
-    let mut counter = 0u32;
-
-    while rcs.len() < TOTAL_ROUNDS {
-        let mut hasher = Sha256::new();
-        hasher.update(b"poseidon_round_constant");
-        hasher.update(&modulus_bytes);
-        hasher.update(&counter.to_le_bytes());
-        let hash = hasher.finalize();
-
-        let mut arr = [0u8; 32];
-        arr.copy_from_slice(&hash);
-
-        let fe = Fr::from_be_bytes_mod_order(&arr);
-        let mut round = [Fr::ZERO; T];
-        round[0] = fe;
-
-        let mut hasher2 = Sha256::new();
-        hasher2.update(b"poseidon_round_constant_extra");
-        hasher2.update(&hash);
-        let hash2 = hasher2.finalize();
-        let mut arr2 = [0u8; 32];
-        arr2.copy_from_slice(&hash2);
-        round[1] = Fr::from_be_bytes_mod_order(&arr2);
-
-        let mut hasher3 = Sha256::new();
-        hasher3.update(b"poseidon_round_constant_extra_2");
-        hasher3.update(&hash2);
-        let hash3 = hasher3.finalize();
-        let mut arr3 = [0u8; 32];
-        arr3.copy_from_slice(&hash3);
-        round[2] = Fr::from_be_bytes_mod_order(&arr3);
-
-        rcs.push(round);
-        counter += 1;
-    }
-
-    rcs
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
+    use ark_crypto_primitives::sponge::{poseidon::PoseidonSponge, CryptographicSponge};
+    use ark_relations::r1cs::ConstraintSystem;
+
+    fn arkworks_hash(config: &PoseidonConfig, inputs: &[Fr]) -> Fr {
+        let mut sponge = PoseidonSponge::<Fr>::new(&config.arkworks_config());
+        sponge.absorb(&inputs.to_vec());
+        sponge.squeeze_field_elements::<Fr>(1)[0]
+    }
 
     #[test]
     fn native_hash_deterministic() {
         let config = PoseidonConfig::new();
         let inputs = vec![Fr::from(1u64), Fr::from(2u64), Fr::from(3u64)];
-        let h1 = config.hash_native(&inputs);
-        let h2 = config.hash_native(&inputs);
-        assert_eq!(h1, h2);
+        assert_eq!(config.hash_native(&inputs), config.hash_native(&inputs));
     }
 
     #[test]
     fn native_hash_different_inputs() {
         let config = PoseidonConfig::new();
-        let a = config.hash_native(&[Fr::from(1u64)]);
-        let b = config.hash_native(&[Fr::from(2u64)]);
-        assert_ne!(a, b);
+        assert_ne!(config.hash_native(&[Fr::from(1u64)]), config.hash_native(&[Fr::from(2u64)]));
+    }
+
+    /// The standard construction, checked against an independent
+    /// implementation: arkworks' PoseidonSponge with the same parameters.
+    #[test]
+    fn native_matches_arkworks_sponge() {
+        let config = PoseidonConfig::new();
+        for n in [1usize, 2, 3, 4, 129, 130] {
+            let inputs: Vec<Fr> = (0..n as u64).map(|i| Fr::from(i * 7 + 3)).collect();
+            assert_eq!(config.hash_native(&inputs), arkworks_hash(&config, &inputs), "n = {n}");
+        }
+    }
+
+    /// Building the proving matrices must work too: `is_satisfied` alone
+    /// doesn't catch a constraint that refers to the constant zero.
+    #[test]
+    fn r1cs_matrices_build() {
+        let config = PoseidonConfig::new();
+        let cs = ConstraintSystem::<Fr>::new_ref();
+        let vals = [Fr::from(1u64), Fr::from(2u64), Fr::from(3u64)];
+        let vars: Vec<Variable> =
+            vals.iter().map(|v| cs.new_witness_variable(|| Ok(*v)).unwrap()).collect();
+        config.hash_r1cs(cs.clone(), &vars, &vals).unwrap();
+        cs.finalize();
+        assert!(cs.to_matrices().is_some());
+    }
+
+    /// The circuit computes the same hash, and the constraints hold.
+    #[test]
+    fn r1cs_matches_native() {
+        let config = PoseidonConfig::new();
+        for n in [1usize, 2, 5] {
+            let cs = ConstraintSystem::<Fr>::new_ref();
+            let vals: Vec<Fr> = (0..n as u64).map(|i| Fr::from(i + 11)).collect();
+            let vars: Vec<Variable> =
+                vals.iter().map(|v| cs.new_witness_variable(|| Ok(*v)).unwrap()).collect();
+            let out = config.hash_r1cs(cs.clone(), &vars, &vals).unwrap();
+            assert!(cs.is_satisfied().unwrap(), "n = {n}");
+            let got = cs.borrow().unwrap().assigned_value(out).unwrap();
+            assert_eq!(got, config.hash_native(&vals), "n = {n}");
+        }
     }
 }

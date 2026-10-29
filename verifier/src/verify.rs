@@ -18,16 +18,19 @@ const V_OBF_BYTES: usize = MAX_PROJ_DIM * 8;
 ///   [0..4]        proof length (u32 LE)
 ///   [4..4+plen]   proof bytes (arkworks compressed)
 ///   [4+plen ..4+plen+32]    commitment (32 bytes, Fr uncompressed LE)
-///   [4+plen+32 ..]          v_obf (128 × i64 LE, canonical ×10⁶ encoding)
+///   [4+plen+32 ..+1024]     v_obf (128 × i64 LE, canonical ×10⁶ encoding)
+///   [last 32]               binding (Fr uncompressed LE, `hus_sdk::proof_binding`)
 ///
-/// The proof's public inputs are `[commitment] ++ v_obf`, so a proof
-/// generated for one vector cannot verify against a different `v_obf`.
+/// The proof's public inputs are `[commitment] ++ v_obf ++ [binding]`, so a
+/// proof generated for one vector, or for one owner key and challenge,
+/// cannot verify against another. The caller supplies the binding it
+/// computed itself, never one taken from the prover.
 pub fn verify(args: &[u8]) -> bool {
-    if args.len() < 4 + 32 + V_OBF_BYTES {
+    if args.len() < 4 + 32 + V_OBF_BYTES + 32 {
         return false;
     }
     let plen = u32::from_le_bytes([args[0], args[1], args[2], args[3]]) as usize;
-    if args.len() != 4 + plen + 32 + V_OBF_BYTES {
+    if args.len() != 4 + plen + 32 + V_OBF_BYTES + 32 {
         return false;
     }
 
@@ -55,6 +58,10 @@ pub fn verify(args: &[u8]) -> bool {
     // Values are bounded by the encoding (|v| < 2³¹ in practice), so a
     // direct i64 → Fr conversion is exact and never wraps.
     let v_obf_start = 4 + plen + 32;
+    let binding = match Fr::deserialize_uncompressed(&args[v_obf_start + V_OBF_BYTES..]) {
+        Ok(b) => b,
+        Err(_) => return false,
+    };
     let public_inputs = core::iter::once(comm)
         .chain(
             args[v_obf_start..v_obf_start + V_OBF_BYTES]
@@ -64,8 +71,9 @@ pub fn verify(args: &[u8]) -> bool {
                     Fr::from(v)
                 }),
         )
+        .chain(core::iter::once(binding))
         .collect::<std::vec::Vec<_>>();
-    if public_inputs.len() != 1 + MAX_PROJ_DIM {
+    if public_inputs.len() != 1 + MAX_PROJ_DIM + 1 {
         return false;
     }
 

@@ -24,11 +24,40 @@ fn v_obf_i64_to_frs(v_obf: &[i64]) -> Vec<Fr> {
     padded.iter().map(|v| Fr::from(*v)).collect()
 }
 
+/// Who a proof is for. The verifier issues a fresh `challenge` and knows the
+/// key the account will be controlled by; both go into the proof as one
+/// public input, so the same proof can't be replayed with another challenge,
+/// stolen for another key, or front-run.
+///
+/// `H = SHA-256("hus.binding.v1" ‖ len(owner_pubkey) as u32 LE ‖ owner_pubkey ‖ challenge)`,
+/// reduced into the field. Returned as the field element's canonical
+/// 32-byte encoding.
+pub fn proof_binding(owner_pubkey: &[u8], challenge: &[u8]) -> [u8; 32] {
+    use sha2::{Digest, Sha256};
+    let mut h = Sha256::new();
+    h.update(b"hus.binding.v1");
+    h.update((owner_pubkey.len() as u32).to_le_bytes());
+    h.update(owner_pubkey);
+    h.update(challenge);
+    serialize_fr(Fr::from_le_bytes_mod_order(&h.finalize()))
+}
+
+fn binding_fr(binding: &[u8; 32]) -> Result<Fr, SdkError> {
+    Fr::deserialize_uncompressed(&binding[..]).map_err(|_| SdkError::CryptoError {
+        reason: "binding deserialize failed",
+    })
+}
+
 /// Generate a Groth16 proof: Poseidon(v_obf_fixed || nonce) == commitment,
-/// with every `v_obf` element exposed as a public input.
+/// with every `v_obf` element and the `binding` (see [`proof_binding`])
+/// exposed as public inputs.
 ///
 /// Returns (proof_bytes, commitment_hash).
-pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
+pub fn prove_projected(
+    pk: &[u8],
+    v_obf: &[f32],
+    binding: &[u8; 32],
+) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
     #[cfg(feature = "std")]
     let start = std::time::Instant::now();
 
@@ -57,6 +86,7 @@ pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), 
         v_obf: v_obf_frs,
         nonce,
         commitment: commitment_fp,
+        binding: binding_fr(binding)?,
     };
 
     let mut rng = rand::rngs::OsRng;
@@ -87,14 +117,18 @@ pub fn prove_projected(pk: &[u8], v_obf: &[f32]) -> Result<(Vec<u8>, [u8; 32]), 
 
 /// Off-chain verification of a Groth16 proof.
 ///
-/// Public inputs: commitment + every v_obf element (fixed-point i64,
-/// `v_obf_to_contract` encoding). The proof only verifies if the supplied
-/// `v_obf` is byte-identical to the vector the proof was generated over.
+/// Public inputs: commitment, every v_obf element (fixed-point i64,
+/// `v_obf_to_contract` encoding), then the binding. The proof only verifies
+/// if the supplied `v_obf` is byte-identical to the vector the proof was
+/// generated over, and `binding` is the one it was made for: the verifier
+/// computes it itself with [`proof_binding`] from the owner key and the
+/// challenge it issued.
 pub fn verify_projected(
     vk: &[u8],
     proof: &[u8],
     commitment: &[u8; 32],
     v_obf: &[i64],
+    binding: &[u8; 32],
 ) -> Result<bool, SdkError> {
     HUS_METRICS
         .proofs_verified
@@ -116,10 +150,14 @@ pub fn verify_projected(
             reason: "commitment deserialize failed",
         })?;
 
-    // Public inputs: [commitment] ++ v_obf (128 fixed-point elements).
+    // Public inputs: [commitment] ++ v_obf (128 fixed-point elements) ++ [binding].
+    if v_obf.len() > MAX_PROJ_DIM {
+        return Ok(false);
+    }
     let mut public_inputs =
         core::iter::once(public_comm).collect::<alloc::vec::Vec<_>>();
     public_inputs.extend(v_obf_i64_to_frs(v_obf));
+    public_inputs.push(binding_fr(binding)?);
 
     let result =
         G16::verify_proof(&pvk, &proof, &public_inputs).map_err(|_| SdkError::CryptoError {
@@ -167,6 +205,7 @@ mod tests {
                 v_obf: vec![Fr::ZERO; n],
                 nonce: Fr::ZERO,
                 commitment: Fr::ZERO,
+                binding: Fr::ZERO,
             },
             alpha,
             beta,
@@ -191,6 +230,15 @@ mod tests {
         v_obf_input: &[f32],
         wrong_comm: Option<[u8; 32]>,
     ) -> bool {
+        run_roundtrip_bound(v_obf_input, wrong_comm, Fr::from(7u64), Fr::from(7u64))
+    }
+
+    fn run_roundtrip_bound(
+        v_obf_input: &[f32],
+        wrong_comm: Option<[u8; 32]>,
+        proved_binding: Fr,
+        checked_binding: Fr,
+    ) -> bool {
         let mut rng = rand::rngs::OsRng;
         let n = v_obf_input.len();
         let (pk, vk) = gen_keys_direct(n, &mut rng);
@@ -212,13 +260,14 @@ mod tests {
                 v_obf: v_obf_frs.clone(),
                 nonce,
                 commitment,
+                binding: proved_binding,
             },
             &pk,
             &mut rng,
         )
         .unwrap();
 
-        // Public inputs: [commitment] ++ v_obf (v_obf is now a public input)
+        // Public inputs: [commitment] ++ v_obf ++ [binding]
         let verify_comm = wrong_comm
             .map(|c| Fr::from_be_bytes_mod_order(&c))
             .unwrap_or(commitment);
@@ -226,6 +275,7 @@ mod tests {
         let pvk = prepare_verifying_key(&vk);
         let pub_inputs = core::iter::once(verify_comm)
             .chain(v_obf_frs.iter().copied())
+            .chain(core::iter::once(checked_binding))
             .collect::<alloc::vec::Vec<_>>();
         match G16::verify_proof(&pvk, &proof, &pub_inputs) {
             Ok(b) => b,
@@ -241,6 +291,23 @@ mod tests {
     #[test]
     fn wrong_commitment_rejected() {
         assert!(!run_roundtrip(&[0.5f32; 2], Some([0x99u8; 32])));
+    }
+
+    /// S3: a proof made for one owner/challenge must not verify for another.
+    #[test]
+    fn other_binding_rejected() {
+        let a = binding_fr(&proof_binding(b"owner-A", b"challenge-1")).unwrap();
+        let b = binding_fr(&proof_binding(b"owner-B", b"challenge-1")).unwrap();
+        let a2 = binding_fr(&proof_binding(b"owner-A", b"challenge-2")).unwrap();
+        assert!(run_roundtrip_bound(&[0.5f32; 2], None, a, a));
+        assert!(!run_roundtrip_bound(&[0.5f32; 2], None, a, b), "another owner");
+        assert!(!run_roundtrip_bound(&[0.5f32; 2], None, a, a2), "another challenge");
+    }
+
+    #[test]
+    fn binding_is_domain_separated_and_length_prefixed() {
+        assert_ne!(proof_binding(b"ab", b"c"), proof_binding(b"a", b"bc"));
+        assert_eq!(proof_binding(b"k", b"n"), proof_binding(b"k", b"n"));
     }
 
     /// C1: the proof must bind v_obf itself — a proof made for one vector
@@ -267,6 +334,7 @@ mod tests {
                 v_obf: v_obf_frs.clone(),
                 nonce,
                 commitment,
+                binding: Fr::ONE,
             },
             &pk,
             &mut rng,
@@ -278,6 +346,7 @@ mod tests {
         // Same vector → verifies.
         let pub_inputs = core::iter::once(commitment)
             .chain(v_obf_frs.iter().copied())
+            .chain(core::iter::once(Fr::ONE))
             .collect::<alloc::vec::Vec<_>>();
         assert!(G16::verify_proof(&pvk, &proof, &pub_inputs).unwrap());
 
@@ -290,6 +359,7 @@ mod tests {
             .collect::<alloc::vec::Vec<_>>();
         let pub_inputs = core::iter::once(commitment)
             .chain(tampered_frs.iter().copied())
+            .chain(core::iter::once(Fr::ONE))
             .collect::<alloc::vec::Vec<_>>();
         assert!(
             !G16::verify_proof(&pvk, &proof, &pub_inputs).unwrap(),

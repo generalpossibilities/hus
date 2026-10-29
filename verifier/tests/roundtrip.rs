@@ -4,23 +4,25 @@
 //! proves a projection with hus-sdk, encodes args as the contract will,
 //! then verifies with the embedded-VK verifier logic that ships in the WASM.
 //!
-//! Wire format: [plen u32 LE][proof][commitment 32B][v_obf 128 × i64 LE]
-//! The proof's public inputs are `[commitment] ++ v_obf`, so tampering with
-//! any element must reject (C1: the vector is bound by the proof).
+//! Wire format: [plen u32 LE][proof][commitment 32B][v_obf 128 × i64 LE][binding 32B]
+//! The proof's public inputs are `[commitment] ++ v_obf ++ [binding]`, so
+//! tampering with any element must reject (C1: the vector is bound; S3: the
+//! owner key and challenge are bound).
 
 use hus_sdk::circuit::r1cs::MAX_PROJ_DIM;
 use hus_sdk::prover::{prove_projected, verify_projected};
 use hus_wasm_verifier::verify::verify;
 
-fn build_args(proof: &[u8], commitment: &[u8], v_obf_contract: &[i64]) -> Vec<u8> {
+fn build_args(proof: &[u8], commitment: &[u8], v_obf_contract: &[i64], binding: &[u8; 32]) -> Vec<u8> {
     assert_eq!(v_obf_contract.len(), MAX_PROJ_DIM);
-    let mut args = Vec::with_capacity(4 + proof.len() + 32 + v_obf_contract.len() * 8);
+    let mut args = Vec::with_capacity(4 + proof.len() + 32 + v_obf_contract.len() * 8 + 32);
     args.extend_from_slice(&(proof.len() as u32).to_le_bytes());
     args.extend_from_slice(proof);
     args.extend_from_slice(commitment);
     for v in v_obf_contract {
         args.extend_from_slice(&v.to_le_bytes());
     }
+    args.extend_from_slice(binding);
     args
 }
 
@@ -31,36 +33,43 @@ fn real_keys_roundtrip() {
 
     // Prove a valid projection.
     let v_obf: Vec<f32> = (0..MAX_PROJ_DIM).map(|i| (i as f32) / 100.0).collect();
-    let (proof, commitment) = prove_projected(&pk_bytes, &v_obf).expect("prove failed");
+    let binding = hus_sdk::proof_binding(b"owner-key-A", b"challenge-0000001");
+    let (proof, commitment) = prove_projected(&pk_bytes, &v_obf, &binding).expect("prove failed");
     assert_eq!(commitment.len(), 32);
     assert_eq!(proof.len(), 128, "proof should be 128 bytes");
 
     // SDK-side verify against the canonical fixed-point encoding.
     let v_obf_contract = hus_sdk::v_obf_to_contract(&v_obf);
     assert!(
-        verify_projected(&vk_bytes, &proof, &commitment, &v_obf_contract).unwrap(),
+        verify_projected(&vk_bytes, &proof, &commitment, &v_obf_contract, &binding).unwrap(),
         "SDK-side verify must pass for a valid proof"
     );
 
     // Component-side verify over the wire format.
-    let args = build_args(&proof, &commitment, &v_obf_contract);
+    let args = build_args(&proof, &commitment, &v_obf_contract, &binding);
     assert!(verify(&args), "valid proof must verify");
 
     // Tamper with commitment -> must reject.
-    let mut bad = build_args(&proof, &commitment, &v_obf_contract);
+    let mut bad = build_args(&proof, &commitment, &v_obf_contract, &binding);
     bad[4 + proof.len()] ^= 0x01;
     assert!(!verify(&bad), "tampered commitment must reject");
 
     // Tamper with proof -> must reject.
-    let mut bad = build_args(&proof, &commitment, &v_obf_contract);
+    let mut bad = build_args(&proof, &commitment, &v_obf_contract, &binding);
     bad[4] ^= 0x01;
     assert!(!verify(&bad), "tampered proof must reject");
 
     // Swap one v_obf element -> must reject (C1: vObf is bound by the proof).
     let mut swapped = v_obf_contract.clone();
     swapped[63] += 1;
-    let bad = build_args(&proof, &commitment, &swapped);
+    let bad = build_args(&proof, &commitment, &swapped, &binding);
     assert!(!verify(&bad), "tampered v_obf must reject");
+
+    // Another owner key, or another challenge -> must reject (S3).
+    let other_owner = hus_sdk::proof_binding(b"owner-key-B", b"challenge-0000001");
+    assert!(!verify(&build_args(&proof, &commitment, &v_obf_contract, &other_owner)), "other owner must reject");
+    let other_challenge = hus_sdk::proof_binding(b"owner-key-A", b"challenge-0000002");
+    assert!(!verify(&build_args(&proof, &commitment, &v_obf_contract, &other_challenge)), "other challenge must reject");
 
     // Malformed args -> reject without panic.
     assert!(!verify(&[0u8; 4]));

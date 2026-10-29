@@ -9,8 +9,8 @@
 //! Run with:
 //!   cargo test --package hus-onchain --test integration_test -- --ignored --nocapture
 
-use hus_onchain::hus_app::{ChainModalityConfig, HusApp};
-use hus_onchain::hus_registry::{ChainModalityConfig as RegChainModalityConfig, HusRegistry};
+use hus_onchain::hus_app::HusApp;
+use hus_onchain::hus_registry::HusRegistry;
 use std::sync::Arc;
 use tvm_client::abi::Signer;
 use tvm_client::ClientConfig;
@@ -18,30 +18,22 @@ use tvm_client::ClientContext;
 
 const CONTRACT_ADDR: &str = "3fb1ca2bf0564aab352b06621b63fd48e8e432a4e13a636ec142d423ac187e67::3fb1ca2bf0564aab352b06621b63fd48e8e432a4e13a636ec142d423ac187e67";
 
-/// Canonical chain modality configs matching the SDK defaults.
-fn default_chain_configs() -> Vec<RegChainModalityConfig> {
-    vec![
-        RegChainModalityConfig { modalityId: "0".into(), projDim: "128".into(), minScore: "80".into() },
-        RegChainModalityConfig { modalityId: "1".into(), projDim: "64".into(),  minScore: "90".into() },
-        RegChainModalityConfig { modalityId: "2".into(), projDim: "64".into(),  minScore: "75".into() },
-        RegChainModalityConfig { modalityId: "3".into(), projDim: "48".into(),  minScore: "90".into() },
-        RegChainModalityConfig { modalityId: "4".into(), projDim: "16".into(),  minScore: "70".into() },
-        RegChainModalityConfig { modalityId: "5".into(), projDim: "12".into(),  minScore: "65".into() },
-        RegChainModalityConfig { modalityId: "6".into(), projDim: "24".into(),  minScore: "70".into() },
-    ]
+/// All seven modalities (the registry takes modality ids; the contract sets
+/// projDim and minScore itself).
+fn default_chain_configs() -> Vec<u8> {
+    (0..7).collect()
 }
 
-/// Subset of configs for a test that only uses Face + Iris.
-fn face_iris_configs() -> Vec<RegChainModalityConfig> {
-    default_chain_configs().into_iter().take(2).collect()
+/// Face + Keystroke (minimum 2).
+fn face_keystroke_configs() -> Vec<u8> {
+    vec![0, 4]
 }
 
-/// Subset with Face + Keystroke (minimum 2, Face is modality 0).
-fn face_keystroke_configs() -> Vec<RegChainModalityConfig> {
-    vec![
-        RegChainModalityConfig { modalityId: "0".into(), projDim: "128".into(), minScore: "80".into() },
-        RegChainModalityConfig { modalityId: "4".into(), projDim: "16".into(),  minScore: "70".into() },
-    ]
+/// `register_app` only sends the message; the new app's address isn't in the
+/// reply. These tests use an app deployed beforehand, whose operator (and
+/// verifier) key is the test wallet: set HUS_TEST_APP_ADDR.
+fn test_app_addr() -> String {
+    std::env::var("HUS_TEST_APP_ADDR").expect("set HUS_TEST_APP_ADDR to a deployed HusApp")
 }
 
 fn make_context() -> Arc<ClientContext> {
@@ -66,6 +58,21 @@ fn make_signer() -> Signer {
     Signer::Keys {
         keys: tvm_client::crypto::KeyPair { public, secret },
     }
+}
+
+fn signer_pubkey(signer: &Signer) -> String {
+    match signer {
+        Signer::Keys { keys } => format!("0x{}", keys.public),
+        _ => panic!("test signer must hold keys"),
+    }
+}
+
+/// The contract registers only what its verifier signs. In these tests the
+/// operator key is also the verifier; the proof bytes are not checked on TVM.
+async fn name_verifier(app: &HusApp, signer: &Signer) {
+    app.set_verifier(&signer_pubkey(signer), signer.clone())
+        .await
+        .expect("set_verifier");
 }
 
 fn unique_name() -> String {
@@ -114,22 +121,15 @@ async fn test_register_app_deploys_husapp() {
     let signer = make_signer();
     let name = unique_name();
 
-    let configs = face_iris_configs();
     let r = registry
-        .register_app(&name, &configs, signer.clone())
-        .await
-        .expect("register_app");
+        .register_app(&name, &[0, 1], signer.clone())
+        .await;
+    assert!(r.is_ok(), "register_app: {:?}", r.err());
 
-    let app_addr = r
-        .return_value
-        .as_ref()
-        .and_then(|v| v.get("value0"))
-        .and_then(|v| v.as_str())
-        .expect("app address in response");
-
-    let app = HusApp::new(ctx, app_addr);
+    // The reply carries only the message hash; check a deployed app's version.
+    let app = HusApp::new(ctx, test_app_addr());
     let app_version = app.get_version().await.expect("husapp get_version");
-    assert_eq!(app_version, "2.3.1");
+    assert_eq!(app_version, "2.6.0");
 }
 
 #[tokio::test]
@@ -141,27 +141,23 @@ async fn test_husapp_deposit_and_submit() {
     let name = unique_name();
 
     let configs = face_keystroke_configs();
-    let r = registry
+    registry
         .register_app(&name, &configs, signer.clone())
         .await
         .expect("register_app");
-    let app_addr = r
-        .return_value
-        .as_ref()
-        .and_then(|v| v.get("value0"))
-        .and_then(|v| v.as_str())
-        .expect("app address");
-    let app = HusApp::new(ctx, &app_addr);
+    let app_addr = test_app_addr();
+    let app = HusApp::new(ctx, app_addr);
 
     let r = app.deposit("42", signer.clone()).await;
     assert!(r.is_ok(), "deposit: {:?}", r.err());
+    name_verifier(&app, &signer).await;
 
     let commitment = hash_hex("user1");
     let v_obf = test_v_obf(1);
     let r = app
-        .submit_commitment(&commitment, &v_obf, 0, signer.clone())
+        .submit_verified(&commitment, &v_obf, "aa", "0x1", 0, signer.clone())
         .await;
-    assert!(r.is_ok(), "submit_commitment: {:?}", r.err());
+    assert!(r.is_ok(), "submit_verified: {:?}", r.err());
 
     let count = app.get_registration_count().await.unwrap();
     assert_eq!(count, 1, "one registration should exist");
@@ -179,28 +175,24 @@ async fn test_husapp_multi_modality() {
     let name = unique_name();
 
     let configs = default_chain_configs();
-    let r = registry
+    registry
         .register_app(&name, &configs, signer.clone())
         .await
         .expect("register_app");
-    let app_addr = r
-        .return_value
-        .as_ref()
-        .and_then(|v| v.get("value0"))
-        .and_then(|v| v.as_str())
-        .expect("app address");
-    let app = HusApp::new(ctx, &app_addr);
+    let app_addr = test_app_addr();
+    let app = HusApp::new(ctx, app_addr);
 
     app.deposit("99", signer.clone()).await.expect("deposit");
+    name_verifier(&app, &signer).await;
 
     for modality_id in 0..7u8 {
         let label = format!("mod{modality_id}_user");
         let commitment = hash_hex(&label);
         let v_obf = test_v_obf(modality_id * 17);
 
-        app.submit_commitment(&commitment, &v_obf, modality_id, signer.clone())
+        app.submit_verified(&commitment, &v_obf, "aa", "0x1", modality_id, signer.clone())
             .await
-            .expect("submit_commitment");
+            .expect("submit_verified");
 
         let dup = app.check_duplicate(&commitment).await.unwrap();
         assert!(dup, "modality {modality_id} should be found as duplicate");
@@ -212,7 +204,7 @@ async fn test_husapp_multi_modality() {
 
 #[tokio::test]
 #[ignore]
-async fn test_husapp_submit_with_proof() {
+async fn test_husapp_submit_verified_proof() {
     let ctx = make_context();
     let registry = HusRegistry::new(ctx.clone(), CONTRACT_ADDR);
     let signer = make_signer();
@@ -226,66 +218,58 @@ async fn test_husapp_submit_with_proof() {
         .expect("read pk.bin — run keygen example first");
 
     let configs = face_keystroke_configs();
-    let r = registry
+    registry
         .register_app(&name, &configs, signer.clone())
         .await
         .expect("register_app");
-    let app_addr = r
-        .return_value
-        .as_ref()
-        .and_then(|v| v.get("value0"))
-        .and_then(|v| v.as_str())
-        .expect("app address");
-    let app = HusApp::new(ctx, &app_addr);
+    let app_addr = test_app_addr();
+    let app = HusApp::new(ctx, app_addr);
 
     app.deposit("swp-1", signer.clone()).await.expect("deposit");
+    name_verifier(&app, &signer).await;
 
     let v_obf_f32: Vec<f32> = test_v_obf(42).iter().map(|&v| v as f32).collect();
+    let binding = hus_sdk::proof_binding(b"test-owner-key", b"test-challenge-0001");
+    let mut binding_be = binding;
+    binding_be.reverse();
+    let binding_hex = format!("0x{}", hex::encode(binding_be));
     let (proof_bytes, commitment_bytes) =
-        hus_sdk::prover::prove_projected(&pk_bytes, &v_obf_f32).expect("proof generation");
+        hus_sdk::prover::prove_projected(&pk_bytes, &v_obf_f32, &binding).expect("proof generation");
 
     // Off-chain verify first (sanity check)
     let ok = hus_sdk::prover::verify_projected(
-        &vk_bytes, &proof_bytes, &commitment_bytes, &hus_sdk::v_obf_to_contract(&v_obf_f32),
+        &vk_bytes, &proof_bytes, &commitment_bytes, &hus_sdk::v_obf_to_contract(&v_obf_f32), &binding,
     )
     .expect("verify_projected");
     assert!(ok, "off-chain proof should verify");
 
-    let proof_b64 = base64::engine::general_purpose::STANDARD.encode(&proof_bytes);
+    let proof_hex = hex::encode(&proof_bytes);
     let commitment_hex = format!("0x{}", hex::encode(commitment_bytes));
     let v_obf_i64: Vec<i64> = test_v_obf(42);
 
     let r = app
-        .submit_with_proof(&v_obf_i64, &proof_b64, &commitment_hex, 0, signer.clone())
+        .submit_verified(&commitment_hex, &v_obf_i64, &proof_hex, &binding_hex, 0, signer.clone())
         .await;
-    assert!(r.is_ok(), "submit_with_proof: {:?}", r.err());
+    assert!(r.is_ok(), "submit_verified: {:?}", r.err());
 
     let count = app.get_registration_count().await.unwrap();
-    assert_eq!(count, 1, "one registration after submit_with_proof");
+    assert_eq!(count, 1, "one registration after submit_verified");
 
     // Verify stored proof matches what we submitted
     let reg = app.get_registration(0).await.expect("get_registration");
     assert!(!reg.proof.is_empty(), "proof should be stored");
-    // Commitment hash is stored as tvm.hash(commitment_bytes) — we can't
-    // easily predict it off-chain, just check it's non-empty
     assert!(!reg.commitment_hash.is_empty(), "commitment hash stored");
 
     // Same V_obf with different nonce → L2 distance 0 → score 100 → rejected
     let (proof_bytes2, commitment_bytes2) =
-        hus_sdk::prover::prove_projected(&pk_bytes, &v_obf_f32).expect("second proof generation");
-    let proof_b64_2 = base64::engine::general_purpose::STANDARD.encode(&proof_bytes2);
+        hus_sdk::prover::prove_projected(&pk_bytes, &v_obf_f32, &binding).expect("second proof generation");
+    let proof_hex_2 = hex::encode(&proof_bytes2);
     let commitment_hex_2 = format!("0x{}", hex::encode(commitment_bytes2));
 
     let r = app
-        .submit_with_proof(
-            &v_obf_i64,
-            &proof_b64_2,
-            &commitment_hex_2,
-            0,
-            signer.clone(),
-        )
+        .submit_verified(&commitment_hex_2, &v_obf_i64, &proof_hex_2, &binding_hex, 0, signer.clone())
         .await;
-    assert!(r.is_ok(), "second submit_with_proof: {:?}", r.err());
+    assert!(r.is_ok(), "second submit_verified: {:?}", r.err());
 
     let count = app.get_registration_count().await.unwrap();
     // L2 distance: same V_obf → distance 0 → score 100 → rejects (> threshold 80)
@@ -302,23 +286,19 @@ async fn test_husapp_duplicate_check() {
     let name = unique_name();
 
     let configs = face_keystroke_configs();
-    let r = registry
+    registry
         .register_app(&name, &configs, signer.clone())
         .await
         .expect("register_app");
-    let app_addr = r
-        .return_value
-        .as_ref()
-        .and_then(|v| v.get("value0"))
-        .and_then(|v| v.as_str())
-        .expect("app address");
-    let app = HusApp::new(ctx, &app_addr);
+    let app_addr = test_app_addr();
+    let app = HusApp::new(ctx, app_addr);
 
     app.deposit("1", signer.clone()).await.expect("deposit");
+    name_verifier(&app, &signer).await;
 
     let commitment = hash_hex("dup-test-user");
     let v_obf = test_v_obf(42);
-    app.submit_commitment(&commitment, &v_obf, 0, signer.clone())
+    app.submit_verified(&commitment, &v_obf, "aa", "0x1", 0, signer.clone())
         .await
         .expect("first submit");
 

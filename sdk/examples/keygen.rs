@@ -14,6 +14,7 @@ fn main() {
         v_obf: vec![Fr::ZERO; 128],
         nonce: Fr::ZERO,
         commitment: Fr::ZERO,
+        binding: Fr::ZERO,
     };
     let start = std::time::Instant::now();
     let pk = Groth16::<Bn254>::generate_random_parameters_with_reduction(circuit, &mut rng).unwrap();

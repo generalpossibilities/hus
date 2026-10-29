@@ -155,6 +155,7 @@ pub extern "C" fn hus_project(
 /// * `pk_len` — byte count of pk
 /// * `v_obf` — projected embedding values
 /// * `v_obf_len` — number of f32 values
+/// * `binding` — 32 bytes from `hus_proof_binding` (owner key + verifier challenge)
 /// * `out_proof` — receives pointer to proof bytes
 /// * `out_proof_len` — receives proof byte count
 /// * `out_commitment` — receives pointer to 32-byte commitment
@@ -170,6 +171,7 @@ pub extern "C" fn hus_prove(
     pk_len: usize,
     v_obf: *const f32,
     v_obf_len: usize,
+    binding: *const u8,
     out_proof: *mut *mut u8,
     out_proof_len: *mut usize,
     out_commitment: *mut *mut u8,
@@ -179,6 +181,7 @@ pub extern "C" fn hus_prove(
 ) -> i32 {
     if pk.is_null()
         || v_obf.is_null()
+        || binding.is_null()
         || out_proof.is_null()
         || out_proof_len.is_null()
         || out_commitment.is_null()
@@ -192,8 +195,12 @@ pub extern "C" fn hus_prove(
 
     let pk_slice = unsafe { core::slice::from_raw_parts(pk, pk_len) };
     let v = unsafe { core::slice::from_raw_parts(v_obf, v_obf_len) };
+    let mut b = [0u8; 32];
+    unsafe {
+        ptr::copy_nonoverlapping(binding, b.as_mut_ptr(), 32);
+    }
 
-    match prove_projected(pk_slice, v) {
+    match prove_projected(pk_slice, v, &b) {
         Ok((proof, commitment)) => {
             unsafe {
                 *out_proof = alloc_buf(&proof);
@@ -225,6 +232,7 @@ pub extern "C" fn hus_prove(
 /// * `commitment_len` — must be 32
 /// * `v_obf` — projected embedding
 /// * `v_obf_len` — number of f32 values
+/// * `binding` — 32 bytes the verifier computed with `hus_proof_binding`
 ///
 /// Returns 1 if valid, 0 if invalid, -1 on error.
 #[no_mangle]
@@ -238,8 +246,9 @@ pub extern "C" fn hus_verify(
     commitment_len: usize,
     v_obf: *const f32,
     v_obf_len: usize,
+    binding: *const u8,
 ) -> i32 {
-    if vk.is_null() || proof.is_null() || commitment.is_null() || v_obf.is_null() {
+    if vk.is_null() || proof.is_null() || commitment.is_null() || v_obf.is_null() || binding.is_null() {
         set_error("null pointer argument");
         return -1;
     }
@@ -255,11 +264,15 @@ pub extern "C" fn hus_verify(
         ptr::copy_nonoverlapping(commitment, c.as_mut_ptr(), 32);
     }
     let v = unsafe { core::slice::from_raw_parts(v_obf, v_obf_len) };
+    let mut b = [0u8; 32];
+    unsafe {
+        ptr::copy_nonoverlapping(binding, b.as_mut_ptr(), 32);
+    }
 
     // Verify against the canonical fixed-point encoding (v_obf is bound by
     // the proof as a public input).
     let v_contract = crate::v_obf_to_contract(v);
-    match verify_projected(vk_slice, p, &c, &v_contract) {
+    match verify_projected(vk_slice, p, &c, &v_contract, &b) {
         Ok(true) => 1,
         Ok(false) => 0,
         Err(e) => {
@@ -267,6 +280,32 @@ pub extern "C" fn hus_verify(
             -1
         }
     }
+}
+
+/// Compute the 32-byte proof binding for an owner key and a verifier
+/// challenge (see `prover::proof_binding`). Writes into `out` (32 bytes).
+///
+/// Returns 0 on success, -1 on error.
+#[no_mangle]
+#[allow(unsafe_code)]
+pub extern "C" fn hus_proof_binding(
+    owner_pubkey: *const u8,
+    owner_pubkey_len: usize,
+    challenge: *const u8,
+    challenge_len: usize,
+    out: *mut u8,
+) -> i32 {
+    if owner_pubkey.is_null() || challenge.is_null() || out.is_null() {
+        set_error("null pointer argument");
+        return -1;
+    }
+    let k = unsafe { core::slice::from_raw_parts(owner_pubkey, owner_pubkey_len) };
+    let c = unsafe { core::slice::from_raw_parts(challenge, challenge_len) };
+    let b = crate::prover::proof_binding(k, c);
+    unsafe {
+        ptr::copy_nonoverlapping(b.as_ptr(), out, 32);
+    }
+    0
 }
 
 /// Free a buffer allocated by any `hus_*` function.

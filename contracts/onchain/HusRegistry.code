@@ -7,8 +7,21 @@
 	LDREF
 	LDREF
 	LDREF
-	LDDICT
+	LDU 256
+	LDREF
 	ENDS
+	CTOS
+	LDDICT
+	LDDICT
+	LDDICT
+	LDU 16
+	LDU 256
+	ENDS
+	SETGLOB 18
+	SETGLOB 17
+	SETGLOB 16
+	SETGLOB 15
+	SETGLOB 14
 	SETGLOB 13
 	SETGLOB 12
 	SETGLOB 11
@@ -19,6 +32,11 @@
 }
 
 .fragment c7_to_c4, {
+	GETGLOB 18
+	GETGLOB 17
+	GETGLOB 16
+	GETGLOB 15
+	GETGLOB 14
 	GETGLOB 13
 	GETGLOB 12
 	GETGLOB 11
@@ -32,9 +50,132 @@
 	STREF
 	STREF
 	STREF
+	STU 256
+	ROLLREV 5
+	NEWC
 	STDICT
+	STDICT
+	STDICT
+	STU 16
+	STU 256
+	STBREFR
 	ENDC
 	POPROOT
+}
+
+.fragment cancelAppUpgrade_267f111d_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 13
+	EQUAL
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 158
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 159
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	THROWIFNOT 112
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 160
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUDEL
+	DROP
+	SETGLOB 15
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 161
+	PUSHSLICE xc000000000000000000000000035fa1adc
+	NEWC
+	STSLICE
+	STU 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment cancelAppUpgrade, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 157
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline cancelAppUpgrade_267f111d_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment clearProvingKeyChunks_e5a8a550_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 13
+	EQUAL
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 85
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 86
+	PUSHINT 0
+	SETGLOB 17
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 87
+	PUSHINT 0
+	SETGLOB 18
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment clearProvingKeyChunks, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 84
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline clearProvingKeyChunks_e5a8a550_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
 }
 
 .fragment constructor, {
@@ -48,7 +189,11 @@
 	THROWIF 51
 	LDREF
 	ENDS
-	.loc HusRegistry.sol, 27
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 49
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 50
+	SETGLOB 10
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 51
 	GETGLOB 5
 	DUP
 	ISNULL
@@ -57,14 +202,154 @@
 		PUSHINT 0
 	}
 	IF
-	GETGLOB 2
-	EQUAL
-	THROWIFNOT 100
-	.loc HusRegistry.sol, 28
+	SETGLOB 13
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment executeAppUpgrade_6be930f4_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 165
 	ACCEPT
-	.loc HusRegistry.sol, 29
-	SETGLOB 10
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 166
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	THROWIFNOT 112
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 168
+	NOW
+	OVER
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	THIRD
+	PUSHINT 604800
+	ADD
+	UFITS 32
+	GEQ
+	THROWIFNOT 113
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 170
+	DUP
+	GETGLOB 14
+	PUSHPOW2 8
+	DICTUGET
+	PUSHCONT {
+		PUSHSLICE x2_
+	}
+	IFNOT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 171
+	OVER
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	SECOND
+	PUSH S2
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	FIRST
+	ROT
+	NEWC
+	STSLICECONST x62_
+	STSLICE
+	PUSHSLICE x402faf08000000000000000000000000000001d7063bf_
+	STSLICER
+	STREF
+	STREF
+	ENDC
+	PUSHINT 1
+	SENDRAWMSG
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 176
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUDEL
+	DROP
+	SETGLOB 15
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 177
+	PUSHSLICE xc00000000000000000000000005deffc3f
+	NEWC
+	STSLICE
+	STU 256
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment executeAppUpgrade, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 164
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline executeAppUpgrade_6be930f4_internal
+	}
 	CALLREF {
 		.inline c7_to_c4
 	}
@@ -72,15 +357,15 @@
 }
 
 .fragment getAppAddress_62182b14_internal, {
-	.loc HusRegistry.sol, 80
-	GETGLOB 13
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 183
+	GETGLOB 14
 	PUSHPOW2 8
 	DICTUGET
 	PUSHCONT {
 		PUSHSLICE x2_
 	}
 	IFNOT
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment upd_only_time_in_c4, {
@@ -108,7 +393,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 79
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 182
 	OVER
 	PUSHCONT {
 		LDREF
@@ -118,7 +403,7 @@
 	IF
 	LDU 256
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline getAppAddress_62182b14_internal
 	}
@@ -154,10 +439,138 @@
 	THROW 0
 }
 
+.fragment getPendingUpgrade_ffe41abb_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 205
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	THROWIFNOT 112
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 206
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	FIRST
+	OVER
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	SECOND
+	ROT
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	THIRD
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment getPendingUpgrade, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 202
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline getPendingUpgrade_ffe41abb_internal
+	}
+	PUSH S3
+	PUSHCONT {
+		PUSH S5
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 98
+		STZEROES
+		XCHG S1, S3
+		STSLICECONST xc942a113
+		STREF
+		STREF
+		STU 32
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		BLKDROP 3
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
 .fragment getProvingKey_704b6f43_internal, {
-	.loc HusRegistry.sol, 88
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 191
 	GETGLOB 11
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment getProvingKey, {
@@ -169,9 +582,9 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 87
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 190
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline getProvingKey_704b6f43_internal
 	}
@@ -203,21 +616,225 @@
 	THROW 0
 }
 
-.fragment getVersion_0d8e6e2c_internal, {
-	.loc HusRegistry.sol, 96
-	PUSHREF {
-		.blob x322e332e30
+.fragment getProvingKeyChunk_02d6960a_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 223
+	DUP
+	GETGLOB 17
+	LESS
+	THROWIFNOT 121
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 224
+	GETGLOB 16
+	PUSHINT 16
+	DICTUGETREF
+	PUSHCONT {
+		PUSHREF {
+		}
 	}
-	.loc HusRegistry.sol, 0
+	IFNOT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment getProvingKeyChunk, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 222
+	LDU 16
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline getProvingKeyChunk_02d6960a_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 3156408008
+		STUR 130
+		STREF
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getProvingKeyChunkCount_e5964dbd_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 219
+	GETGLOB 17
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment getProvingKeyChunkCount, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 218
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline getProvingKeyChunkCount_e5964dbd_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 3326329716
+		STUR 130
+		STU 16
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getProvingKeyHash_df773120_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 228
+	GETGLOB 18
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment getProvingKeyHash, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 227
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline getProvingKeyHash_df773120_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 2334152912
+		STUR 130
+		STU 256
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getUpgradeDelay_dff5dc08_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 199
+	PUSHINT 604800
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment getUpgradeDelay, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 198
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline getUpgradeDelay_dff5dc08_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 3390096318
+		STUR 130
+		STU 32
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment getVersion_0d8e6e2c_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 232
+	PUSHREF {
+		.blob x322e342e32
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment getVersion, {
 	DROP
 	GETGLOB 6
 	THROWIFNOT 76
-	.loc HusRegistry.sol, 95
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 231
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline getVersion_0d8e6e2c_internal
 	}
@@ -250,9 +867,9 @@
 }
 
 .fragment getVk_824783c8_internal, {
-	.loc HusRegistry.sol, 92
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 195
 	GETGLOB 12
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment getVk, {
@@ -264,9 +881,9 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 91
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 194
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline getVk_824783c8_internal
 	}
@@ -299,20 +916,13 @@
 }
 
 .fragment isAppRegistered_a180ac35_internal, {
-	.loc HusRegistry.sol, 84
-	GETGLOB 13
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 187
+	GETGLOB 14
 	PUSHPOW2 8
 	DICTUGET
-	PUSHCONT {
-		PUSHSLICE x2_
-	}
-	IFNOT
-	PUSHREFSLICE {
-		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
-	}
-	SDEQ
-	NOT
-	.loc HusRegistry.sol, 0
+	NULLSWAPIFNOT
+	NIP
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment isAppRegistered, {
@@ -324,7 +934,7 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 83
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 186
 	OVER
 	PUSHCONT {
 		LDREF
@@ -334,7 +944,7 @@
 	IF
 	LDU 256
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline isAppRegistered_a180ac35_internal
 	}
@@ -366,15 +976,211 @@
 	THROW 0
 }
 
-.fragment registerApp_b3a55f64_internal, {
-	.loc HusRegistry.sol, 51
+.fragment isUpgradeReady_56de7998_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 214
+	DUP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	PUSHCONT {
+		DROP
+		FALSE
+	}
+	IFNOTJMP
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 215
+	NOW
+	SWAP
+	GETGLOB 15
+	PUSHPOW2 8
+	DICTUGET
+	IFREFELSEREF
+	{
+		LDREF
+		LDREF
+		LDU 32
+		ENDS
+		TRIPLE
+	}
+	{
+		PUSHREF {
+		}
+		DUP
+		PUSHINT 0
+		TRIPLE
+	}
+	THIRD
+	PUSHINT 604800
+	ADD
+	UFITS 32
+	GEQ
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment isUpgradeReady, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 213
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline isUpgradeReady_56de7998_internal
+	}
+	OVER
+	PUSHCONT {
+		PUSH S3
+		CTOS
+		LDU 2
+		LDMSGADDR
+		DROP
+		NIP
+		NEWC
+		STSLICECONST xc
+		STSLICE
+		PUSHINT 4234611286
+		STUR 130
+		STI 1
+		ENDC
+		PUSHINT 0
+		SENDRAWMSG
+	}
+	PUSHCONT {
+		DROP
+	}
+	IFELSE
+	IFREF {
+		.inline upd_only_time_in_c4
+	}
+	THROW 0
+}
+
+.fragment proposeAppUpgrade_c2eccbed_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 13
+	EQUAL
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 146
 	ACCEPT
-	.loc HusRegistry.sol, 52
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 147
+	PUSH S2
+	GETGLOB 14
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	THROWIFNOT 110
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 148
+	OVER
+	CTOS
+	SBITS
+	THROWIFNOT 111
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 150
+	NOW
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 151
+	XC2PU S2, S2, S2
+	TRIPLE
+	PUSH S2
+	GETGLOB 15
+	ROT
+	CALLREF {
+		UNTRIPLE
+		XCHG S2
+		NEWC
+		STREF
+		STREF
+		STU 32
+	}
+	ROTREV
+	PUSHPOW2 8
+	DICTUSETB
+	SETGLOB 15
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 153
+	DUP
+	PUSHINT 604800
+	ADD
+	UFITS 32
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 154
+	XCHG S2
+	PUSHSLICE xc00000000000000000000000002f4a8262
+	NEWC
+	STSLICE
+	STU 256
+	STU 32
+	STU 32
+	ENDC
+	PUSHINT 0
+	SENDRAWMSG
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment proposeAppUpgrade, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 141
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	LDREF
+	LDREF
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline proposeAppUpgrade_c2eccbed_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment registerApp_f15c98d5_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 101
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 102
 	GETGLOB 10
 	CTOS
 	SBITS
 	THROWIFNOT 102
-	.loc HusRegistry.sol, 54
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 103
+	DUP
+	FIRST
+	GTINT 1
+	THROWIFNOT 104
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 105
 	GETGLOB 5
 	DUP
 	ISNULL
@@ -383,62 +1189,74 @@
 		PUSHINT 0
 	}
 	IF
-	NEWC
-	STU 256
-	STREF
-	ENDC
-	HASHCU
-	.loc HusRegistry.sol, 55
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 106
 	DUP
-	GETGLOB 13
-	PUSHPOW2 8
-	DICTUGET
 	PUSHCONT {
-		PUSHSLICE x2_
+		.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 107
+		DROP
+		GETGLOB 13
+		.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	}
 	IFNOT
-	PUSHREFSLICE {
-		.blob x8000000000000000000000000000000000000000000000000000000000000000001_
-	}
-	SDEQ
-	THROWIFNOT 103
-	.loc HusRegistry.sol, 57
-	NOW
-	OVER
-	GETGLOB 5
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 110
 	DUP
-	ISNULL
-	PUSHCONT {
-		DROP
-		PUSHINT 0
-	}
-	IF
 	NEWC
 	STU 256
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 111
+	XCHG3 S1, S3, S0
+	STREF
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 112
+	ENDC
+	HASHCU
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 113
+	DUP
+	GETGLOB 14
+	PUSHPOW2 8
+	DICTUGET
+	NULLSWAPIFNOT
+	NIP
+	THROWIF 103
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 116
+	OVER
+	NEWC
 	STU 256
-	STU 32
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 117
+	OVER
+	STUR 256
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 118
+	NOW
+	STUR 32
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 119
 	ENDC
 	CTOS
 	SHA256U
-	.loc HusRegistry.sol, 59
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 121
+	NULL
+	PUSHINT 0
+	NULL
+	PAIR
 	PUSHINT 0
 	NULL
 	PAIR
 	NULL
 	PUSHINT 0
-	BLKPUSH 2, 0
+	BLKPUSH 4, 0
 	PUSHREF {
 	}
-	PUSH S7
+	PUSH S11
 	MYADDR
 	NEWC
 	PUSHINT 321
 	STZEROES
 	STSLICE
-	ROLLREV 7
+	ROLLREV 11
 	NEWC
 	STU 256
 	STREF
+	STU 256
+	STU 256
+	ROLLREV 7
+	NEWC
 	STU 256
 	STU 32
 	STU 32
@@ -448,6 +1266,13 @@
 	XCHG S2
 	STU 32
 	STDICT
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
+	STDICT
+	STBREFR
 	STBREFR
 	ENDC
 	GETGLOB 10
@@ -457,21 +1282,24 @@
 	STDICT
 	STZERO
 	ENDC
-	.loc HusRegistry.sol, 64
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 126
+	ROTREV
+	REVERSE 4, 1
 	GETGLOB 12
-	XCPU S1, S0
+	ROLL 4
+	DUP
 	HASHCU
 	NEWC
 	STSLICECONST x801_
 	STU 256
 	ENDC
 	CTOS
-	ROLLREV 3
-	PUSH S3
+	ROLLREV 5
+	PUSH S5
 	NEWC
 	STSLICECONST x62_
 	STSLICE
-	PUSHSLICE x405f5e1000000000000000000000000000007_
+	PUSHSLICE x411e1a3000000000000000000000000000007_
 	STSLICER
 	OVER
 	CALLREF {
@@ -498,22 +1326,28 @@
 	}
 	STREF
 	STONE
-	ROTREV
+	ROLLREV 4
 	NEWC
 	STSLICECONST x00000001
 	STREF
+	STU 256
+	SWAP
+	UNPAIR
+	XCHG S2
+	STU 32
+	STDICT
 	STU 256
 	STBREFR
 	ENDC
 	PUSHINT 1
 	SENDRAWMSG
-	.loc HusRegistry.sol, 71
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 133
 	PUSH2 S0, S1
-	GETGLOB 13
+	GETGLOB 14
 	PUSHPOW2 8
 	DICTUSET
-	SETGLOB 13
-	.loc HusRegistry.sol, 73
+	SETGLOB 14
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 135
 	PUXC S0, S1
 	PUSHSLICE xc00000000000000000000000004c375de2
 	NEWC
@@ -523,7 +1357,7 @@
 	ENDC
 	PUSHINT 0
 	SENDRAWMSG
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment registerApp, {
@@ -535,12 +1369,17 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 50
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 97
 	LDREF
+	LDU 32
+	LDDICT
+	ROTREV
+	PAIR
+	SWAP
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
-		.inline registerApp_b3a55f64_internal
+		.inline registerApp_f15c98d5_internal
 	}
 	OVER
 	PUSHCONT {
@@ -557,7 +1396,7 @@
 		STUR 98
 		SWAP
 		NEWC
-		STSLICECONST xdd8b4256
+		STSLICECONST xbc6f0b2b
 		STSLICE
 		STBREFR
 		ENDC
@@ -575,7 +1414,7 @@
 }
 
 .fragment setProvingKey_34e41c8e_internal, {
-	.loc HusRegistry.sol, 35
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
 	GETGLOB 5
 	DUP
 	ISNULL
@@ -584,20 +1423,20 @@
 		PUSHINT 0
 	}
 	IF
-	GETGLOB 2
+	GETGLOB 13
 	EQUAL
-	THROWIFNOT 100
-	.loc HusRegistry.sol, 36
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 62
 	ACCEPT
-	.loc HusRegistry.sol, 37
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 63
 	SETGLOB 11
-	.loc HusRegistry.sol, 38
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 64
 	PUSHREF {
 		.blob xc0000000000000000000000000259d395b
 	}
 	PUSHINT 0
 	SENDRAWMSG
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment setProvingKey, {
@@ -609,10 +1448,10 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 34
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 61
 	LDREF
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline setProvingKey_34e41c8e_internal
 	}
@@ -622,8 +1461,8 @@
 	THROW 0
 }
 
-.fragment setVk_b4622e6d_internal, {
-	.loc HusRegistry.sol, 42
+.fragment setProvingKeyChunk_fcb5db51_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
 	GETGLOB 5
 	DUP
 	ISNULL
@@ -632,20 +1471,139 @@
 		PUSHINT 0
 	}
 	IF
-	GETGLOB 2
+	GETGLOB 13
 	EQUAL
-	THROWIFNOT 100
-	.loc HusRegistry.sol, 43
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 76
 	ACCEPT
-	.loc HusRegistry.sol, 44
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 77
+	DUP
+	PUSHPOW2DEC 32
+	CDATASIZE
+	DROP
+	NIP
+	RSHIFT 3
+	GTINT 0
+	THROWIFNOT 120
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 78
+	OVER
+	GETGLOB 16
+	PUSHINT 16
+	DICTUSETREF
+	SETGLOB 16
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 79
+	DUP
+	GETGLOB 17
+	GEQ
+	PUSHCONT {
+		.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 80
+		DUP
+		INC
+		UFITS 16
+		SETGLOB 17
+		.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	}
+	IF
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	DROP
+}
+
+.fragment setProvingKeyChunk, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 75
+	LDU 16
+	LDREF
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline setProvingKeyChunk_fcb5db51_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment setProvingKeyHash_28c137e9_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 13
+	EQUAL
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 91
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 92
+	SETGLOB 18
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+}
+
+.fragment setProvingKeyHash, {
+	DROP
+	GETGLOB 6
+	THROWIFNOT 76
+	GETGLOB 2
+	ISNULL
+	IFREF {
+		.inline c4_to_c7
+	}
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 90
+	OVER
+	PUSHCONT {
+		LDREF
+		ENDS
+		CTOS
+	}
+	IF
+	LDU 256
+	ENDS
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
+	CALLREF {
+		.inline setProvingKeyHash_28c137e9_internal
+	}
+	CALLREF {
+		.inline c7_to_c4
+	}
+	THROW 0
+}
+
+.fragment setVk_b4622e6d_internal, {
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 57
+	GETGLOB 5
+	DUP
+	ISNULL
+	PUSHCONT {
+		DROP
+		PUSHINT 0
+	}
+	IF
+	GETGLOB 13
+	EQUAL
+	THROWIFNOT 101
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 68
+	ACCEPT
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 69
 	SETGLOB 12
-	.loc HusRegistry.sol, 45
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 70
 	PUSHREF {
 		.blob xc000000000000000000000000068bafdd2
 	}
 	PUSHINT 0
 	SENDRAWMSG
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 }
 
 .fragment setVk, {
@@ -657,10 +1615,10 @@
 	IFREF {
 		.inline c4_to_c7
 	}
-	.loc HusRegistry.sol, 41
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 67
 	LDREF
 	ENDS
-	.loc HusRegistry.sol, 0
+	.loc /home/kodics/hus/contracts/onchain/HusRegistry.sol, 0
 	CALLREF {
 		.inline setVk_b4622e6d_internal
 	}
@@ -672,42 +1630,122 @@
 
 .fragment public_function_selector, {
 	DUP
-	PUSHINT 775502033
+	PUSHINT 1075368868
 	LEQ
 	IFJMPREF {
 		DUP
-		EQINT 1
+		PUSHINT 186669264
+		LEQ
 		IFJMPREF {
-			.inline constructor
+			DUP
+			EQINT 1
+			IFJMPREF {
+				.inline constructor
+			}
+			DUP
+			PUSHINT 112677363
+			EQUAL
+			IFJMPREF {
+				.inline getProvingKey
+			}
+			DUP
+			PUSHINT 179329852
+			EQUAL
+			IFJMPREF {
+				.inline getAppAddress
+			}
+			DUP
+			PUSHINT 186669264
+			EQUAL
+			IFJMPREF {
+				.inline getProvingKeyHash
+			}
 		}
 		DUP
-		PUSHINT 112677363
-		EQUAL
+		PUSHINT 1008924360
+		LEQ
 		IFJMPREF {
-			.inline getProvingKey
+			DUP
+			PUSHINT 678788655
+			EQUAL
+			IFJMPREF {
+				.inline cancelAppUpgrade
+			}
+			DUP
+			PUSHINT 775502033
+			EQUAL
+			IFJMPREF {
+				.inline setVk
+			}
+			DUP
+			PUSHINT 1008924360
+			EQUAL
+			IFJMPREF {
+				.inline getProvingKeyChunk
+			}
 		}
 		DUP
-		PUSHINT 179329852
+		PUSHINT 1013910315
 		EQUAL
 		IFJMPREF {
-			.inline getAppAddress
+			.inline registerApp
 		}
 		DUP
-		PUSHINT 775502033
+		PUSHINT 1075368868
 		EQUAL
 		IFJMPREF {
-			.inline setVk
+			.inline executeAppUpgrade
 		}
 	}
 	DUP
-	PUSHINT 1568905995
+	PUSHINT 1242612670
 	LEQ
 	IFJMPREF {
 		DUP
-		PUSHINT 1078511090
+		PUSHINT 1083017129
+		LEQ
+		IFJMPREF {
+			DUP
+			PUSHINT 1078511090
+			EQUAL
+			IFJMPREF {
+				.inline getVersion
+			}
+			DUP
+			PUSHINT 1083017129
+			EQUAL
+			IFJMPREF {
+				.inline clearProvingKeyChunks
+			}
+		}
+		DUP
+		PUSHINT 1178846068
 		EQUAL
 		IFJMPREF {
-			.inline getVersion
+			.inline getProvingKeyChunkCount
+		}
+		DUP
+		PUSHINT 1229103379
+		EQUAL
+		IFJMPREF {
+			.inline getPendingUpgrade
+		}
+		DUP
+		PUSHINT 1242612670
+		EQUAL
+		IFJMPREF {
+			.inline getUpgradeDelay
+		}
+	}
+	DUP
+	PUSHINT 1919342280
+	LEQ
+	IFJMPREF {
+		DUP
+		PUSHINT 1471089467
+		EQUAL
+		IFJMPREF {
+			.inline setProvingKeyHash
 		}
 		DUP
 		PUSHINT 1550413873
@@ -721,18 +1759,35 @@
 		IFJMPREF {
 			.inline setProvingKey
 		}
+		DUP
+		PUSHINT 1919342280
+		EQUAL
+		IFJMPREF {
+			.inline isAppRegistered
+		}
 	}
 	DUP
-	PUSHINT 1569407574
-	EQUAL
+	PUSHINT 2135245798
+	LEQ
 	IFJMPREF {
-		.inline registerApp
-	}
-	DUP
-	PUSHINT 1919342280
-	EQUAL
-	IFJMPREF {
-		.inline isAppRegistered
+		DUP
+		PUSHINT 2062475846
+		EQUAL
+		IFJMPREF {
+			.inline proposeAppUpgrade
+		}
+		DUP
+		PUSHINT 2087127638
+		EQUAL
+		IFJMPREF {
+			.inline isUpgradeReady
+		}
+		DUP
+		PUSHINT 2135245798
+		EQUAL
+		IFJMPREF {
+			.inline setProvingKeyChunk
+		}
 	}
 }
 
@@ -826,7 +1881,11 @@
 }
 
 .fragment default_data_cell, {
+	PUSHINT 0
+	DUP
 	NULL
+	BLKPUSH 2, 0
+	PUSHINT 0
 	PUSHREF {
 	}
 	BLKPUSH 2, 0
@@ -836,7 +1895,15 @@
 	STREF
 	STREF
 	STREF
+	STU 256
+	ROLLREV 5
+	NEWC
 	STDICT
+	STDICT
+	STDICT
+	STU 16
+	STU 256
+	STBREFR
 	ENDC
 }
 

@@ -164,6 +164,8 @@ impl HusHandle {
     /// * `embedding_json` — JSON array of f32 values (e.g. `"[0.1,0.2,...]"`)
     /// * `seed_hex` — 32-byte hex string (64 hex chars)
     /// * `proj_dim` — projection dimension (≤ 128)
+    /// * `binding_hex` — 32-byte hex from `proof_binding_wasm` (owner key +
+    ///   the verifier's challenge); the proof is only valid for it
     ///
     /// Returns JSON: `{"commitment_hex":"...","proof_hex":"...","v_obf_json":"...","v_obf_scaled":[int64,...]}`
     pub fn project_and_prove(
@@ -171,7 +173,9 @@ impl HusHandle {
         embedding_json: &str,
         seed_hex: &str,
         proj_dim: usize,
+        binding_hex: &str,
     ) -> Result<String, JsValue> {
+        let binding = parse_hex32(binding_hex)?;
         let embedding: Vec<f32> = parse_f32_json(embedding_json);
         let seed = parse_hex32(seed_hex)?;
 
@@ -183,7 +187,7 @@ impl HusHandle {
         let v_obf = derive_and_project(&seed, &embedding, dim)
             .map_err(|e| JsValue::from_str(&alloc::format!("{:?}", e)))?;
 
-        let (proof_bytes, commitment) = prove_projected(&self.pk, &v_obf)
+        let (proof_bytes, commitment) = prove_projected(&self.pk, &v_obf, &binding)
             .map_err(|e| JsValue::from_str(&alloc::format!("{:?}", e)))?;
 
         let proof_hex = hex_encode(&proof_bytes);
@@ -205,8 +209,13 @@ impl HusHandle {
         Ok(result)
     }
 
-    /// Verify a Groth16 proof against a commitment and V_obf.
-    pub fn verify(&self, proof_hex: &str, commitment_hex: &str, v_obf_json: &str) -> bool {
+    /// Verify a Groth16 proof against a commitment, V_obf and the binding the
+    /// verifier computed itself (`proof_binding_wasm`).
+    pub fn verify(&self, proof_hex: &str, commitment_hex: &str, v_obf_json: &str, binding_hex: &str) -> bool {
+        let binding = match hex_decode32(binding_hex) {
+            Some(b) => b,
+            None => return false,
+        };
         let proof_bytes = match hex_decode(proof_hex) {
             Some(b) => b,
             None => return false,
@@ -223,6 +232,7 @@ impl HusHandle {
             &proof_bytes,
             &commitment,
             &crate::v_obf_to_contract(&v_obf),
+            &binding,
         )
         .unwrap_or(false)
     }
@@ -231,6 +241,15 @@ impl HusHandle {
 // ---------------------------------------------------------------------------
 // Standalone helpers (usable without HusHandle instance)
 // ---------------------------------------------------------------------------
+
+/// The 32-byte proof binding (hex) for an owner key and a verifier
+/// challenge, both hex.
+#[wasm_bindgen]
+pub fn proof_binding_wasm(owner_pubkey_hex: &str, challenge_hex: &str) -> Result<String, JsValue> {
+    let k = hex_decode(owner_pubkey_hex).ok_or_else(|| JsValue::from_str("bad owner key hex"))?;
+    let c = hex_decode(challenge_hex).ok_or_else(|| JsValue::from_str("bad challenge hex"))?;
+    Ok(hex_encode(&crate::prover::proof_binding(&k, &c)))
+}
 
 /// Project an embedding through BioHashing. Returns V_obf as JSON.
 #[wasm_bindgen]
