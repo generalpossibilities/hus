@@ -78,7 +78,8 @@ With Groth16 on BN254 (Powers of Tau trusted setup), a malicious prover cannot f
 **Threat:** An attacker presents a fake biometric (photo, silicone finger, deepfake video).  
 **Mitigation:** 
 - Hardware attestation (see [attestation.md](attestation.md)): every verification and registration must come from the integrator's unmodified app on a genuine, locked device, for exactly that request. This stops scripts, emulators, rooted phones and repackaged apps from feeding in made-up vectors. It does not stop a photo or screen held up to a real phone's camera.
-- Still open: liveness at the capture layer, with a server-issued challenge.
+- Face liveness at the capture layer (see [liveness.md](liveness.md)): blink, smile and head turns in an order derived from the verifier's single-use challenge, on one face tracked without a break, and the face used for the proof cropped from that same tracked face. A photo can't follow it, nor can a recording made before the challenge existed.
+- Still open: a face shown on a screen and puppeted live (a real-time deepfake). That needs presentation-attack detection (screen and print artefacts, depth).
 
 ### 5.3 Statistical Linkage
 

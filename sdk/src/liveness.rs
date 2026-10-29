@@ -1,3 +1,9 @@
+//! Signal-presence checks per modality. **This is not liveness**: it only
+//! rejects empty or constant input (a flat image, silence) and accepts any
+//! photo or recording. Face liveness is [`crate::face_liveness`], used by
+//! [`crate::enroll::FaceEnrollment`]; never treat a pass here as proof that
+//! a live person was present.
+
 use crate::capture::RawCapture;
 use crate::config::Modality;
 use alloc::vec::Vec;

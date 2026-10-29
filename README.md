@@ -100,7 +100,11 @@ hus/
 │   │   ├── circuit/                  #   R1CS circuit + Poseidon constraints
 │   │   ├── capture.rs                #   Sensor capture trait + WASM impls
 │   │   ├── extract.rs               #   Feature extractors (pure Rust + ONNX)
-│   │   ├── liveness.rs              #   18 challenge types across 7 modalities
+│   │   ├── face.rs                   #   Camera frames (NV21/BGRA/RGBA) + 5-point face alignment
+│   │   ├── face_liveness.rs          #   Active face liveness from the verifier's challenge
+│   │   ├── enroll.rs                 #   One face session: liveness → embed → prove → attestation challenge
+│   │   ├── typing.rs                 #   Typing session: a challenge code on the app's keypad
+│   │   ├── liveness.rs              #   Signal-presence checks (not liveness)
 │   │   ├── quality.rs               #   Per-modality quality checks
 │   │   ├── quality_gate.rs          #   Multi-modality quality fusion
 │   │   ├── key.rs                    #   Key derivation hierarchy
@@ -232,7 +236,8 @@ See [docs/security.md](docs/security.md) for the full threat model.
 | REST gateway + JS SDK | ✅ Complete |
 | C FFI for Python/Go/Java/iOS | ✅ Complete |
 | Multi-modality (7 modalities) | ✅ Complete |
-| Liveness detection (18 challenges) | ✅ Complete |
+| Face liveness (challenge-ordered actions, one tracked face) | ✅ Complete; screen replays not detected |
+| Face + typing enrolment sessions, C API, Android build | ✅ Complete |
 | Timelocked upgrade mechanism | ✅ Implemented |
 | Chunked proving key upload (17MB) | ✅ Implemented |
 | Production audit | 📅 Planned |

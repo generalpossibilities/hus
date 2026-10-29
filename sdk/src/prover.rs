@@ -94,13 +94,53 @@ pub fn prove_projected(
     v_obf: &[f32],
     binding: &[u8; 32],
 ) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
-    #[cfg(feature = "std")]
-    let start = std::time::Instant::now();
-
     let pk =
         ProvingKey::<Bn254>::deserialize_uncompressed(pk).map_err(|_| SdkError::CryptoError {
             reason: "PK deserialize failed",
         })?;
+    prove_with(&pk, v_obf, binding)
+}
+
+/// SHA-256 of the proving keys [`ProverKey::load`] accepts: the current
+/// setup's `keep/pk.bin` (dev setup, single party; replaced by the
+/// multi-party setup's key).
+pub const PROVING_KEY_SHA256: &[&str] = &["37ed630e4767c87240768dd3a9f761d1135c87b94e9a01ad06b33207105efc18"];
+
+/// A proving key checked by hash. Checking every curve point of the 17 MB
+/// key takes close to a minute (several on a phone); a key whose SHA-256
+/// is pinned in [`PROVING_KEY_SHA256`] is already known to be the setup's,
+/// so it is loaded without the point checks, in milliseconds.
+pub struct ProverKey(ProvingKey<Bn254>);
+
+impl ProverKey {
+    pub fn load(bytes: &[u8]) -> Result<Self, SdkError> {
+        use sha2::{Digest, Sha256};
+        let digest = Sha256::digest(bytes);
+        let mut hex = alloc::string::String::with_capacity(64);
+        for b in digest {
+            use core::fmt::Write;
+            let _ = write!(hex, "{b:02x}");
+        }
+        if !PROVING_KEY_SHA256.contains(&hex.as_str()) {
+            return Err(SdkError::CryptoError { reason: "proving key is not the pinned one" });
+        }
+        ProvingKey::<Bn254>::deserialize_uncompressed_unchecked(bytes)
+            .map(ProverKey)
+            .map_err(|_| SdkError::CryptoError { reason: "PK deserialize failed" })
+    }
+
+    pub fn prove(&self, v_obf: &[f32], binding: &[u8; 32]) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
+        prove_with(&self.0, v_obf, binding)
+    }
+}
+
+fn prove_with(
+    pk: &ProvingKey<Bn254>,
+    v_obf: &[f32],
+    binding: &[u8; 32],
+) -> Result<(Vec<u8>, [u8; 32]), SdkError> {
+    #[cfg(feature = "std")]
+    let start = std::time::Instant::now();
 
     // Canonical on-chain encoding (fixed-point ×10⁶, padded to 128).
     let v_obf_contract = v_obf_to_contract(v_obf);
@@ -126,7 +166,7 @@ pub fn prove_projected(
     };
 
     let mut rng = rand::rngs::OsRng;
-    let proof = G16::create_random_proof_with_reduction(circuit, &pk, &mut rng).map_err(|_| {
+    let proof = G16::create_random_proof_with_reduction(circuit, pk, &mut rng).map_err(|_| {
         SdkError::CryptoError {
             reason: "Groth16 proof creation failed",
         }

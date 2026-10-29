@@ -10,8 +10,11 @@ pub mod capture;
 pub mod circuit;
 pub mod config;
 pub mod crypto;
+pub mod enroll;
 pub mod error;
 pub mod extract;
+pub mod face;
+pub mod face_liveness;
 pub mod key;
 pub mod liveness;
 pub mod mel;
@@ -25,6 +28,7 @@ pub mod projection;
 pub mod prover;
 pub mod quality;
 pub mod quality_gate;
+pub mod typing;
 #[cfg(feature = "wasm-capture")]
 pub mod wasm;
 
@@ -41,12 +45,14 @@ pub use config::{
     DEFAULT_THRESHOLD, UNIQUENESS_MIN_SCORE,
 };
 pub use error::{CaptureError, ExtractionError, SdkError};
+pub use enroll::{EnrollConfig, EnrollError, Enrollment, FaceEnrollment, FaceModel};
 pub use extract::{Embedding, Extractor};
 pub use key::SessionKeys;
 pub use liveness::{require_liveness, LivenessResult, LivenessSession};
 pub use projection::{derive_and_project, derive_matrix, project};
 pub use prover::{attestation_challenge, proof_binding, prove_projected, verify_projected};
 pub use quality_gate::{QualityGate, QualityReport};
+pub use typing::TypingEnrollment;
 
 pub(crate) use circuit::r1cs::MAX_PROJ_DIM;
 pub(crate) const PROJ_DIM: usize = MAX_PROJ_DIM;

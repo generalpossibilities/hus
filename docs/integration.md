@@ -76,6 +76,12 @@ let client = HusClient::new(
 
 ### 3.4 Capture, Extract, Liveness
 
+> For face and typing on a phone, use the enrolment sessions instead
+> ([liveness.md](liveness.md)): liveness, capture, proof and the
+> attestation challenge in one session that the app can't steer. The
+> per-modality `LivenessSession` below only checks that a signal is
+> present; it is not liveness.
+
 ```rust
 use hus_sdk::{
     capture::{Capture, MockCapture, RawCapture},

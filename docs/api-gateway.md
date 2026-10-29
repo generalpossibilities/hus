@@ -81,7 +81,7 @@ curl -X POST http://localhost:3000/api/v1/verify \
   -d '{
     "proof": "hex",
     "commitment": "hex-32-bytes",
-    "v_obf": [0.05, -0.12, 0.33],
+    "v_obf": [123456, -789012, ...],
     "owner_pubkey": "hex",
     "challenge": "hex, 16-64 bytes, single use",
     "app_address": "the HusApp address, or the integrator id its app attests to",
@@ -271,6 +271,6 @@ const { proof, commitment } = await (await fetch(`${HUS}/api/v1/prove`, {
 ## Notes
 
 - **Auth**: If `--api-key` is set, all endpoints except status require `Authorization: Bearer <api-key>`
-- **V_obf format**: `/api/v1/project` returns `float32[]`; `/api/v1/submit` requires `int64[]` in the canonical encoding (`v_obf_to_contract`: ×10⁶, padded to 128)
+- **V_obf format**: `/api/v1/project` returns `float32[]`; `/api/v1/verify` and `/api/v1/submit` require `int64[]` in the canonical encoding (`v_obf_to_contract`: ×10⁶, padded to 128)
 - **CORS**: Permissive (any origin, any method, any header) for browser apps
 - **No `--vk-hex`**: VK and PK are fetched from the registry contract automatically

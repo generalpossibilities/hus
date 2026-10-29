@@ -146,7 +146,8 @@ struct Attested {
 struct VerifyRequest {
     proof: String,
     commitment: String,
-    v_obf: Vec<f32>,
+    /// Canonical fixed-point vector (`hus_sdk::v_obf_to_contract`), as for `/submit`.
+    v_obf: Vec<i64>,
     #[serde(flatten)]
     proof_for: ProofFor,
     #[serde(flatten)]
@@ -454,7 +455,7 @@ async fn verify_handler(
     let commitment = parse_hex_32(&req.commitment)?;
     let proof_bytes = hex::decode(&req.proof)
         .map_err(|e| AppError(format!("hex decode: {e}")))?;
-    let v_obf = hus_sdk::v_obf_to_contract(&req.v_obf);
+    let v_obf = req.v_obf;
     let binding = req.proof_for.binding()?;
     let valid = hus_sdk::prover::verify_projected(&state.vk, &proof_bytes, &commitment, &v_obf, &binding)
         .map_err(|e| AppError(e.to_string()))?;

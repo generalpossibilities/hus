@@ -19,8 +19,9 @@ stores the attestation's hash (`attestationHash`) and the verifier publishes
 the attestation (`GET /api/v1/attestation/{hash}`) so anyone can re-check
 it. No route accepts a proof without an attestation.
 
-**What it does not stop:** a photo or screen held up to the camera on a real
-phone (that needs liveness), or a device whose TEE itself is broken
+**What it does not stop:** a face shown to a real phone's camera. Face
+liveness ([liveness.md](liveness.md)) stops photos and recordings; a face on a
+screen puppeted live is still open. Nor a device whose TEE itself is broken
 (revocation covers known cases).
 
 On-chain proof verification (the AVM `hus-groth16` contract) covers the
