@@ -43,11 +43,15 @@ register a made-up vector through the genuine app. So:
 
 ## Supported formats
 
+Either platform can be left out of the policy; its attestations are then
+refused.
+
+
 | Format | Platform | Status |
 |---|---|---|
 | `android-key` | Android Key Attestation, chain to a Google root | Supported |
 | Play Integrity | Android, via Google's servers | Possible add-on |
-| App Attest | iOS | Planned |
+| `apple-app-attest` | iOS App Attest, chain to Apple's App Attestation root | Supported |
 
 ## The challenge
 
@@ -93,7 +97,34 @@ ks.deleteEntry(alias)
 // attestation = {"format": "android-key", "chain": chain}
 ```
 
-## What the verifier checks (`hus-attest`)
+## iOS: producing the attestation
+
+Generate a **new** App Attest key for each request and attest it with the
+HUS challenge as the client data hash. Send the attestation object.
+
+```swift
+let service = DCAppAttestService.shared
+let keyId = try await service.generateKey()
+let object = try await service.attestKey(keyId, clientDataHash: attestationChallenge) // 32 bytes from HUS
+// attestation = {"format": "apple-app-attest", "object": object.base64EncodedString()}
+```
+
+The app needs the App Attest entitlement
+(`com.apple.developer.devicecheck.appattest-environment` = `production`).
+Development builds attest in Apple's sandbox; the policy refuses those
+unless `allow_development` is set.
+
+What the verifier checks: the credential certificate and intermediate chain
+to Apple's App Attestation root (`https://www.apple.com/certificateauthority/private`)
+and are in date; the certificate's nonce extension
+(`1.2.840.113635.100.8.2`) equals `SHA-256(authData ‖ attestation_challenge)`;
+the credential id is the SHA-256 of the attested key; the RP ID hash is the
+SHA-256 of one of the policy's App IDs (`TEAMID.bundle.id`); the counter is
+0; the AAGUID is production (or development, if allowed). The receipt is
+not checked: it is for Apple's fraud metric, not for trust. Apple's own
+sample attestation from its validation guide is a test vector.
+
+## What the verifier checks for Android (`hus-attest`)
 
 - The chain is 2–10 certificates, each signed by the next, names chained,
   every issuer a CA, ending in one of Google's attestation roots (matched by
@@ -128,6 +159,9 @@ The integrator names its own app. HUS has no built-in app identity.
     "signing_cert_sha256": ["<sha-256 of the release signing certificate, hex>"],
     "min_security_level": "trusted-environment",
     "min_os_patch_level": 202501
+  },
+  "apple": {
+    "app_ids": ["ABCDE12345.com.example.app"]
   },
   "revocation_max_age_secs": 172800
 }

@@ -11,14 +11,16 @@
 //! owner or another challenge.
 //!
 //! Supported: Android Key Attestation (a fresh Keystore key whose
-//! certificate chain ends in a Google root). The format is tagged so iOS App
-//! Attest can be added beside it.
+//! certificate chain ends in a Google root) and Apple App Attest (a fresh
+//! App Attest key, chain to Apple's App Attestation root).
 //!
-//! What it does not prove: that a real face, rather than a photo or screen,
-//! was in front of the camera (liveness), or that the device's TEE is not
-//! itself compromised.
+//! What it does not prove: that a real face was in front of the camera
+//! (that is HUS's liveness, in the SDK), or that the device's secure
+//! hardware is not itself compromised.
 
 mod android;
+mod apple;
+pub mod cbor;
 pub mod der;
 
 use base64::Engine as _;
@@ -28,6 +30,7 @@ use std::collections::HashSet;
 use x509_parser::pem::parse_x509_pem;
 
 pub use android::{AndroidVerdict, SecurityLevel};
+pub use apple::AppleVerdict;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum AttestError {
@@ -69,13 +72,18 @@ impl std::error::Error for AttestError {}
 /// A device's attestation for one submission, as clients send it.
 ///
 /// JSON: `{"format":"android-key","chain":["<base64 DER>", ...]}`, leaf first
-/// (the certificate of the fresh Keystore key), root last.
+/// (the certificate of the fresh Keystore key), root last; or
+/// `{"format":"apple-app-attest","object":"<base64 attestation object>"}`.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(tag = "format", rename_all = "kebab-case", deny_unknown_fields)]
 pub enum Attestation {
     AndroidKey {
         #[serde(with = "b64_list")]
         chain: Vec<Vec<u8>>,
+    },
+    AppleAppAttest {
+        #[serde(with = "b64_one")]
+        object: Vec<u8>,
     },
 }
 
@@ -84,7 +92,8 @@ impl Attestation {
     /// published attestation can recompute it.
     ///
     /// Android: `SHA-256("hus.attestation.android-key.v1" ‖ for each cert:
-    /// u32 LE len ‖ DER)`.
+    /// u32 LE len ‖ DER)`. Apple: `SHA-256("hus.attestation.apple-app-attest.v1"
+    /// ‖ u32 LE len ‖ attestation object)`.
     pub fn hash(&self) -> [u8; 32] {
         let mut h = Sha256::new();
         match self {
@@ -95,8 +104,28 @@ impl Attestation {
                     h.update(c);
                 }
             }
+            Attestation::AppleAppAttest { object } => {
+                h.update(b"hus.attestation.apple-app-attest.v1");
+                h.update((object.len() as u32).to_le_bytes());
+                h.update(object);
+            }
         }
         h.finalize().into()
+    }
+}
+
+mod b64_one {
+    use super::*;
+    use serde::{Deserializer, Serializer};
+
+    pub fn serialize<S: Serializer>(v: &[u8], s: S) -> Result<S::Ok, S::Error> {
+        s.serialize_str(&base64::engine::general_purpose::STANDARD.encode(v))
+    }
+
+    pub fn deserialize<'de, D: Deserializer<'de>>(d: D) -> Result<Vec<u8>, D::Error> {
+        base64::engine::general_purpose::STANDARD
+            .decode(String::deserialize(d)?)
+            .map_err(serde::de::Error::custom)
     }
 }
 
@@ -123,7 +152,10 @@ mod b64_list {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Policy {
+    #[serde(default)]
     pub android: Option<AndroidPolicy>,
+    #[serde(default)]
+    pub apple: Option<ApplePolicy>,
     /// The revocation list must be at most this old (seconds).
     #[serde(default = "default_revocation_max_age")]
     pub revocation_max_age_secs: i64,
@@ -156,6 +188,17 @@ pub struct AndroidPolicy {
     pub min_boot_patch_level: Option<i64>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ApplePolicy {
+    /// The app's App IDs, `TEAMID.bundle.id`.
+    pub app_ids: Vec<String>,
+    /// Accept attestations from development builds (App Attest's sandbox).
+    /// Never in production.
+    #[serde(default)]
+    pub allow_development: bool,
+}
+
 fn default_min_attestation_version() -> i64 {
     3
 }
@@ -175,7 +218,17 @@ impl Policy {
                 }
             }
         }
-        if p.android.is_none() {
+        if let Some(a) = &p.apple {
+            let ok = |id: &String| {
+                id.split_once('.').is_some_and(|(team, bundle)| {
+                    team.len() == 10 && team.bytes().all(|b| b.is_ascii_alphanumeric()) && !bundle.is_empty()
+                })
+            };
+            if a.app_ids.is_empty() || !a.app_ids.iter().all(ok) {
+                return Err(AttestError::Policy("apple needs App IDs of the form TEAMID.bundle.id".into()));
+            }
+        }
+        if p.android.is_none() && p.apple.is_none() {
             return Err(AttestError::Policy("no platform is allowed".into()));
         }
         Ok(p)
@@ -186,11 +239,20 @@ impl Policy {
 #[derive(Debug, Clone)]
 pub struct TrustAnchors {
     roots: Vec<Anchor>,
+    /// Apple App Attestation roots, DER.
+    apple: Vec<Vec<u8>>,
 }
 
 #[derive(Debug, Clone)]
 struct Anchor {
     spki: Vec<u8>,
+}
+
+const APPLE_ROOTS: &[&str] = &[include_str!("../roots/apple-app-attestation-root.pem")];
+
+fn pem_der(pem: &str) -> Vec<u8> {
+    let (_, p) = parse_x509_pem(pem.as_bytes()).expect("embedded root PEM");
+    p.contents
 }
 
 const GOOGLE_ROOTS: &[&str] = &[
@@ -212,7 +274,7 @@ impl TrustAnchors {
                 Anchor { spki: c.public_key().raw.to_vec() }
             })
             .collect();
-        TrustAnchors { roots }
+        TrustAnchors { roots, apple: APPLE_ROOTS.iter().map(|p| pem_der(p)).collect() }
     }
 
     /// Other roots, for tests only.
@@ -225,7 +287,23 @@ impl TrustAnchors {
                 Anchor { spki: c.public_key().raw.to_vec() }
             })
             .collect();
-        TrustAnchors { roots }
+        TrustAnchors { roots, apple: Vec::new() }
+    }
+
+    /// Other Apple roots, for tests only.
+    #[cfg(any(test, feature = "test-roots"))]
+    pub fn with_apple_roots_for_tests(mut self, roots_der: Vec<Vec<u8>>) -> Self {
+        self.apple = roots_der;
+        self
+    }
+
+    /// Whether `cert` is signed by an Apple root (matched by name and key).
+    fn apple_signed(&self, cert: &x509_parser::certificate::X509Certificate) -> bool {
+        self.apple.iter().any(|d| {
+            x509_parser::parse_x509_certificate(d).is_ok_and(|(_, r)| {
+                r.subject().as_raw() == cert.issuer().as_raw() && cert.verify_signature(Some(r.public_key())).is_ok()
+            })
+        })
     }
 
     fn contains(&self, spki: &[u8]) -> bool {
@@ -281,6 +359,7 @@ impl RevocationList {
 pub struct Verdict {
     pub attestation_hash: [u8; 32],
     pub android: Option<AndroidVerdict>,
+    pub apple: Option<AppleVerdict>,
 }
 
 /// Check `attestation` for the submission whose
@@ -293,17 +372,23 @@ pub fn verify(
     revocations: &RevocationList,
     now_unix: i64,
 ) -> Result<Verdict, AttestError> {
-    if now_unix - revocations.fetched_at > policy.revocation_max_age_secs {
-        return Err(AttestError::RevocationListStale);
-    }
     match attestation {
         Attestation::AndroidKey { chain } => {
+            // Google's revocation list covers Android only.
+            if now_unix - revocations.fetched_at > policy.revocation_max_age_secs {
+                return Err(AttestError::RevocationListStale);
+            }
             let p = policy
                 .android
                 .as_ref()
                 .ok_or_else(|| AttestError::Policy("android is not allowed".into()))?;
             let v = android::verify(chain, expected_challenge, p, anchors, revocations, now_unix)?;
-            Ok(Verdict { attestation_hash: attestation.hash(), android: Some(v) })
+            Ok(Verdict { attestation_hash: attestation.hash(), android: Some(v), apple: None })
+        }
+        Attestation::AppleAppAttest { object } => {
+            let p = policy.apple.as_ref().ok_or_else(|| AttestError::Policy("apple is not allowed".into()))?;
+            let v = apple::verify(object, expected_challenge, p, anchors, now_unix)?;
+            Ok(Verdict { attestation_hash: attestation.hash(), android: None, apple: Some(v) })
         }
     }
 }

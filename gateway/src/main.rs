@@ -289,9 +289,17 @@ fn check_attestation(
         hus_sdk::attestation_challenge(app_address, modality_id, commitment, v_obf, proof, binding);
     let verdict = {
         let guard = state.revocations.read().map_err(|_| AppError("revocation list lock".into()))?;
-        let list = guard
-            .as_ref()
-            .ok_or_else(|| AppError("attestation revocation list not loaded yet".into()))?;
+        // Google's list covers Android only; Apple attestations don't wait for it.
+        let empty;
+        let list = match (guard.as_ref(), attestation) {
+            (Some(l), _) => l,
+            (None, hus_attest::Attestation::AppleAppAttest { .. }) => {
+                empty = hus_attest::RevocationList::from_json(br#"{"entries":{}}"#, 0)
+                    .map_err(|e| AppError(e.to_string()))?;
+                &empty
+            }
+            (None, _) => return Err(AppError("attestation revocation list not loaded yet".into())),
+        };
         hus_attest::verify(
             attestation,
             &challenge,
