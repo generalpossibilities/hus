@@ -308,6 +308,59 @@ pub extern "C" fn hus_proof_binding(
     0
 }
 
+/// Compute the 32-byte challenge the device's hardware attestation must
+/// carry for one submission (see `prover::attestation_challenge`).
+/// `app_address` is UTF-8; `commitment`, `binding` and `out` are 32 bytes;
+/// `v_obf` is the canonical fixed-point vector.
+///
+/// Returns 0 on success, -1 on error.
+#[no_mangle]
+#[allow(unsafe_code)]
+pub extern "C" fn hus_attestation_challenge(
+    app_address: *const u8,
+    app_address_len: usize,
+    modality_id: u8,
+    commitment: *const u8,
+    v_obf: *const i64,
+    v_obf_len: usize,
+    proof: *const u8,
+    proof_len: usize,
+    binding: *const u8,
+    out: *mut u8,
+) -> i32 {
+    if app_address.is_null()
+        || commitment.is_null()
+        || v_obf.is_null()
+        || proof.is_null()
+        || binding.is_null()
+        || out.is_null()
+    {
+        set_error("null pointer argument");
+        return -1;
+    }
+    let app = unsafe { core::slice::from_raw_parts(app_address, app_address_len) };
+    let app = match core::str::from_utf8(app) {
+        Ok(a) => a,
+        Err(_) => {
+            set_error("app_address is not UTF-8");
+            return -1;
+        }
+    };
+    let mut c = [0u8; 32];
+    let mut b = [0u8; 32];
+    unsafe {
+        ptr::copy_nonoverlapping(commitment, c.as_mut_ptr(), 32);
+        ptr::copy_nonoverlapping(binding, b.as_mut_ptr(), 32);
+    }
+    let v = unsafe { core::slice::from_raw_parts(v_obf, v_obf_len) };
+    let p = unsafe { core::slice::from_raw_parts(proof, proof_len) };
+    let h = crate::prover::attestation_challenge(app, modality_id, &c, v, p, &b);
+    unsafe {
+        ptr::copy_nonoverlapping(h.as_ptr(), out, 32);
+    }
+    0
+}
+
 /// Free a buffer allocated by any `hus_*` function.
 ///
 /// # Safety

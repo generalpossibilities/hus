@@ -1,5 +1,5 @@
 [workspace]
-members = ["sdk", "onchain", "gateway"]
+members = ["sdk", "onchain", "gateway", "attest"]
 resolver = "2"
 
 [profile.release]

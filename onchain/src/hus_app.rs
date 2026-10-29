@@ -178,6 +178,7 @@ impl HusApp {
         v_obf: &[i64],
         proof: &str,
         binding: &str,
+        attestation_hash: &str,
         modality_id: u8,
         signer: Signer,
     ) -> Result<Value, String> {
@@ -190,6 +191,7 @@ impl HusApp {
                 "vObf": v_obf_json,
                 "proof": proof,
                 "binding": binding,
+                "attestationHash": attestation_hash,
                 "modalityId": modality_id,
             })),
         };
@@ -276,6 +278,7 @@ impl HusApp {
                 .map_err(|_| "invalid timestamp")?,
             proof: output["proof"].as_str().unwrap_or("").to_string(),
             binding: output["binding"].as_str().unwrap_or("").to_string(),
+            attestation_hash: output["attestationHash"].as_str().unwrap_or("").to_string(),
         })
     }
 
@@ -397,4 +400,7 @@ pub struct RegistrationInfo {
     pub proof: String,
     /// proof_binding(owner key, challenge) as a uint256 string.
     pub binding: String,
+    /// SHA-256 of the hardware attestation the verifier checked, as a
+    /// uint256 string.
+    pub attestation_hash: String,
 }

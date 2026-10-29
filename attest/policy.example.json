@@ -1,0 +1,9 @@
+{
+  "android": {
+    "package_names": ["com.example.app"],
+    "signing_cert_sha256": ["0000000000000000000000000000000000000000000000000000000000000000"],
+    "min_security_level": "trusted-environment",
+    "min_os_patch_level": 202501
+  },
+  "revocation_max_age_secs": 172800
+}

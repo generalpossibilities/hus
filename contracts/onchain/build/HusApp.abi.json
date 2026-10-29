@@ -54,6 +54,7 @@
 				{"name":"vObf","type":"int64[]"},
 				{"name":"proof","type":"bytes"},
 				{"name":"binding","type":"uint256"},
+				{"name":"attestationHash","type":"uint256"},
 				{"name":"modalityId","type":"uint8"}
 			],
 			"outputs": [
@@ -81,7 +82,8 @@
 				{"name":"modalityId","type":"uint8"},
 				{"name":"timestamp","type":"uint32"},
 				{"name":"proof","type":"bytes"},
-				{"name":"binding","type":"uint256"}
+				{"name":"binding","type":"uint256"},
+				{"name":"attestationHash","type":"uint256"}
 			]
 		},
 		{
@@ -227,7 +229,7 @@
 		{"init":false,"name":"_appVersion","type":"uint32"},
 		{"init":false,"name":"_registrationCount","type":"uint32"},
 		{"init":false,"name":"_seenCommitments","type":"map(uint256,bool)"},
-		{"components":[{"name":"commitmentHash","type":"fixedbytes32"},{"name":"vObf","type":"int64[]"},{"name":"modalityId","type":"uint8"},{"name":"timestamp","type":"uint32"},{"name":"proof","type":"bytes"},{"name":"binding","type":"uint256"}],"init":false,"name":"_registrations","type":"tuple[]"},
+		{"components":[{"name":"commitmentHash","type":"fixedbytes32"},{"name":"vObf","type":"int64[]"},{"name":"modalityId","type":"uint8"},{"name":"timestamp","type":"uint32"},{"name":"proof","type":"bytes"},{"name":"binding","type":"uint256"},{"name":"attestationHash","type":"uint256"}],"init":false,"name":"_registrations","type":"tuple[]"},
 		{"components":[{"name":"modalityId","type":"uint8"},{"name":"projDim","type":"uint8"},{"name":"minScore","type":"uint8"}],"init":false,"name":"_modalityConfigList","type":"tuple[]"},
 		{"components":[{"name":"modalityId","type":"uint8"},{"name":"projDim","type":"uint8"},{"name":"minScore","type":"uint8"}],"init":false,"name":"_modalityConfigMap","type":"map(uint8,tuple)"}
 	]

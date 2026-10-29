@@ -81,6 +81,15 @@ fn parse_f32_json(s: &str) -> Vec<f32> {
         .collect()
 }
 
+/// Strict: any value that isn't an integer fails the whole parse.
+fn parse_i64_json(s: &str) -> Option<Vec<i64>> {
+    let inner = s.trim().strip_prefix('[')?.strip_suffix(']')?.trim();
+    if inner.is_empty() {
+        return Some(Vec::new());
+    }
+    inner.split(',').map(|part| part.trim().parse::<i64>().ok()).collect()
+}
+
 fn extract_error_msg(e: &ExtractionError) -> String {
     match e {
         ExtractionError::ModelNotLoaded(msg) => alloc::format!("model not loaded: {}", msg),
@@ -249,6 +258,32 @@ pub fn proof_binding_wasm(owner_pubkey_hex: &str, challenge_hex: &str) -> Result
     let k = hex_decode(owner_pubkey_hex).ok_or_else(|| JsValue::from_str("bad owner key hex"))?;
     let c = hex_decode(challenge_hex).ok_or_else(|| JsValue::from_str("bad challenge hex"))?;
     Ok(hex_encode(&crate::prover::proof_binding(&k, &c)))
+}
+
+/// The 32-byte challenge (hex) the device's hardware attestation must carry
+/// for one submission. `v_obf_json` is the canonical fixed-point vector as a
+/// JSON array of integers; the other byte arguments are hex.
+#[wasm_bindgen]
+pub fn attestation_challenge_wasm(
+    app_address: &str,
+    modality_id: u8,
+    commitment_hex: &str,
+    v_obf_json: &str,
+    proof_hex: &str,
+    binding_hex: &str,
+) -> Result<String, JsValue> {
+    let fixed32 = |h: &str, what: &str| -> Result<[u8; 32], JsValue> {
+        hex_decode(h)
+            .and_then(|v| <[u8; 32]>::try_from(v).ok())
+            .ok_or_else(|| JsValue::from_str(&format!("bad {what} hex")))
+    };
+    let c = fixed32(commitment_hex, "commitment")?;
+    let b = fixed32(binding_hex, "binding")?;
+    let v = parse_i64_json(v_obf_json).ok_or_else(|| JsValue::from_str("bad v_obf json"))?;
+    let p = hex_decode(proof_hex).ok_or_else(|| JsValue::from_str("bad proof hex"))?;
+    Ok(hex_encode(&crate::prover::attestation_challenge(
+        app_address, modality_id, &c, &v, &p, &b,
+    )))
 }
 
 /// Project an embedding through BioHashing. Returns V_obf as JSON.

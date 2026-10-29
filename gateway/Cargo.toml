@@ -6,6 +6,7 @@ edition = "2021"
 [dependencies]
 hus-sdk = { path = "../sdk" }
 hus-onchain = { path = "../onchain" }
+hus-attest = { path = "../attest" }
 tvm_client = { git = "https://github.com/tvmlabs/tvm-sdk.git", rev = "3b6a038067fa162c5ab11ef28851d2cc9655a705" }
 
 axum = "0.7"
@@ -17,3 +18,4 @@ tower-http = { version = "0.5", features = ["cors"] }
 hex = "0.4"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+reqwest = "0.13"

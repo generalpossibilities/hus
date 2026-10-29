@@ -42,6 +42,42 @@ pub fn proof_binding(owner_pubkey: &[u8], challenge: &[u8]) -> [u8; 32] {
     serialize_fr(Fr::from_le_bytes_mod_order(&h.finalize()))
 }
 
+/// The challenge a hardware attestation must carry for one submission
+/// (Android: `setAttestationChallenge` on a fresh Keystore key; iOS App
+/// Attest: the client data hash). It commits to everything the verifier
+/// accepts, so a genuine attestation can't be paired with another vector,
+/// proof, owner, challenge, modality or app.
+///
+/// `SHA-256("hus.attest.v1" ‖ u32 LE len(app) ‖ app ‖ modality_id ‖ commitment
+/// ‖ binding ‖ u32 LE len(v_obf) ‖ v_obf as i64 LE ‖ u32 LE len(proof) ‖ proof)`,
+/// where `app` is the app address trimmed and lowercased, and `v_obf` is the
+/// canonical fixed-point vector (`v_obf_to_contract`).
+pub fn attestation_challenge(
+    app_address: &str,
+    modality_id: u8,
+    commitment: &[u8; 32],
+    v_obf: &[i64],
+    proof: &[u8],
+    binding: &[u8; 32],
+) -> [u8; 32] {
+    use sha2::{Digest, Sha256};
+    let app = app_address.trim().to_ascii_lowercase();
+    let mut h = Sha256::new();
+    h.update(b"hus.attest.v1");
+    h.update((app.len() as u32).to_le_bytes());
+    h.update(app.as_bytes());
+    h.update([modality_id]);
+    h.update(commitment);
+    h.update(binding);
+    h.update((v_obf.len() as u32).to_le_bytes());
+    for v in v_obf {
+        h.update(v.to_le_bytes());
+    }
+    h.update((proof.len() as u32).to_le_bytes());
+    h.update(proof);
+    h.finalize().into()
+}
+
 fn binding_fr(binding: &[u8; 32]) -> Result<Fr, SdkError> {
     Fr::deserialize_uncompressed(&binding[..]).map_err(|_| SdkError::CryptoError {
         reason: "binding deserialize failed",
@@ -308,6 +344,21 @@ mod tests {
     fn binding_is_domain_separated_and_length_prefixed() {
         assert_ne!(proof_binding(b"ab", b"c"), proof_binding(b"a", b"bc"));
         assert_eq!(proof_binding(b"k", b"n"), proof_binding(b"k", b"n"));
+    }
+
+    #[test]
+    fn attestation_challenge_covers_every_field() {
+        let c = [1u8; 32];
+        let b = [2u8; 32];
+        let v = [3i64, -4];
+        let base = attestation_challenge("0:AB", 1, &c, &v, b"proof", &b);
+        assert_eq!(base, attestation_challenge(" 0:ab ", 1, &c, &v, b"proof", &b));
+        assert_ne!(base, attestation_challenge("0:ac", 1, &c, &v, b"proof", &b));
+        assert_ne!(base, attestation_challenge("0:ab", 2, &c, &v, b"proof", &b));
+        assert_ne!(base, attestation_challenge("0:ab", 1, &[9; 32], &v, b"proof", &b));
+        assert_ne!(base, attestation_challenge("0:ab", 1, &c, &[3, -5], b"proof", &b));
+        assert_ne!(base, attestation_challenge("0:ab", 1, &c, &v, b"proof!", &b));
+        assert_ne!(base, attestation_challenge("0:ab", 1, &c, &v, b"proof", &[9; 32]));
     }
 
     /// C1: the proof must bind v_obf itself — a proof made for one vector

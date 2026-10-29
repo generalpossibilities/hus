@@ -3,7 +3,7 @@ pragma AbiHeader expire;
 pragma AbiHeader pubkey;
 
 contract HusApp {
-    string constant version = "2.6.0";
+    string constant version = "2.7.0";
 
     int256 constant THRESHOLD_SCALED = 5000000;
     uint8 constant MIN_MODALITIES = 2;
@@ -19,6 +19,10 @@ contract HusApp {
         // Who the proof was made for: proof_binding(owner key, challenge),
         // the circuit's last public input. Needed to re-check the proof.
         uint256 binding;
+        // SHA-256 of the hardware attestation (the device's certificate
+        // chain) the verifier checked. The chain itself is published by the
+        // verifier, so anyone can re-check it against this hash.
+        uint256 attestationHash;
     }
 
     struct ModalityConfig {
@@ -144,15 +148,17 @@ contract HusApp {
         int64[] vObf,
         bytes proof,
         uint256 binding,
+        uint256 attestationHash,
         uint8 modalityId
     ) external returns (bool isUnique, uint8 score) {
         require(_verifierPubkey != 0 && msg.pubkey() == _verifierPubkey, 109);
         require(proof.length > 0, 133);
+        require(attestationHash != 0, 134);
         _assertModalityConfig(modalityId, uint32(vObf.length));
         require(!_seenCommitments[uint256(commitmentHash)], 114);
         tvm.accept();
 
-        (isUnique, score) = _register(uint256(commitmentHash), vObf, proof, binding, modalityId);
+        (isUnique, score) = _register(uint256(commitmentHash), vObf, proof, binding, attestationHash, modalityId);
     }
 
     // ── Internal ──────────────────────────────────────────────
@@ -162,6 +168,7 @@ contract HusApp {
         int64[] vObf,
         bytes proof,
         uint256 binding,
+        uint256 attestationHash,
         uint8 modalityId
     ) internal returns (bool isUnique, uint8 score) {
         require(!_seenCommitments[commKey], 114);
@@ -193,6 +200,7 @@ contract HusApp {
             r.timestamp = uint32(block.timestamp);
             r.proof = proof;
             r.binding = binding;
+            r.attestationHash = attestationHash;
             uint32 vlen = uint32(vObf.length);
             for (uint32 j = 0; j < vlen; j++) {
                 r.vObf.push(vObf[j]);
@@ -258,11 +266,12 @@ contract HusApp {
         uint8 modalityId,
         uint32 timestamp,
         bytes proof,
-        uint256 binding
+        uint256 binding,
+        uint256 attestationHash
     ) {
         require(index < _registrationCount, 120);
         Registration r = _registrations[index];
-        return (r.commitmentHash, r.vObf, r.modalityId, r.timestamp, r.proof, r.binding);
+        return (r.commitmentHash, r.vObf, r.modalityId, r.timestamp, r.proof, r.binding, r.attestationHash);
     }
 
     function getRegistrationCount() external view returns (uint32) {

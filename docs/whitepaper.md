@@ -81,7 +81,9 @@ User Device                        Off-chain Verifier          Acki Nacki Chain
    │  Verify π via verify_projected()                │                  
    │  (BN254 pairing, ~2ms)                          │                  
    │  If invalid → reject                             │                  
-   │               submitVerified(C, V_obf, proof, mod) │
+   │  Check device attestation (hus-attest)          │                  
+   │  If invalid → reject                             │                  
+   │  submitVerified(C, V_obf, proof, binding, attH, mod) │
    │                              ──────────────────────────────────►  │
    │                                                                    ├─ Check duplicate commitment
    │                                                                    ├─ L₂ distance vs stored V_obf
@@ -237,7 +239,7 @@ Stored `vObf` is already obfuscated and application-specific — it leaks no cro
 | Method | Access | Description |
 |--------|--------|-------------|
 | `constructor(vk, seedHash, modalityIds)` | Registry only | Deploy with VK, seed, and modality list |
-| `submitVerified(commitmentHash, vObf, proof, modalityId)` | The app's verifier key only | Register after the verifier has checked the proof off-chain |
+| `submitVerified(commitmentHash, vObf, proof, binding, attestationHash, modalityId)` | The app's verifier key only | Register after the verifier has checked the proof and the device attestation off-chain |
 | `setVerifier(verifierPubkey)` | The app operator's key | Name the verifier key (zero turns registration off) |
 | `checkDuplicate(commitmentHash)` | Anyone | Quick lookup (view) |
 | `deposit(paymentId)` | Anyone | Convert SHELL → VMSHELL for gas |
@@ -251,7 +253,7 @@ Stored `vObf` is already obfuscated and application-specific — it leaks no cro
 ### 6.3 State Transition Rules
 
 1. **App onboarding:** Anyone calls `registerApp(appName, modalityIds)` on the registry. The registry derives `appId` deterministically from `appName`, generates a random `seedHash`, and deploys a HusApp with the stored VK and app code.
-2. **Registration:** After off-chain proof verification, the verifier calls `submitVerified(commitmentHash, vObf, proof, modalityId)`. The contract checks duplicate commitment, computes L₂ distance, and stores the registration if unique.
+2. **Registration:** After off-chain proof and attestation checks, the verifier calls `submitVerified(commitmentHash, vObf, proof, binding, attestationHash, modalityId)`. The contract checks duplicate commitment, computes L₂ distance, and stores the registration if unique.
 3. **Rejection:** Score ≥ 80 or duplicate commitment → transaction fails (exit code).
 4. **Append-only:** Registrations are never deleted.
 5. **Timelocked upgrades:** The registry can propose an upgrade via `proposeAppUpgrade()`. After 7 days (`UPGRADE_DELAY = 604800` seconds), anyone can call `executeAppUpgrade()`. Pending upgrades can be cancelled by the owner.

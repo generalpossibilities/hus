@@ -45,7 +45,7 @@ pub use extract::{Embedding, Extractor};
 pub use key::SessionKeys;
 pub use liveness::{require_liveness, LivenessResult, LivenessSession};
 pub use projection::{derive_and_project, derive_matrix, project};
-pub use prover::{proof_binding, prove_projected, verify_projected};
+pub use prover::{attestation_challenge, proof_binding, prove_projected, verify_projected};
 pub use quality_gate::{QualityGate, QualityReport};
 
 pub(crate) use circuit::r1cs::MAX_PROJ_DIM;

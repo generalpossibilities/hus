@@ -129,7 +129,7 @@ async fn test_register_app_deploys_husapp() {
     // The reply carries only the message hash; check a deployed app's version.
     let app = HusApp::new(ctx, test_app_addr());
     let app_version = app.get_version().await.expect("husapp get_version");
-    assert_eq!(app_version, "2.6.0");
+    assert_eq!(app_version, "2.7.0");
 }
 
 #[tokio::test]
@@ -155,7 +155,7 @@ async fn test_husapp_deposit_and_submit() {
     let commitment = hash_hex("user1");
     let v_obf = test_v_obf(1);
     let r = app
-        .submit_verified(&commitment, &v_obf, "aa", "0x1", 0, signer.clone())
+        .submit_verified(&commitment, &v_obf, "aa", "0x1", "0x1", 0, signer.clone())
         .await;
     assert!(r.is_ok(), "submit_verified: {:?}", r.err());
 
@@ -190,7 +190,7 @@ async fn test_husapp_multi_modality() {
         let commitment = hash_hex(&label);
         let v_obf = test_v_obf(modality_id * 17);
 
-        app.submit_verified(&commitment, &v_obf, "aa", "0x1", modality_id, signer.clone())
+        app.submit_verified(&commitment, &v_obf, "aa", "0x1", "0x1", modality_id, signer.clone())
             .await
             .expect("submit_verified");
 
@@ -248,7 +248,7 @@ async fn test_husapp_submit_verified_proof() {
     let v_obf_i64: Vec<i64> = test_v_obf(42);
 
     let r = app
-        .submit_verified(&commitment_hex, &v_obf_i64, &proof_hex, &binding_hex, 0, signer.clone())
+        .submit_verified(&commitment_hex, &v_obf_i64, &proof_hex, &binding_hex, "0x1", 0, signer.clone())
         .await;
     assert!(r.is_ok(), "submit_verified: {:?}", r.err());
 
@@ -267,7 +267,7 @@ async fn test_husapp_submit_verified_proof() {
     let commitment_hex_2 = format!("0x{}", hex::encode(commitment_bytes2));
 
     let r = app
-        .submit_verified(&commitment_hex_2, &v_obf_i64, &proof_hex_2, &binding_hex, 0, signer.clone())
+        .submit_verified(&commitment_hex_2, &v_obf_i64, &proof_hex_2, &binding_hex, "0x1", 0, signer.clone())
         .await;
     assert!(r.is_ok(), "second submit_verified: {:?}", r.err());
 
@@ -298,7 +298,7 @@ async fn test_husapp_duplicate_check() {
 
     let commitment = hash_hex("dup-test-user");
     let v_obf = test_v_obf(42);
-    app.submit_verified(&commitment, &v_obf, "aa", "0x1", 0, signer.clone())
+    app.submit_verified(&commitment, &v_obf, "aa", "0x1", "0x1", 0, signer.clone())
         .await
         .expect("first submit");
 

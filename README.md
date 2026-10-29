@@ -69,7 +69,8 @@ cargo run -p hus-gateway -- \
   --network <graphql-endpoint> \
   --registry <registry-address> \
   --public-key <hex> \
-  --secret-key <hex>
+  --secret-key <hex> \
+  --attest-policy attest/policy.example.json   # your app's policy; see docs/attestation.md
 ```
 
 ### Deploy HusRegistry on Shellnet

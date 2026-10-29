@@ -1,5 +1,5 @@
 use axum::{
-    extract::State,
+    extract::{Path, State},
     http::{HeaderMap, Request, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
@@ -8,7 +8,7 @@ use axum::{
 };
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use std::sync::Arc;
+use std::sync::{Arc, RwLock};
 use tower_http::cors::{Any, CorsLayer};
 
 #[derive(Parser, Debug)]
@@ -40,6 +40,18 @@ struct Args {
     /// Optional API key for bearer-token auth. If omitted, all endpoints are public.
     #[arg(long, env = "HUS_API_KEY")]
     api_key: Option<String>,
+
+    /// The integrator's attestation policy (JSON, see hus_attest::Policy):
+    /// which app, signed by which key, may submit. Required: every
+    /// verification and submission needs a hardware attestation.
+    #[arg(long, env = "HUS_ATTEST_POLICY")]
+    attest_policy: String,
+
+    /// Where checked attestations are kept and served from
+    /// (`GET /api/v1/attestation/{hash}`), so anyone can re-check the hash
+    /// stored with a registration.
+    #[arg(long, env = "HUS_ATTESTATION_DIR", default_value = "attestations")]
+    attestation_dir: String,
 }
 
 struct AppState {
@@ -50,6 +62,12 @@ struct AppState {
     protocol_signer: tvm_client::abi::Signer,
     network: String,
     api_key: Option<String>,
+    attest_policy: hus_attest::Policy,
+    trust_anchors: hus_attest::TrustAnchors,
+    /// Google's revocation list, refreshed in the background. Until it has
+    /// loaded (or once it is too old), every attestation is refused.
+    revocations: RwLock<Option<hus_attest::RevocationList>>,
+    attestation_dir: std::path::PathBuf,
 }
 
 /// Maximum projection dimension accepted from clients (matches the in-circuit
@@ -112,6 +130,18 @@ struct ProveResponse {
     commitment: String,
 }
 
+/// The device side of a request: who it is for (the app, so one app's
+/// attestations can't be used at another) and the hardware attestation over
+/// `hus_sdk::attestation_challenge` of the request.
+#[derive(Deserialize)]
+struct Attested {
+    /// The HusApp address, or for an integrator that keeps its own registry,
+    /// the identifier its app puts into the attestation challenge.
+    app_address: String,
+    modality_id: u8,
+    attestation: hus_attest::Attestation,
+}
+
 #[derive(Deserialize)]
 struct VerifyRequest {
     proof: String,
@@ -119,11 +149,16 @@ struct VerifyRequest {
     v_obf: Vec<f32>,
     #[serde(flatten)]
     proof_for: ProofFor,
+    #[serde(flatten)]
+    attested: Attested,
 }
 
 #[derive(Serialize)]
 struct VerifyResponse {
+    /// The proof verifies and the attestation passed.
     valid: bool,
+    /// SHA-256 of the attestation (hex); keep it with the registration.
+    attestation_hash: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -158,6 +193,7 @@ struct SubmitRequest {
     modality_id: u8,
     #[serde(flatten)]
     proof_for: ProofFor,
+    attestation: hus_attest::Attestation,
 }
 
 /// The binding as a big-endian 256-bit number (the contract's uint256), from
@@ -226,6 +262,85 @@ fn parse_hex_32(s: &str) -> Result<[u8; 32], AppError> {
     let mut arr = [0u8; 32];
     arr.copy_from_slice(&bytes);
     Ok(arr)
+}
+
+fn now_unix() -> i64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs() as i64)
+        .unwrap_or(0)
+}
+
+/// Check a device attestation for one request, then keep it so it can be
+/// served next to the hash that goes on chain.
+#[allow(clippy::too_many_arguments)]
+fn check_attestation(
+    state: &AppState,
+    attestation: &hus_attest::Attestation,
+    app_address: &str,
+    modality_id: u8,
+    commitment: &[u8; 32],
+    v_obf: &[i64],
+    proof: &[u8],
+    binding: &[u8; 32],
+) -> Result<[u8; 32], AppError> {
+    let challenge =
+        hus_sdk::attestation_challenge(app_address, modality_id, commitment, v_obf, proof, binding);
+    let verdict = {
+        let guard = state.revocations.read().map_err(|_| AppError("revocation list lock".into()))?;
+        let list = guard
+            .as_ref()
+            .ok_or_else(|| AppError("attestation revocation list not loaded yet".into()))?;
+        hus_attest::verify(
+            attestation,
+            &challenge,
+            &state.attest_policy,
+            &state.trust_anchors,
+            list,
+            now_unix(),
+        )
+        .map_err(|e| AppError(format!("attestation: {e}")))?
+    };
+    let hash = verdict.attestation_hash;
+    let path = state.attestation_dir.join(format!("{}.json", hex::encode(hash)));
+    let body = serde_json::to_vec(attestation).map_err(|e| AppError(e.to_string()))?;
+    std::fs::write(&path, body).map_err(|e| AppError(format!("store attestation: {e}")))?;
+    Ok(hash)
+}
+
+/// Fetch Google's attestation status list now and then. A failed fetch keeps
+/// the old list; `hus_attest::verify` refuses it once it is too old.
+async fn refresh_revocations(state: Arc<AppState>) {
+    let client = reqwest::Client::new();
+    loop {
+        let fetched = async {
+            let r = client
+                .get(hus_attest::RevocationList::URL)
+                .timeout(std::time::Duration::from_secs(30))
+                .send()
+                .await
+                .map_err(|e| e.to_string())?
+                .error_for_status()
+                .map_err(|e| e.to_string())?;
+            let body = r.bytes().await.map_err(|e| e.to_string())?;
+            hus_attest::RevocationList::from_json(&body, now_unix()).map_err(|e| e.to_string())
+        }
+        .await;
+        let wait = match fetched {
+            Ok(list) => {
+                tracing::info!("attestation revocation list: {} entries", list.len());
+                if let Ok(mut g) = state.revocations.write() {
+                    *g = Some(list);
+                }
+                6 * 3600
+            }
+            Err(e) => {
+                tracing::warn!("attestation revocation list fetch failed: {e}");
+                600
+            }
+        };
+        tokio::time::sleep(std::time::Duration::from_secs(wait)).await;
+    }
 }
 
 fn make_signer(keys: WalletKeys) -> tvm_client::abi::Signer {
@@ -339,15 +454,25 @@ async fn verify_handler(
     let commitment = parse_hex_32(&req.commitment)?;
     let proof_bytes = hex::decode(&req.proof)
         .map_err(|e| AppError(format!("hex decode: {e}")))?;
-    let valid = hus_sdk::prover::verify_projected(
-        &state.vk,
-        &proof_bytes,
+    let v_obf = hus_sdk::v_obf_to_contract(&req.v_obf);
+    let binding = req.proof_for.binding()?;
+    let valid = hus_sdk::prover::verify_projected(&state.vk, &proof_bytes, &commitment, &v_obf, &binding)
+        .map_err(|e| AppError(e.to_string()))?;
+    if !valid {
+        return Ok(Json(VerifyResponse { valid: false, attestation_hash: None }));
+    }
+    let a = &req.attested;
+    let hash = check_attestation(
+        &state,
+        &a.attestation,
+        &a.app_address,
+        a.modality_id,
         &commitment,
-        &hus_sdk::v_obf_to_contract(&req.v_obf),
-        &req.proof_for.binding()?,
-    )
-    .map_err(|e| AppError(e.to_string()))?;
-    Ok(Json(VerifyResponse { valid }))
+        &v_obf,
+        &proof_bytes,
+        &binding,
+    )?;
+    Ok(Json(VerifyResponse { valid: true, attestation_hash: Some(hex::encode(hash)) }))
 }
 
 async fn register_app_handler(
@@ -392,6 +517,16 @@ async fn submit_handler(
     if !valid {
         return Err(AppError("proof does not match the submitted v_obf".into()));
     }
+    let attestation_hash = check_attestation(
+        &state,
+        &req.attestation,
+        &req.app_address,
+        req.modality_id,
+        &commitment,
+        &req.v_obf,
+        &proof_bytes,
+        &binding,
+    )?;
 
     let app = hus_onchain::HusApp::new(Arc::clone(&state.client_context), &req.app_address);
     let output = app
@@ -400,6 +535,7 @@ async fn submit_handler(
             &req.v_obf,
             &hex::encode(&proof_bytes),
             &format!("0x{}", hex::encode(binding_be(&binding))),
+            &format!("0x{}", hex::encode(attestation_hash)),
             req.modality_id,
             state.protocol_signer.clone(),
         )
@@ -409,6 +545,19 @@ async fn submit_handler(
         message_hash: None,
         is_unique: output["isUnique"].as_bool(),
     }))
+}
+
+/// A checked attestation, by the hash stored with its registration.
+async fn attestation_handler(
+    State(state): State<Arc<AppState>>,
+    Path(hash): Path<String>,
+) -> Result<Response, AppError> {
+    let hash = parse_hex_32(&hash)?;
+    let path = state.attestation_dir.join(format!("{}.json", hex::encode(hash)));
+    match std::fs::read(&path) {
+        Ok(body) => Ok(([(axum::http::header::CONTENT_TYPE, "application/json")], body).into_response()),
+        Err(_) => Ok(StatusCode::NOT_FOUND.into_response()),
+    }
 }
 
 async fn check_handler(
@@ -505,6 +654,11 @@ async fn main() {
     let registry =
         hus_onchain::HusRegistry::new(Arc::clone(&client_context), &args.registry);
 
+    let policy_json = std::fs::read_to_string(&args.attest_policy).expect("read attestation policy");
+    let attest_policy = hus_attest::Policy::from_json(&policy_json).expect("attestation policy");
+    let attestation_dir = std::path::PathBuf::from(&args.attestation_dir);
+    std::fs::create_dir_all(&attestation_dir).expect("create attestation dir");
+
     let state = Arc::new(AppState {
         pk: pk_bytes,
         vk: vk_bytes,
@@ -513,7 +667,12 @@ async fn main() {
         protocol_signer,
         network: args.network.clone(),
         api_key: args.api_key.clone(),
+        attest_policy,
+        trust_anchors: hus_attest::TrustAnchors::google(),
+        revocations: RwLock::new(None),
+        attestation_dir,
     });
+    tokio::spawn(refresh_revocations(state.clone()));
 
     let cors = CorsLayer::new()
         .allow_origin(Any)
@@ -533,6 +692,7 @@ async fn main() {
 
     let app = Router::new()
         .route("/api/v1/status", get(status_handler))
+        .route("/api/v1/attestation/:hash", get(attestation_handler))
         .merge(secured_routes)
         .layer(cors)
         .with_state(state);

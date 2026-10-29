@@ -15,6 +15,7 @@ sha2 = "0.10"
 
 [dev-dependencies]
 hus-sdk = { path = "../sdk" }
+hus-attest = { path = "../attest" }
 getrandom = "0.2"
 pasta_curves = "0.5"
 hex = "0.4"

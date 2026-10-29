@@ -44,13 +44,15 @@ cargo run -p hus-gateway -- \
   --proving-key-file /path/to/pk.bin \
   --verifying-key-file /path/to/vk.bin \
   --public-key 0x<wallet-pub> \
-  --secret-key 0x<wallet-secret>
+  --secret-key 0x<wallet-secret> \
+  --attest-policy /path/to/attest-policy.json
 
 # Or via env vars (preferred for production)
 export HUS_NETWORK=https://shellnet.ackinacki.org/graphql
 export HUS_REGISTRY=0:<address>
 export HUS_PUBLIC_KEY=0x<wallet-pub>
 export HUS_SECRET_KEY=0x<wallet-secret>
+export HUS_ATTEST_POLICY=/path/to/attest-policy.json   # required, docs/attestation.md
 cargo run -p hus-gateway
 ```
 

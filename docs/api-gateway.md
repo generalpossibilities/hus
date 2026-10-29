@@ -9,8 +9,15 @@ cargo run -p hus-gateway -- \
   --network https://shellnet.ackinacki.org/graphql \
   --registry <HusRegistry-address> \
   --public-key <protocol-wallet-public-hex> \
-  --secret-key <protocol-wallet-secret-hex>
+  --secret-key <protocol-wallet-secret-hex> \
+  --attest-policy attest-policy.json
 ```
+
+`--attest-policy` is required: every `/verify` and `/submit` needs a
+hardware attestation from the integrator's own app (see
+[attestation.md](attestation.md)). Checked attestations are kept in
+`--attestation-dir` (default `attestations/`) and served at
+`GET /api/v1/attestation/{hash}`.
 
 The gateway fetches VK/PK from the registry on startup.
 
@@ -72,19 +79,29 @@ curl -X POST http://localhost:3000/api/v1/prove \
 curl -X POST http://localhost:3000/api/v1/verify \
   -H 'Content-Type: application/json' \
   -d '{
-    "proof": "base64-encoded-proof",
+    "proof": "hex",
     "commitment": "hex-32-bytes",
-    "v_obf": [0.05, -0.12, 0.33]
+    "v_obf": [0.05, -0.12, 0.33],
+    "owner_pubkey": "hex",
+    "challenge": "hex, 16-64 bytes, single use",
+    "app_address": "the HusApp address, or the integrator id its app attests to",
+    "modality_id": 0,
+    "attestation": {"format": "android-key", "chain": ["base64 DER", "..."]}
   }'
 ```
 
 ```json
 {
-  "valid": true
+  "valid": true,
+  "attestation_hash": "hex-32-bytes"
 }
 ```
 
-**This is the critical verification step.** On-chain Groth16 verification via `gosh.vergrth16` is blocked on Shellnet — proofs must be verified off-chain before submission.
+`valid` is true only if the proof verifies for this owner and challenge
+**and** the attestation passes for exactly this request. A bad attestation
+is an error, not `valid: false`. Integrators that keep their own registry
+(rather than a HusApp) use this route and store `attestation_hash` with the
+registration.
 
 ### POST /api/v1/register-app — Deploy HusApp
 
@@ -112,7 +129,8 @@ curl -X POST http://localhost:3000/api/v1/register-app \
 
 The gateway checks the Groth16 proof off-chain against the commitment and
 all 128 `v_obf` values (the circuit's public inputs). Only if it verifies
-does the gateway sign `submitVerified` on the app contract with its own key.
+and the device's hardware attestation passes for exactly this request does
+the gateway sign `submitVerified` on the app contract with its own key.
 Callers never send keys.
 
 Set-up, once per app: the app operator names the gateway's public key as
@@ -127,9 +145,16 @@ curl -X POST http://localhost:3000/api/v1/submit \
     "commitment": "hex-32-bytes",
     "v_obf": [123456, -789012, ...],
     "proof": "hex",
-    "modality_id": 0
+    "modality_id": 0,
+    "owner_pubkey": "hex",
+    "challenge": "hex, 16-64 bytes, single use",
+    "attestation": {"format": "android-key", "chain": ["base64 DER", "..."]}
   }'
 ```
+
+The attestation must carry `hus_sdk::attestation_challenge(app_address,
+modality_id, commitment, v_obf, proof, binding)`. Its hash goes on chain with
+the registration (`attestationHash`).
 
 ```json
 {
@@ -239,7 +264,8 @@ const { proof, commitment } = await (await fetch(`${HUS}/api/v1/prove`, {
 | Capture + extract | User device | Raw biometric → embedding | ~1s |
 | Project | User device or gateway | Embedding → V_obf | ~15 µs |
 | **Prove** | Gateway or device | V_obf → Groth16 proof | 1–5s |
-| **Verify** | Gateway (off-chain) | Check proof | ~2 ms |
+| Attest | User device | Fresh Keystore key whose attestation carries the request's challenge | ~0.5s |
+| **Verify** | Gateway (off-chain) | Check proof and attestation | ~2 ms |
 | Submit | Gateway → blockchain | `submitVerified()`, signed by the gateway | ~30s |
 
 ## Notes
